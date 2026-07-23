@@ -1,0 +1,3 @@
+# Keeps the data/ directory in version control.
+# Generated files here (app.db, chroma/, cruise-lines.json) are git-ignored;
+# only this placeholder is tracked so the folder exists on a fresh clone.

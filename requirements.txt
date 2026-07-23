@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------------------
+# Byond Borders Cruise Concierge — Python dependencies
+# Install into a virtualenv with:  pip install -r requirements.txt
+# Versions are pinned loosely (>=) so a fresh install gets recent, compatible
+# releases; tighten these once the pilot is stable.
+# ---------------------------------------------------------------------------
+
+# --- Core data contracts ---------------------------------------------------
+# Pydantic v2 powers every typed schema in engine/schemas.py (the contracts
+# that model output, tool inputs/outputs, and the lead form must obey). The
+# [email] extra pulls in email-validator, needed for the EmailStr fields.
+pydantic[email]>=2.0
+
+# --- The agent framework ---------------------------------------------------
+# Pydantic AI is the agent + tool-calling layer. The base package includes
+# OpenAI support, so no extra provider install is needed.
+pydantic-ai>=0.0.14
+
+# --- LLM provider ----------------------------------------------------------
+# OpenAI SDK — used both directly (small-model scope gate, embeddings) and
+# under the hood by Pydantic AI for the large-model synthesis steps.
+openai>=1.0
+
+# --- Frontend --------------------------------------------------------------
+# Streamlit renders the registration gate and the streaming chat UI (app.py).
+streamlit>=1.30
+
+# --- Retrieval (RAG) -------------------------------------------------------
+# ChromaDB is the local vector store for the 14 research briefs + line prose.
+# Runs in-process on disk (data/chroma) — no separate server to manage.
+chromadb>=0.4
+
+# --- Config + integrations -------------------------------------------------
+# Loads settings from the local .env file (see engine/config.py).
+python-dotenv>=1.0
+# Sends lead-notification emails to the sales desk (same provider the website
+# uses). Optional at runtime: with no API key the app logs to console instead.
+resend>=2.0
+
+# --- Testing + eval fixtures ----------------------------------------------
+# pytest runs the unit tests and the scenario eval suite (evals/).
+pytest>=8.0
+# PyYAML loads the eval scenario files (evals/scenarios/*.yaml).
+pyyaml>=6.0

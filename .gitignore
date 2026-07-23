@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------------
+# Byond Borders Cruise Concierge — git ignore rules
+# ---------------------------------------------------------------------------
+
+# --- Secrets ---------------------------------------------------------------
+# The real environment file with API keys. Only .env.example is committed.
+.env
+
+# --- Generated data (rebuilt locally by the ingest pipeline) ---------------
+# The SQLite database and the vector store are true local build output — each
+# machine regenerates them by running ingest, so they are NOT committed.
+data/app.db
+data/chroma/
+
+# NOTE: data/cruise-lines.json is deliberately NOT ignored. It is generated in
+# the *website* repo (scripts/export-cruise-content.mjs) but committed HERE so
+# this repo is self-contained at runtime — clone, install, ingest, run, with no
+# website checkout required. Refresh it only when website cruise content changes
+# (see README "Refreshing cruise content"). It holds no secrets and no prices.
+
+# --- Python bytecode / caches ----------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# --- Virtualenvs -----------------------------------------------------------
+.venv/
+venv/

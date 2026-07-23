@@ -1,0 +1,2603 @@
+[
+  {
+    "slug": "costa",
+    "name": "Costa Cruises",
+    "tagline": "Italian style, worldwide fly-cruise reach",
+    "signature": "Year-round Western Mediterranean 7-night loops, plus Caribbean, Canaries, South America and Asia seasons",
+    "relationship": "PSA",
+    "intro": "Costa brings an Italian sense of occasion to a genuinely worldwide programme — 631 itineraries and 1,280 departures on sale for July 2026 – June 2027 — best sold to GCC clients as a fly-cruise product.",
+    "description": [
+      "Costa Cruises operates nine recently renovated ships, all Italian-flagged, spanning the Western and Eastern Mediterranean, Northern Europe and the fjords, the Caribbean and Antilles, the Canaries, South America, Asia and a round-the-world voyage bookable by segment. Expect generous dining, lively evening entertainment and a ship that feels like a floating piazza, with family, honeymoon and accessibility programmes built into the core offer.",
+      "Costa is a fly-cruise for GCC clients, and an easy one: its home ports cluster in the Western Mediterranean at Barcelona, Rome (Civitavecchia), Savona and Marseille, in the Eastern Mediterranean at Venice and Athens, and in Northern Europe at Hamburg, Kiel and Copenhagen — all a one-stop flight from the Gulf. As a Preferred Sales Agent, we hold fares and allocation across the programme and build the flight and pre-cruise hotel into a single booking."
+    ],
+    "highlights": [
+      "Nine recently renovated ships, including the LNG-powered flagships Costa Toscana and Costa Smeralda",
+      "A genuinely worldwide programme: Mediterranean, Northern Europe, Caribbean, Canaries, South America, Asia and a round-the-world voyage bookable in segments",
+      "Suite guests receive butler service, a welcome bottle of Ferrari sparkling wine and an in-suite coffee machine",
+      "Family, honeymoon and accessibility programmes built into the core offer",
+      "C|Club loyalty discounts and the MyCosta app for pre-cruise self-service"
+    ],
+    "ships": [
+      "Costa Toscana",
+      "Costa Smeralda",
+      "Costa Diadema",
+      "Costa Fascinosa",
+      "Costa Favolosa",
+      "Costa Deliziosa",
+      "Costa Fortuna",
+      "Costa Pacifica",
+      "Costa Serena"
+    ],
+    "atAGlance": {
+      "fleetSize": "9 ships in service",
+      "homePorts": "Civitavecchia (Rome), Barcelona, Marseille, Savona, Venice (Marghera), Istanbul",
+      "gccAccess": "Fly-cruise — Western Mediterranean from Barcelona, Rome and Savona, Eastern Mediterranean from Venice and Athens, plus Northern Europe, Caribbean and Canaries seasons"
+    },
+    "itineraries": [
+      {
+        "region": "Western Mediterranean",
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Barcelona",
+          "Marseille",
+          "Savona",
+          "Palma de Mallorca",
+          "Cagliari"
+        ],
+        "nights": "7 nights core, 2–5 night short breaks",
+        "season": "Year-round Jul 2026 – Jun 2027 · 697 departures"
+      },
+      {
+        "region": "Eastern Mediterranean",
+        "ports": [
+          "Marghera (Venice)",
+          "Piraeus (Athens)",
+          "Istanbul",
+          "Taranto",
+          "La Valletta",
+          "Catania"
+        ],
+        "nights": "7 nights (14-night combos)",
+        "season": "Jul–Nov 2026 & Apr–Jun 2027 · 161 departures"
+      },
+      {
+        "region": "Northern Europe & Fjords",
+        "ports": [
+          "Kiel",
+          "Copenhagen",
+          "Hamburg"
+        ],
+        "nights": "7–15 nights",
+        "season": "Summer seasons Jul–Nov 2026 & Apr–Jun 2027 · 66 departures"
+      },
+      {
+        "region": "Caribbean & Antilles",
+        "ports": [
+          "Santo Domingo",
+          "La Romana",
+          "Pointe-à-Pitre (Guadeloupe)",
+          "Fort-de-France (Martinique)"
+        ],
+        "nights": "7 & 14 nights",
+        "season": "Winter Nov 2026 – Mar 2027 · 116 departures"
+      },
+      {
+        "region": "Canaries & African Atlantic",
+        "ports": [
+          "Santa Cruz (Tenerife)",
+          "Las Palmas (Gran Canaria)",
+          "Barcelona",
+          "Savona"
+        ],
+        "nights": "7 nights core, up to 12",
+        "season": "Sep 2026 – May 2027 · 117 departures"
+      },
+      {
+        "region": "South America",
+        "ports": [
+          "Buenos Aires",
+          "Rio de Janeiro",
+          "Montevideo",
+          "Santos (São Paulo)"
+        ],
+        "nights": "8–9 nights core",
+        "season": "Oct 2026 – Apr 2027 · 53 departures"
+      },
+      {
+        "region": "Asia",
+        "ports": [
+          "Keelung (Taipei)",
+          "Naha (Okinawa)",
+          "Busan",
+          "Hong Kong"
+        ],
+        "nights": "2–5 nights",
+        "season": "Jul–Nov 2026 & Jan–Feb 2027 · 68 departures"
+      },
+      {
+        "region": "World Cruise (bookable by segment)",
+        "ports": [
+          "Sydney",
+          "San Francisco",
+          "Tokyo",
+          "Buenos Aires"
+        ],
+        "nights": "26–140 nights",
+        "season": "Segments across Jul 2026 – Jun 2027"
+      }
+    ],
+    "bestFor": [
+      "Families",
+      "First-time cruisers",
+      "Multi-generational groups",
+      "Fly-cruise clients wanting Italian style"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations across Costa's worldwide fly-cruise programme",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging — pair a Dubai or Abu Dhabi stay with a Mediterranean or Northern Europe embarkation",
+      "Honest guidance on the current Gulf sailing pause, so clients book the fly-cruise option that actually suits them"
+    ],
+    "faqs": [
+      {
+        "q": "How do GCC clients join a Costa sailing?",
+        "a": "As a fly-cruise into one of Costa's home ports. The Western Mediterranean runs year-round from Barcelona, Rome (Civitavecchia), Savona and Marseille; the Eastern Mediterranean from Venice and Athens; and a summer Northern Europe season from Hamburg, Kiel and Copenhagen. We package the flight, the pre-cruise hotel and the sailing as one booking."
+      },
+      {
+        "q": "Which Costa ships suit a first-time GCC cruise client?",
+        "a": "Costa Smeralda and Costa Toscana are the newest, most premium ships in the fleet — both LNG-powered, with extensive family facilities and a customisable in-suite minibar option."
+      },
+      {
+        "q": "Is Costa a good fit for family bookings?",
+        "a": "Yes. Costa promotes dedicated family deals, multi-generational cabin options and an accessibility programme ('Cruises for Everyone'), alongside strong value for multi-cabin bookings."
+      },
+      {
+        "q": "What's included for suite guests?",
+        "a": "Suite guests fleet-wide receive a personal butler, a welcome bottle of Ferrari sparkling wine and an in-suite coffee machine; on Costa Toscana and Costa Smeralda a customisable minibar is also included."
+      },
+      {
+        "q": "Can a Costa cruise be combined with a Dubai stopover?",
+        "a": "Yes — since Costa's Mediterranean and Northern Europe seasons require a flight from the Gulf, we typically build in a Dubai or Abu Dhabi stay either side of the cruise as part of the same booking."
+      },
+      {
+        "q": "Does Costa offer a round-the-world cruise?",
+        "a": "Yes, on Costa Deliziosa and Costa Serena, bookable as a full voyage or as individual segments — useful for clients who want a taste of the World Cruise without the full multi-month commitment."
+      }
+    ]
+  },
+  {
+    "slug": "norwegian",
+    "name": "Norwegian Cruise Line",
+    "tagline": "Freestyle cruising, worldwide reach",
+    "signature": "Year-round Caribbean and weekly Hawaii sailings, plus Alaska, Mediterranean and Northern Europe seasons",
+    "relationship": "PSA",
+    "intro": "Norwegian's Freestyle Cruising philosophy — no fixed dining times, no dress codes — spans 785 sailings across 20 regions on sale as at July 2026, making it one of the most requested lines among our GCC agent network.",
+    "description": [
+      "Norwegian Cruise Line operates 21 ships across the Prima, Breakaway Plus, Breakaway, Epic, Jewel, Dawn and Sun classes, with guests choosing their own dining times and dress code fleet-wide. The line sails a genuinely worldwide programme — Caribbean, Bahamas, Bermuda, Mediterranean, Northern Europe, Alaska, Hawaii, Asia, Panama Canal, Mexican Riviera, Australia & New Zealand and more — with The Haven, Studios for solo travellers and family-connecting staterooms covering most traveller types.",
+      "One voyage brings clients home the scenic way: a 21-day Norwegian Sun sailing from Athens calls Muscat, Doha and Abu Dhabi before finishing in Dubai, in September 2027. Everything else is fly-cruise, with Dubai an official NCL hotel-package city. As Preferred Sales Agent, we hold fares and group allocations across the worldwide programme."
+    ],
+    "highlights": [
+      "Freestyle dining — no set mealtimes or formal dress codes, fleet-wide",
+      "21 ships sailing a genuinely worldwide programme, from the Caribbean to Asia and Australia",
+      "A 21-day Athens–Dubai voyage on Norwegian Sun, calling Muscat, Doha and Abu Dhabi on the way home",
+      "Dubai is an official NCL fly-cruise hotel hub for Asia and Extraordinary Journeys sailings",
+      "The Haven, Studios for solo travellers and connecting family staterooms cover most traveller types"
+    ],
+    "ships": [
+      "Norwegian Aqua",
+      "Norwegian Luna",
+      "Norwegian Viva",
+      "Norwegian Prima",
+      "Norwegian Encore",
+      "Norwegian Bliss",
+      "Norwegian Joy",
+      "Norwegian Escape",
+      "Norwegian Getaway",
+      "Norwegian Breakaway",
+      "Norwegian Epic",
+      "Norwegian Jade",
+      "Norwegian Jewel",
+      "Norwegian Pearl",
+      "Norwegian Gem",
+      "Norwegian Dawn",
+      "Norwegian Star",
+      "Norwegian Spirit",
+      "Norwegian Sun",
+      "Norwegian Sky",
+      "Pride of America"
+    ],
+    "atAGlance": {
+      "fleetSize": "21 ships in service — Norwegian Aura joins 2027",
+      "homePorts": "Miami, Port Canaveral, Southampton, Barcelona, Venice (Ravenna), Seattle, Honolulu, Sydney",
+      "gccAccess": "A 21-day Norwegian Sun voyage from Athens finishes in Dubai, calling Muscat, Doha and Abu Dhabi (September 2027); otherwise fly-cruise the Caribbean, Alaska, Bahamas, Bermuda, Mediterranean and Hawaii"
+    },
+    "itineraries": [
+      {
+        "region": "Caribbean",
+        "ports": [
+          "Orlando (Port Canaveral)",
+          "Miami",
+          "Tampa",
+          "New Orleans",
+          "San Juan",
+          "Great Stirrup Cay"
+        ],
+        "nights": "3–19 days",
+        "season": "Year-round · 138 sailings on sale"
+      },
+      {
+        "region": "Mediterranean",
+        "ports": [
+          "Venice (Ravenna)",
+          "Barcelona",
+          "Lisbon",
+          "Rome (Civitavecchia)",
+          "Istanbul"
+        ],
+        "nights": "7–21 days",
+        "season": "98 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Northern Europe",
+        "indexLabels": [
+          "Northern Europe & Baltic"
+        ],
+        "ports": [
+          "London (Southampton)",
+          "Copenhagen",
+          "Helsinki",
+          "Reykjavik",
+          "Oslo"
+        ],
+        "nights": "7–16 days",
+        "season": "Summer seasons · 97 sailings on sale"
+      },
+      {
+        "region": "Extraordinary Journeys",
+        "indexLabels": [
+          "World & Grand Voyages"
+        ],
+        "ports": [
+          "Miami",
+          "Honolulu",
+          "Papeete (Tahiti)",
+          "London (Southampton)"
+        ],
+        "nights": "6–19 days",
+        "season": "70 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Asia",
+        "indexLabels": [
+          "Asia (Far East)"
+        ],
+        "ports": [
+          "Tokyo (Yokohama)",
+          "Seoul (Incheon)",
+          "Hong Kong"
+        ],
+        "nights": "9–19 days",
+        "season": "48 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Seattle",
+          "Vancouver",
+          "Whittier",
+          "Juneau",
+          "Ketchikan (Ward Cove)"
+        ],
+        "nights": "7–16 days",
+        "season": "Summer season · 44 sailings on sale"
+      },
+      {
+        "region": "Bahamas",
+        "ports": [
+          "Miami",
+          "Jacksonville",
+          "Orlando (Port Canaveral)",
+          "Philadelphia"
+        ],
+        "nights": "2–13 days",
+        "season": "Year-round · 43 sailings on sale"
+      },
+      {
+        "region": "Transatlantic",
+        "indexLabels": [
+          "Transatlantic & repositioning"
+        ],
+        "ports": [
+          "London (Southampton)",
+          "Barcelona",
+          "Miami",
+          "Lisbon"
+        ],
+        "nights": "7–19 days",
+        "season": "33 crossings on sale (Jul 2026)"
+      },
+      {
+        "region": "Hawaii",
+        "ports": [
+          "Honolulu",
+          "Kahului",
+          "Hilo",
+          "Kona",
+          "Papeete (Tahiti)"
+        ],
+        "nights": "7–16 days",
+        "season": "Year-round · 32 sailings on sale"
+      },
+      {
+        "region": "Australia & New Zealand",
+        "ports": [
+          "Sydney",
+          "Melbourne",
+          "Wellington",
+          "Auckland"
+        ],
+        "nights": "4–20 days",
+        "season": "31 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Canada & New England",
+        "indexLabels": [
+          "North America & Canada"
+        ],
+        "ports": [
+          "Boston",
+          "New York",
+          "Philadelphia",
+          "Québec City",
+          "Halifax"
+        ],
+        "nights": "7–11 days",
+        "season": "27 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Greek Isles",
+        "indexLabels": [
+          "Greek Isles & Aegean"
+        ],
+        "ports": [
+          "Athens (Piraeus)",
+          "Venice (Ravenna)",
+          "Istanbul",
+          "Santorini",
+          "Mykonos"
+        ],
+        "nights": "7–18 days",
+        "season": "27 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Panama Canal",
+        "ports": [
+          "Miami",
+          "Los Angeles",
+          "New York",
+          "Cartagena"
+        ],
+        "nights": "10–22 days",
+        "season": "26 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "South Pacific",
+        "ports": [
+          "Papeete (Tahiti)",
+          "Lautoka (Fiji)",
+          "Honolulu",
+          "Bora Bora"
+        ],
+        "nights": "8–13 days",
+        "season": "17 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Weekend short breaks",
+        "ports": [
+          "Miami",
+          "Orlando (Port Canaveral)",
+          "Nassau",
+          "Great Stirrup Cay"
+        ],
+        "nights": "2–8 days",
+        "season": "17 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Bermuda",
+        "ports": [
+          "New York",
+          "Philadelphia",
+          "Boston",
+          "Royal Naval Dockyard"
+        ],
+        "nights": "4–8 days",
+        "season": "16 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Pacific Coastal",
+        "ports": [
+          "San Diego",
+          "Vancouver",
+          "Los Angeles",
+          "San Francisco"
+        ],
+        "nights": "6–18 days",
+        "season": "9 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "Mexico",
+        "indexLabels": [
+          "Mexico & Baja"
+        ],
+        "ports": [
+          "Los Angeles",
+          "San Diego",
+          "Cabo San Lucas",
+          "Puerto Vallarta"
+        ],
+        "nights": "5–17 days",
+        "season": "7 sailings on sale (Jul 2026)"
+      },
+      {
+        "region": "South America",
+        "ports": [
+          "Buenos Aires",
+          "Santiago (San Antonio)",
+          "Ushuaia",
+          "Montevideo"
+        ],
+        "nights": "15–16 days",
+        "season": "3 voyages on sale (Jul 2026)"
+      },
+      {
+        "region": "Africa",
+        "indexLabels": [
+          "Middle East & Africa journeys"
+        ],
+        "ports": [
+          "Lisbon",
+          "Athens (Piraeus)",
+          "Casablanca",
+          "Aqaba",
+          "Jeddah",
+          "Muscat"
+        ],
+        "nights": "9–18 days",
+        "season": "2 voyages on sale — incl. Athens to Muscat via the Red Sea"
+      }
+    ],
+    "bestFor": [
+      "Independent travellers",
+      "Solo cruisers (Studios)",
+      "Multi-generational families",
+      "Fly-cruise clients wanting worldwide reach"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations across Norwegian's worldwide programme",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging — pair a Dubai pre-cruise hotel stay with an NCL Asia or Extraordinary Journeys sailing",
+      "Clear guidance on Freestyle Cruising norms for first-time GCC cruisers"
+    ],
+    "faqs": [
+      {
+        "q": "Does Norwegian Cruise Line sail from Dubai?",
+        "a": "There are no NCL sailings departing from Dubai or any Gulf port. However, select one-way voyages on sale end in the region: a 21-day Mediterranean voyage from Athens on Norwegian Sun finishes via Doha and Abu Dhabi in Dubai, and an 18-day Athens voyage on Norwegian Sky ends in Muscat after Red Sea calls at Aqaba and Jeddah. Otherwise NCL is a fly-cruise product for GCC clients, with Dubai an official hotel-package city."
+      },
+      {
+        "q": "What is Freestyle Cruising?",
+        "a": "NCL's signature approach: no assigned dining times or tables, no formal dress codes, and up to 28 speciality and complimentary dining options fleet-wide."
+      },
+      {
+        "q": "How many ships does Norwegian operate?",
+        "a": "22, spanning the Prima, Breakaway Plus, Breakaway, Epic, Jewel, Dawn and Sun classes, plus the US-flagged Pride of America."
+      },
+      {
+        "q": "Can we combine a Dubai stay with an NCL cruise?",
+        "a": "Yes — Dubai's Hilton Al Habtoor City is NCL's official partner hotel for pre- or post-cruise stays connecting into Asia sailings (Singapore, Tokyo, Bangkok, Seoul, Taipei, Manila, Kuala Lumpur) or other Extraordinary Journeys embarkation ports."
+      },
+      {
+        "q": "Which ship or cabin type suits a solo traveller?",
+        "a": "NCL's Studios are purpose-built single-occupancy cabins with access to an exclusive private lounge, available across several ships in the fleet."
+      },
+      {
+        "q": "Does Norwegian suit large or multi-generational families?",
+        "a": "Yes — The Haven offers a private, butler-served enclave, alongside larger connecting family staterooms across the wider fleet."
+      }
+    ]
+  },
+  {
+    "slug": "elixir",
+    "name": "Elixir Cruises",
+    "tagline": "A boutique two-yacht line in the Greek islands",
+    "signature": "7-night boutique yacht voyages through the Cyclades, from Lavrion (Athens), April–October",
+    "relationship": "Wholesale",
+    "intro": "Elixir is a genuinely small, boutique operation — two named yachts sailing the Greek islands — best suited to GCC clients wanting an intimate, high-touch cruise rather than a mainstream fleet.",
+    "description": [
+      "Elixir Cruises sails two small yachts of its own: Elysium (64 metres, 25 cabins), based in Lavrion for an Aegean season, and M/Y Gemaya, typically sold by individual cabin. The company is headquartered in Ras Al Khaimah in the UAE, with its management office in Piraeus — a rare cruise operator with its own Gulf base.",
+      "The product is the Cyclades: week-long round trips from Lavrion (Athens) calling at Mykonos, Santorini, Milos, Sifnos, Naxos and Serifos, with themed departures through the April–October season and one Greece & Turkey itinerary. We wholesale Elixir inventory to our agent network, so you can package it with confidence while being upfront with clients about the boutique scale of the operation."
+    ],
+    "highlights": [
+      "Two small, named yachts — Elysium (25 cabins) and M/Y Gemaya",
+      "Cyclades round trips from Lavrion (Athens) — Mykonos, Santorini, Milos, Sifnos, Naxos and Serifos",
+      "UAE-headquartered, in Ras Al Khaimah, with management in Piraeus",
+      "Themed sailings — UNESCO heritage, wellness at sea, Greek Easter — plus a Greece & Turkey itinerary",
+      "Well suited to honeymoons, small groups and private charters"
+    ],
+    "ships": [
+      "Elysium",
+      "Gemaya"
+    ],
+    "atAGlance": {
+      "fleetSize": "2 yachts (Elysium, Gemaya)",
+      "homePorts": "Lavrion (Athens)",
+      "gccAccess": "A UAE-headquartered line — fly-cruise the Cyclades from Athens on a boutique yacht, April to October"
+    },
+    "itineraries": [
+      {
+        "region": "Greek Islands (The Elysium)",
+        "ports": [
+          "Lavrion (Athens)",
+          "Delos & Mykonos",
+          "Santorini",
+          "Patmos",
+          "Nafplion",
+          "Kusadasi (Türkiye)"
+        ],
+        "nights": "7 nights, Friday to Friday",
+        "season": "2026 season · 6 itineraries"
+      },
+      {
+        "region": "Aegean & Saronic (M/Y Gemaya)",
+        "ports": [
+          "Lavrion (Athens)",
+          "Sifnos",
+          "Santorini",
+          "Hydra",
+          "Spetses",
+          "Milos"
+        ],
+        "nights": "7 nights, Friday to Friday",
+        "season": "2026 season · 3 itineraries"
+      }
+    ],
+    "bestFor": [
+      "Honeymooners",
+      "Small groups and private charters",
+      "Clients wanting a boutique yacht experience",
+      "Repeat cruisers seeking something different"
+    ],
+    "whyByond": [
+      "Wholesale rates secured directly with Elixir Cruises",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around the Aegean season, with Athens pre- and post-nights",
+      "Honest guidance on this boutique, limited-allocation product so client expectations are set correctly"
+    ],
+    "faqs": [
+      {
+        "q": "Where does Elixir sail?",
+        "a": "The Cyclades, on week-long round trips from Lavrion (Athens) between April and October — Mykonos, Santorini, Milos, Sifnos, Naxos and Serifos. Elixir is headquartered in Ras Al Khaimah, and Athens is four to five hours from any Gulf hub, so it sells as an easy short-haul fly-cruise."
+      },
+      {
+        "q": "How big are Elixir's ships?",
+        "a": "Elysium carries 50 guests across 25 cabins; Gemaya has just 5 suites and is typically sold by individual cabin rather than full-ship charter."
+      },
+      {
+        "q": "Is Elixir a good fit for large groups?",
+        "a": "Not usually — given the very small scale of both yachts, Elixir suits couples, small groups and bespoke charters rather than large multi-cabin bookings."
+      },
+      {
+        "q": "What's included in an Elixir fare?",
+        "a": "Cabin amenities, buffet breakfast plus half-board dining, a welcome cocktail and non-alcoholic drinks are included on Elysium; Gemaya's fare additionally includes an open bar, port taxes, transfers and water toys."
+      },
+      {
+        "q": "Can Elixir be booked as a private charter?",
+        "a": "Yes — both yachts are used for private charters, incentive groups, honeymoons and small theme cruises alongside their scheduled itineraries."
+      },
+      {
+        "q": "When does the Elixir season run?",
+        "a": "April to October, from Lavrion (Athens). Elixir publishes themed departures across the season — UNESCO heritage, wellness at sea and Greek Easter among them — plus one Greece & Turkey itinerary."
+      }
+    ]
+  },
+  {
+    "slug": "scenic-emerald",
+    "name": "Scenic & Emerald Cruises",
+    "tagline": "Luxury river and ocean, all-inclusive",
+    "signature": "European river cruising on the Rhine, Danube and Douro, plus yacht seasons in the Med, Red Sea and polar expeditions",
+    "relationship": "Wholesale",
+    "intro": "Scenic and its confirmed sister brand Emerald Cruises bring true all-inclusive luxury to rivers and oceans alike, with a genuine Red Sea and Seychelles season for GCC-region clients.",
+    "description": [
+      "Scenic Luxury Cruises & Tours (ultra-luxury river 'Space-Ships' and the expedition yacht Scenic Eclipse) and Emerald Cruises (deluxe river 'Star-Ships' and boutique ocean yachts) sit inside the same corporate group and share a loyalty programme, Scenic and Emerald Rewards. Both brands price all-inclusive: fares, excursions, drinks and gratuities are bundled from the outset, which makes quoting simple and the final invoice easy to explain to clients.",
+      "For GCC-region clients, Emerald's ocean yachts run a Red Sea season (Aqaba, Jeddah, Safaga, Sharm El Sheikh) and a Seychelles & Indian Ocean season (ex-Mahé), the two most geographically relevant products in either brand's worldwide network. We wholesale allocation across both brands' river and ocean programmes for agents building premium, higher-end itineraries."
+    ],
+    "highlights": [
+      "True all-inclusive fares — drinks, excursions, port charges and gratuities included",
+      "A genuine Red Sea season (Emerald Azzurra/Sakara) ex-Aqaba and Jeddah",
+      "River sailings across Europe and the Mekong alongside true polar expedition voyages on Scenic Eclipse",
+      "A 'good–better' pairing for clients within one relationship and one loyalty programme"
+    ],
+    "ships": [
+      "Scenic Eclipse",
+      "Scenic Eclipse II",
+      "Scenic Jasper",
+      "Scenic Opal",
+      "Scenic Amber",
+      "Scenic Ruby",
+      "Scenic Pearl",
+      "Scenic Crystal",
+      "Scenic Jewel",
+      "Scenic Jade",
+      "Scenic Sapphire",
+      "Scenic Diamond",
+      "Scenic Gem",
+      "Scenic Azure",
+      "Scenic Spirit",
+      "Emerald Azzurra",
+      "Emerald Sakara",
+      "Emerald Kaia",
+      "Emerald Sky",
+      "Emerald Star",
+      "Emerald Sun",
+      "Emerald Dawn",
+      "Emerald Destiny",
+      "Emerald Luna",
+      "Emerald Astra",
+      "Emerald Liberté",
+      "Emerald Lumi",
+      "Emerald Radiance",
+      "Emerald Harmony"
+    ],
+    "atAGlance": {
+      "fleetSize": "29 vessels in service across the two brands — Scenic's two Discovery Yachts and 13 river Space-Ships, plus Emerald's three yachts and 11 Star-Ships",
+      "homePorts": "Amsterdam, Budapest, Porto, Lyon, Siem Reap, Dubrovnik, Aqaba, Mahé",
+      "gccAccess": "Emerald is the regional brand of the pair — a Red Sea yacht season calling at Jeddah, Aqaba and Sharm el-Sheikh, plus a Seychelles & Indian Ocean season from Mahé; Scenic adds European rivers and polar expeditions as fly-cruises"
+    },
+    "itineraries": [
+      {
+        "region": "European rivers (Scenic Space-Ships)",
+        "indexLabels": [
+          "European rivers"
+        ],
+        "ports": [
+          "Paris",
+          "Amsterdam",
+          "Budapest",
+          "Bordeaux",
+          "Lisbon",
+          "Zurich"
+        ],
+        "nights": "8–38 days",
+        "season": "2026–2028 · 225 itineraries on sale"
+      },
+      {
+        "region": "Eastern Europe & Balkans (river)",
+        "ports": [
+          "Budapest",
+          "Bucharest",
+          "Vienna",
+          "Istanbul"
+        ],
+        "nights": "9–29 days",
+        "season": "2026–2027 · 27 itineraries on sale"
+      },
+      {
+        "region": "Antarctica & South Georgia (Scenic Eclipse)",
+        "indexLabels": [
+          "Expedition (Polar)"
+        ],
+        "ports": [
+          "Buenos Aires",
+          "Santiago",
+          "Lima",
+          "Ushuaia"
+        ],
+        "nights": "13–37 days",
+        "season": "Seasons on sale to 2029 · 46 voyages"
+      },
+      {
+        "region": "Arctic, Iceland & Greenland (Scenic Eclipse)",
+        "ports": [
+          "Reykjavik",
+          "Copenhagen",
+          "Oslo",
+          "Bergen",
+          "Toronto"
+        ],
+        "nights": "13–32 days",
+        "season": "2026–2028 · 29 voyages"
+      },
+      {
+        "region": "Norwegian Fjords & Baltic (Scenic Eclipse)",
+        "indexLabels": [
+          "Norwegian Fjords",
+          "Northern Europe & Baltic"
+        ],
+        "ports": [
+          "Stockholm",
+          "Copenhagen",
+          "Bergen",
+          "London"
+        ],
+        "nights": "9–22 days",
+        "season": "2026–2028 · 14 voyages"
+      },
+      {
+        "region": "Mediterranean & Ancient Empires (Scenic Eclipse)",
+        "indexLabels": [
+          "Mediterranean",
+          "Greek Isles & Aegean"
+        ],
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Athens (Piraeus)",
+          "Venice",
+          "Istanbul"
+        ],
+        "nights": "9–33 days",
+        "season": "2027–2028 seasons · 30 voyages"
+      },
+      {
+        "region": "Mediterranean & Adriatic (Emerald ocean yacht)",
+        "ports": [
+          "Dubrovnik",
+          "Piraeus (Athens)",
+          "Venice",
+          "Nice",
+          "Barcelona"
+        ],
+        "nights": "8–15 nights",
+        "season": "2027"
+      },
+      {
+        "region": "South America & Patagonia (Scenic Eclipse)",
+        "indexLabels": [
+          "South America"
+        ],
+        "ports": [
+          "Santiago",
+          "Buenos Aires",
+          "Rio de Janeiro",
+          "Panama City"
+        ],
+        "nights": "9–31 days",
+        "season": "Seasons on sale to 2029 · 31 voyages"
+      },
+      {
+        "region": "Mekong & Asia",
+        "indexLabels": [
+          "Southeast Asia",
+          "Asia (Far East)"
+        ],
+        "ports": [
+          "Hanoi",
+          "Siem Reap",
+          "Ho Chi Minh City",
+          "Tokyo"
+        ],
+        "nights": "11–28 days",
+        "season": "2026–2029 · 36 journeys"
+      },
+      {
+        "region": "Middle East & Africa journeys (Egypt, Jordan & Kenya)",
+        "indexLabels": [
+          "Middle East & Africa journeys"
+        ],
+        "ports": [
+          "Cairo",
+          "Amman",
+          "Nairobi"
+        ],
+        "nights": "8–28 days",
+        "season": "2026 & 2028 departures · 10 journeys"
+      },
+      {
+        "region": "North America & Canada",
+        "ports": [
+          "New York City",
+          "Montreal",
+          "Boston",
+          "Vancouver"
+        ],
+        "nights": "9–19 days",
+        "season": "2026–2028 · 13 journeys"
+      },
+      {
+        "region": "Australia & New Zealand (Scenic Eclipse)",
+        "indexLabels": [
+          "Australia & New Zealand"
+        ],
+        "ports": [
+          "Auckland",
+          "Christchurch",
+          "Cairns"
+        ],
+        "nights": "6–24 days",
+        "season": "Seasons on sale to 2029 · 10 voyages"
+      },
+      {
+        "region": "Red Sea (Emerald ocean yacht)",
+        "ports": [
+          "Aqaba",
+          "Jeddah",
+          "Cairo (Ain Al Sokhna)",
+          "Safaga",
+          "Sharm El Sheikh"
+        ],
+        "nights": "10–13 nights",
+        "season": "2026/27"
+      },
+      {
+        "region": "Seychelles & Indian Ocean (Emerald ocean yacht)",
+        "ports": [
+          "Mahé",
+          "Mombasa",
+          "Nairobi"
+        ],
+        "nights": "8–22 nights",
+        "season": "2026/27"
+      }
+    ],
+    "bestFor": [
+      "Repeat luxury cruisers",
+      "River-cruise clients wanting all-inclusive fares",
+      "Expedition-minded travellers",
+      "Clients wanting a good–better pairing under one relationship"
+    ],
+    "whyByond": [
+      "Wholesale rates across both Scenic's and Emerald's river and ocean programmes",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around the Red Sea or Seychelles season",
+      "One relationship covering both the ultra-luxury and accessible-deluxe tiers, under a shared loyalty programme"
+    ],
+    "faqs": [
+      {
+        "q": "What do Scenic and Emerald offer closest to the GCC?",
+        "a": "Emerald is the regional brand of the pair: its yachts run a Red Sea season calling Jeddah, Aqaba and Sharm El Sheikh, and a Seychelles & Indian Ocean season from Mahé — both a short flight from the Gulf. Scenic adds European river cruising and polar expeditions as fly-cruises."
+      },
+      {
+        "q": "What's the difference between Scenic and Emerald?",
+        "a": "Scenic sits at the ultra-luxury end — smaller guest counts, higher space ratios, and premium extras such as helicopters and a submersible on Scenic Eclipse. Emerald offers a more accessible deluxe/boutique-yacht tier under the same parent group, so clients can be offered a 'good–better' pairing within one relationship."
+      },
+      {
+        "q": "Are the fares genuinely all-inclusive?",
+        "a": "Yes — both brands bundle port charges, meals, most beverages, Wi-Fi and gratuities into the headline fare, and Emerald's yachts add an included daily shore excursion."
+      },
+      {
+        "q": "Can we offer clients a Nile or Egypt river cruise under these brands?",
+        "a": "No — neither Scenic nor Emerald currently list an Egypt/Nile river product on their official sites; this should not be offered on the strength of either brand."
+      },
+      {
+        "q": "Is there a shared loyalty programme?",
+        "a": "Yes, Scenic and Emerald Rewards spans both brands."
+      },
+      {
+        "q": "What's the best season for a Red Sea sailing?",
+        "a": "Emerald's Red Sea itineraries run across the 2026/27 season ex-Aqaba and Jeddah — confirm the specific voyage dates directly with us before quoting."
+      }
+    ]
+  },
+  {
+    "slug": "crystal",
+    "name": "Crystal Cruises",
+    "tagline": "The return of a legendary name — with a genuine Dubai turnaround",
+    "signature": "Grand voyages worldwide — Mediterranean, Alaska and Baltic seasons up to the 139-night 2027 World Cruise",
+    "relationship": "Wholesale",
+    "intro": "Crystal Cruises returns to the world's oceans with the spacious, ultra all-inclusive service that first made the name famous — and, notably for GCC clients, a genuine Dubai turnaround in spring 2028, on voyages already on sale.",
+    "description": [
+      "Crystal built its reputation on generous space-per-guest ratios, near 1:1 crew-to-guest ratios and suite-led, ultra all-inclusive fares, and the relaunched two-ship fleet (Crystal Serenity, Crystal Symphony, under owner A&K Travel Group since 2022) carries that heritage forward. A third ship, Crystal Grace, joins in 2028 and is already on sale across Europe and the Americas.",
+      "Dubai is a genuine turnaround port for Crystal Symphony, not just a port of call: spring sailings run Dubai–Jeddah, Dubai–Barcelona and Dubai–Fort Lauderdale, plus a Singapore–Dubai repositioning voyage calling at the Musandam Peninsula (Oman) and Abu Dhabi along the way. Our wholesale relationship gives agents access to this suite-led inventory for clients seeking a genuinely six-star experience, with a real Dubai departure to point to."
+    ],
+    "highlights": [
+      "A genuine Dubai turnaround in spring 2028, on voyages already on sale to Jeddah, Barcelona and Fort Lauderdale",
+      "Among the most spacious per-guest ratios at sea, with a near 1:1 crew-to-guest ratio",
+      "All-suite accommodation with butler service and ultra all-inclusive dining, drinks and gratuities",
+      "World Cruise departures each January through 2029 (99–150 nights) and multi-week Grand Journeys"
+    ],
+    "ships": [
+      "Crystal Serenity",
+      "Crystal Symphony"
+    ],
+    "atAGlance": {
+      "fleetSize": "2 ships (Crystal Grace joins 2028 — already on sale)",
+      "homePorts": "Dubai, Lisbon, Barcelona, Fort Lauderdale, Singapore",
+      "gccAccess": "Dubai on sale inside the 2028 World Cruise aboard Crystal Symphony — Melbourne–Dubai calling the Musandam Peninsula and Abu Dhabi, then Dubai–Jeddah calling Fujairah, Muscat and Salalah"
+    },
+    "itineraries": [
+      {
+        "region": "Arabian Gulf & Red Sea (Dubai turnaround)",
+        "ports": [
+          "Dubai",
+          "Abu Dhabi",
+          "Fujairah",
+          "Muscat",
+          "Salalah",
+          "Jeddah",
+          "Musandam Peninsula"
+        ],
+        "nights": "9–31 nights (segments)",
+        "season": "Spring 2028 · Crystal Symphony — on sale now"
+      },
+      {
+        "region": "Europe & Mediterranean",
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Barcelona",
+          "Lisbon"
+        ],
+        "nights": "3–65 nights",
+        "season": "2026–2028 seasons · 74 voyages"
+      },
+      {
+        "region": "The Americas & Caribbean",
+        "ports": [
+          "Fort Lauderdale",
+          "San Juan",
+          "San Diego"
+        ],
+        "nights": "3–39 nights",
+        "season": "Aug 2026 – Feb 2028 seasons · 62 voyages"
+      },
+      {
+        "region": "Baltics & Northern Europe",
+        "ports": [
+          "Copenhagen",
+          "Reykjavik",
+          "Portsmouth (London)",
+          "Hamburg"
+        ],
+        "nights": "4–59 nights",
+        "season": "Summers 2026–2028 · 31 voyages"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Vancouver",
+          "Seward (Anchorage)"
+        ],
+        "nights": "6–20 nights",
+        "season": "Summers 2026–2028 · 26 voyages"
+      },
+      {
+        "region": "Australia & New Zealand",
+        "ports": [
+          "Auckland",
+          "Melbourne"
+        ],
+        "nights": "13–15 nights",
+        "season": "Mar 2027 & Mar 2028"
+      },
+      {
+        "region": "North America & Canada",
+        "ports": [
+          "New York City",
+          "Quebec City",
+          "Vancouver"
+        ],
+        "nights": "7–33 nights",
+        "season": "Autumn foliage seasons 2026–2028 · 16 voyages"
+      },
+      {
+        "region": "South America",
+        "ports": [
+          "Fort Lauderdale",
+          "New York City",
+          "Rio de Janeiro"
+        ],
+        "nights": "7–71 nights",
+        "season": "2027–2028 · 14 voyages"
+      },
+      {
+        "region": "Asia",
+        "ports": [
+          "Singapore",
+          "Bangkok",
+          "Benoa (Bali)",
+          "Brisbane"
+        ],
+        "nights": "9–85 nights",
+        "season": "Mar–Apr seasons · 10 voyages — several ending in Dubai"
+      },
+      {
+        "region": "South Pacific",
+        "ports": [
+          "Tahiti (Papeete)",
+          "Lautoka (Fiji)"
+        ],
+        "nights": "10–37 nights",
+        "season": "Feb 2027 & Feb 2028 · 7 voyages"
+      },
+      {
+        "region": "World Cruise",
+        "ports": [
+          "Fort Lauderdale",
+          "Melbourne",
+          "San Diego"
+        ],
+        "nights": "99–150 nights",
+        "season": "January departures 2027, 2028 & 2029 · 6 voyages"
+      },
+      {
+        "region": "Transoceanic crossings",
+        "indexLabels": [
+          "Transoceanic"
+        ],
+        "ports": [
+          "Lisbon",
+          "Fort Lauderdale",
+          "Barcelona"
+        ],
+        "nights": "11–35 nights",
+        "season": "2026–2028 · 19 crossings"
+      }
+    ],
+    "bestFor": [
+      "Experienced luxury cruisers",
+      "Long-voyage clients (multi-week)",
+      "All-suite and butler-service seekers",
+      "Clients wanting a genuine Dubai departure"
+    ],
+    "whyByond": [
+      "Wholesale rates on Crystal's suite-led, ultra all-inclusive inventory",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around Crystal's genuine Dubai turnaround season",
+      "Early booking guidance given Crystal's small two-ship fleet and limited Dubai-season inventory"
+    ],
+    "faqs": [
+      {
+        "q": "Does Crystal Cruises sail from Dubai?",
+        "a": "Yes, genuinely. Crystal Symphony turns around in Dubai in spring 2028, on voyages already on sale — Dubai–Jeddah, Dubai–Barcelona and Dubai–Fort Lauderdale routings, plus a Singapore–Dubai voyage that calls at the Musandam Peninsula (Oman) and Abu Dhabi."
+      },
+      {
+        "q": "How big is Crystal's fleet?",
+        "a": "Two ships in service today — Crystal Serenity (740 guests) and Crystal Symphony (606 guests) — with a third, Crystal Grace, due in 2028."
+      },
+      {
+        "q": "Is Crystal all-inclusive?",
+        "a": "Yes — an 'ultra all-inclusive' model covering all restaurants and bars, speciality dining, premium beverages and gratuities, with a near 1:1 crew-to-guest ratio."
+      },
+      {
+        "q": "Does every guest get a butler?",
+        "a": "Yes, personal butler service is included for every stateroom and suite."
+      },
+      {
+        "q": "Does Crystal offer a world cruise?",
+        "a": "Yes — a 139-night 2027 World Cruise from San Diego to Vancouver, though this particular routing does not include any Middle East calls; the Dubai-linked sailings sit on separate regional and repositioning voyages."
+      },
+      {
+        "q": "How much availability is there for the Dubai sailings?",
+        "a": "Given the small two-ship fleet, inventory on the Dubai turnaround season is limited — we recommend confirming current on-sale dates with us early."
+      }
+    ]
+  },
+  {
+    "slug": "aroya",
+    "name": "Aroya Cruises",
+    "tagline": "Saudi Arabia's own cruise line",
+    "signature": "Red Sea short breaks of 2–8 nights from Jeddah and a summer Mediterranean season from Istanbul",
+    "relationship": "PSA",
+    "intro": "AROYA is Saudi Arabia's homegrown cruise line — a single 335-metre ship sailing the Red Sea from Jeddah and the Mediterranean from Istanbul, with a distinctly Arabian welcome built in from the start.",
+    "description": [
+      "AROYA Cruises, owned by Cruise Saudi (Public Investment Fund), operates one ship — simply 'Aroya' — carrying up to 3,362 guests across 18 decks. Its Red Sea season, branded 'Red Coral Secrets,' runs September to May from Jeddah, calling at ports across Saudi Arabia, Egypt and Jordan; the ship repositions each summer to Istanbul for a Mediterranean season via the Suez Canal. Onboard, the line is built around family and faith-conscious features: a nursery, a large Kid Zone and water park, women-only pool/spa/gym hours, separate prayer rooms and shisha lounges.",
+      "AROYA is the closest thing the region has to a home-market cruise line — Saudi-owned, and sailing the Red Sea from Jeddah plus a Mediterranean season from Istanbul, both a short flight from any GCC city. As Preferred Sales Agent we carry direct fares and cabin holds across both seasons, and we will tell you first as new departure ports are released."
+    ],
+    "highlights": [
+      "A Red Sea season ('Red Coral Secrets') from Jeddah, September to May",
+      "A Mediterranean season from Istanbul each summer, connected via a Suez Canal repositioning voyage",
+      "Purpose-built family and faith-conscious facilities: nursery, Kid Zone, women-only wellness hours, prayer rooms",
+      "A GCC-wide official trade-partner network, with AED accepted at checkout"
+    ],
+    "ships": [
+      "Aroya"
+    ],
+    "atAGlance": {
+      "fleetSize": "1 ship (Aroya)",
+      "homePorts": "Jeddah, Istanbul",
+      "gccAccess": "The closest cruise line to the GCC — Red Sea round trips from Jeddah and a Mediterranean season from Istanbul, a short hop from every Gulf hub"
+    },
+    "itineraries": [
+      {
+        "region": "Red Sea (from Jeddah)",
+        "ports": [
+          "Jeddah",
+          "Sharm El Sheikh",
+          "Aqaba",
+          "Yanbu",
+          "Jabal Al-Sabaya"
+        ],
+        "nights": "2–5 nights",
+        "season": "Late Sep 2026 – May 2027 season · 7 sailings listed"
+      },
+      {
+        "region": "Red Sea ↔ Mediterranean repositioning",
+        "ports": [
+          "Istanbul",
+          "Suez Canal",
+          "Sharm El Sheikh",
+          "Jeddah"
+        ],
+        "nights": "8 nights one-way",
+        "season": "Southbound Sep 2026 · northbound May 2027"
+      },
+      {
+        "region": "Mediterranean (from Istanbul)",
+        "ports": [
+          "Istanbul",
+          "Bodrum",
+          "Marmaris",
+          "Kas",
+          "Mykonos",
+          "Piraeus (Athens)",
+          "Alexandria"
+        ],
+        "nights": "5–7 nights",
+        "season": "Jul–Sep 2026, resuming Jun 2027 · 5 sailings listed"
+      }
+    ],
+    "bestFor": [
+      "Saudi and GCC families",
+      "Faith-conscious travellers",
+      "Groups and MICE bookings",
+      "National Day and short-break clients"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations through AROYA's official GCC trade-partner network",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around the Red Sea or Mediterranean season",
+      "Clear guidance on boarding documents (KSA National ID/Iqama vs passport) so clients arrive prepared"
+    ],
+    "faqs": [
+      {
+        "q": "Where does AROYA sail from?",
+        "a": "Jeddah for the Red Sea and Istanbul for the Mediterranean — the two home ports on sale. Jeddah is a short direct hop from every GCC city, which makes AROYA the closest cruise product to this market: Red Sea round trips of two to eight nights calling Sharm El Sheikh, Aqaba, Yanbu and Jabal Al-Sabaya, plus a summer Mediterranean season from Istanbul."
+      },
+      {
+        "q": "What documents do clients need for a Jeddah round trip?",
+        "a": "For round-trip Red Sea sailings that start and end in Jeddah with no international port calls, a KSA National ID or Iqama is sufficient. A passport is required for itineraries with international calls, and residents should ensure any exit/re-entry visas are valid."
+      },
+      {
+        "q": "Is AROYA suitable for families?",
+        "a": "Yes — the ship has a dedicated nursery for ages 6–24 months, a large Kid Zone and water park, and a Premier Family Suite category."
+      },
+      {
+        "q": "Are there women-only facilities onboard?",
+        "a": "Yes — exclusive pool, spa and gym hours for women are offered (published hours vary by itinerary), alongside separate male and female prayer rooms."
+      },
+      {
+        "q": "Does AROYA support AED bookings?",
+        "a": "Yes — the booking engine's currency selector includes AED alongside SAR, USD, EUR and GBP."
+      },
+      {
+        "q": "How big is the ship?",
+        "a": "335 metres long, 18 decks, 1,678 cabins, with a maximum capacity of 3,362 guests and over 1,600 crew."
+      }
+    ]
+  },
+  {
+    "slug": "carnival",
+    "name": "Carnival Cruises",
+    "tagline": "Fun, value-led fly-cruise holidays from the US and Australia",
+    "signature": "Year-round Caribbean and Bahamas sailings with Celebration Key, plus Alaska summers and Australia getaways",
+    "relationship": "PSA",
+    "intro": "Carnival's easy-going, value-led approach makes it a dependable fly-cruise recommendation for GCC families — 1,667 departures on sale for July 2026 – July 2027, every one starting with a flight to the US, Australia or a seasonal European home port.",
+    "description": [
+      "Carnival Cruise Line operates around 32 ships across the Caribbean, the Bahamas (including its new private destination Celebration Key), Mexico's west coast, Alaska and a growing Australia deployment. Its Excel-class flagships — Mardi Gras, Carnival Celebration and Carnival Jubilee — are LNG-powered and built around big family attractions such as the BOLT® rollercoaster and multi-slide Carnival WaterWorks™ water parks, paired on the same ship with an adults-only Serenity Retreat and celebrity-chef dining from Emeril Lagasse and Guy Fieri.",
+      "Carnival sells to the GCC as a fly-cruise, across 28 home ports: the Caribbean and Bahamas from Miami, Orlando (Port Canaveral), Galveston, Tampa and New Orleans; Alaska from Seattle; Australia and the South Pacific from Sydney and Brisbane; a summer Europe season from London, Barcelona, Rome and Lisbon; and Asia from Singapore, Hong Kong and Tokyo. As Preferred Sales Agent, we hold fares and group allocations across the programme and build the flight and pre-cruise hotel stay into one booking, with clear guidance on the separate travel-document track Carnival maintains for non-US citizens."
+    ],
+    "highlights": [
+      "Excel-class flagships — Mardi Gras, Carnival Celebration, Carnival Jubilee — with BOLT® coasters and Carnival WaterWorks™ water parks",
+      "A new private Bahamas destination, Celebration Key, with five themed zones including an adults-only Pearl Cove Beach Club",
+      "Caribbean sailings from seven US home ports, plus a west-coast Mexico programme and a growing year-round Australia deployment",
+      "Serenity Adult-Only Retreats and Family Harbor accommodation on the same ships, for multi-generational bookings",
+      "Celebrity-chef dining from Emeril Lagasse and Guy Fieri on the newest ships"
+    ],
+    "ships": [
+      "Mardi Gras",
+      "Carnival Celebration",
+      "Carnival Jubilee",
+      "Carnival Firenze",
+      "Carnival Venezia",
+      "Carnival Luminosa",
+      "Carnival Panorama",
+      "Carnival Horizon",
+      "Carnival Vista",
+      "Carnival Magic",
+      "Carnival Breeze",
+      "Carnival Dream",
+      "Carnival Conquest",
+      "Carnival Glory",
+      "Carnival Valor",
+      "Carnival Liberty",
+      "Carnival Freedom",
+      "Carnival Sunrise",
+      "Carnival Sunshine",
+      "Carnival Radiance",
+      "Carnival Splendor",
+      "Carnival Legend",
+      "Carnival Miracle",
+      "Carnival Pride",
+      "Carnival Spirit",
+      "Carnival Elation",
+      "Carnival Paradise",
+      "Carnival Adventure",
+      "Carnival Encounter"
+    ],
+    "atAGlance": {
+      "fleetSize": "29 ships in service — Carnival Festivale joins 2027 and Carnival Tropicale 2028",
+      "homePorts": "Miami, Port Canaveral, Galveston, Long Beach, Seattle, Sydney, Brisbane, London (seasonal)",
+      "gccAccess": "Fly-cruise — year-round Caribbean and Bahamas from seven US home ports, plus Alaska, Europe, Asia and Australia seasons"
+    },
+    "itineraries": [
+      {
+        "region": "The Bahamas",
+        "indexLabels": [
+          "Bahamas"
+        ],
+        "ports": [
+          "Miami",
+          "Port Canaveral (Orlando)",
+          "Jacksonville",
+          "Baltimore",
+          "Norfolk"
+        ],
+        "nights": "3–8 nights",
+        "season": "Year-round Jul 2026 – Jul 2027 · 535 departures"
+      },
+      {
+        "region": "Western Caribbean",
+        "ports": [
+          "Galveston",
+          "New Orleans",
+          "Tampa",
+          "Miami"
+        ],
+        "nights": "4–7 nights core",
+        "season": "Year-round Jul 2026 – Jul 2027 · 403 departures"
+      },
+      {
+        "region": "Eastern Caribbean",
+        "ports": [
+          "Port Canaveral (Orlando)",
+          "Miami",
+          "Norfolk",
+          "New York (Manhattan)"
+        ],
+        "nights": "6–8 nights core",
+        "season": "Year-round Jul 2026 – Jul 2027 · 204 departures"
+      },
+      {
+        "region": "Australia & South Pacific",
+        "indexLabels": [
+          "Australia & New Zealand",
+          "South Pacific"
+        ],
+        "ports": [
+          "Sydney",
+          "Brisbane",
+          "Melbourne"
+        ],
+        "nights": "2–14 nights",
+        "season": "Year-round Jul 2026 – Jul 2027 · 174 departures"
+      },
+      {
+        "region": "Mexican Riviera & Baja",
+        "indexLabels": [
+          "Mexico & Baja"
+        ],
+        "ports": [
+          "Long Beach (Los Angeles)",
+          "San Francisco"
+        ],
+        "nights": "3–8 nights",
+        "season": "Year-round Jul 2026 – Jul 2027 · 152 departures"
+      },
+      {
+        "region": "Long voyages & repositioning",
+        "indexLabels": [
+          "Transatlantic & repositioning",
+          "South America",
+          "Southeast Asia"
+        ],
+        "ports": [
+          "Long Beach (Los Angeles)",
+          "San Francisco",
+          "San Antonio (Chile)"
+        ],
+        "nights": "14–18 nights",
+        "season": "Select departures 2026/27 · South America & transpacific"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Seattle",
+          "San Francisco"
+        ],
+        "nights": "7–10 nights",
+        "season": "Summer seasons Jul–Sep 2026 & Apr–Jul 2027 · 54 departures"
+      },
+      {
+        "region": "Bermuda",
+        "ports": [
+          "Norfolk",
+          "New York (Manhattan)",
+          "Baltimore"
+        ],
+        "nights": "4–7 nights",
+        "season": "Jul–Oct 2026 & Apr–Jul 2027 · 26 departures"
+      },
+      {
+        "region": "Europe & Mediterranean",
+        "indexLabels": [
+          "Mediterranean",
+          "Greek Isles & Aegean",
+          "Northern Europe & Baltic"
+        ],
+        "ports": [
+          "London (Dover/Southampton)",
+          "Barcelona",
+          "Rome (Civitavecchia)",
+          "Lisbon"
+        ],
+        "nights": "8–12 nights",
+        "season": "Aug–Oct 2026 & May–Jul 2027 · 23 voyages incl. transatlantics"
+      },
+      {
+        "region": "Panama Canal & Caribbean",
+        "ports": [
+          "Galveston",
+          "Tampa",
+          "Seattle",
+          "Mobile"
+        ],
+        "nights": "8–16 nights",
+        "season": "Sep 2026 – Apr 2027 · 12 voyages"
+      },
+      {
+        "region": "Hawaii",
+        "ports": [
+          "Long Beach (Los Angeles)",
+          "Seattle"
+        ],
+        "nights": "14–15 nights",
+        "season": "Sep 2026 – Mar 2027 · 8 voyages"
+      },
+      {
+        "region": "Canada & Greenland",
+        "indexLabels": [
+          "North America & Canada"
+        ],
+        "ports": [
+          "Norfolk",
+          "Baltimore"
+        ],
+        "nights": "8–14 nights",
+        "season": "Aug–Oct 2026 · 7 voyages"
+      },
+      {
+        "region": "Southern Caribbean",
+        "ports": [
+          "Miami",
+          "Port Canaveral (Orlando)"
+        ],
+        "nights": "8 nights core",
+        "season": "Aug 2026 – Jul 2027 · 57 departures"
+      }
+    ],
+    "bestFor": [
+      "Families and multi-generational groups",
+      "First-time cruisers",
+      "Value-conscious clients",
+      "Fly-cruise bookings into the US or Australia"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations across Carnival's worldwide programme",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging — we build the flight and pre-cruise hotel stay into a single Carnival booking",
+      "Clear guidance on Carnival's separate non-US-citizen travel-document requirements, so clients arrive prepared"
+    ],
+    "faqs": [
+      {
+        "q": "Which Carnival home port suits a GCC client best?",
+        "a": "Singapore and Hong Kong are the shortest hops from the Gulf, and Carnival home-ports both. For the classic Carnival holiday, sell the Caribbean or Bahamas out of Miami or Orlando (Port Canaveral) — that is where the newest Excel-class ships and Celebration Key sit. Europe from London, Barcelona or Rome works well as a summer alternative."
+      },
+      {
+        "q": "What is Celebration Key?",
+        "a": "Carnival's newest private destination on Grand Bahama Island, with five themed zones: Paradise Plaza, the family-focused Starfish Lagoon, the adults' Calypso Lagoon, the adults-only Pearl Cove Beach Club, and Lokono Cove for Bahamian culture — plus a mile-long beach."
+      },
+      {
+        "q": "Which ships suit a first-time GCC family booking?",
+        "a": "The Excel-class ships — Mardi Gras, Carnival Celebration and Carnival Jubilee — pair the BOLT® rollercoaster and large-format Carnival WaterWorks™ water parks with a Serenity Adult-Only Retreat, so families and couples can share the same sailing comfortably."
+      },
+      {
+        "q": "What travel documents do GCC clients need?",
+        "a": "Carnival's own Help hub maintains a distinct 'Non-U.S. Citizens' guidance track, separate from US-citizen instructions — we point clients to this directly rather than the American documentation."
+      },
+      {
+        "q": "Is Australia a realistic option for GCC clients?",
+        "a": "Yes — it's the one major non-US home-porting market Carnival sells at scale, with year-round departures from Sydney and Brisbane. It's still a long-haul flight from the Gulf, but it avoids US visa/ESTA processing for clients who prefer that."
+      },
+      {
+        "q": "Can a Carnival cruise be combined with a US or Australia stay?",
+        "a": "Yes — since every Carnival sailing requires a flight from the Gulf, we typically build a Miami, Orlando or Sydney city stay either side of the cruise into the same booking."
+      }
+    ]
+  },
+  {
+    "slug": "dream-star",
+    "name": "StarDream Cruises",
+    "tagline": "Asia's own cruise group — Singapore, Hong Kong, Taiwan and Japan",
+    "signature": "Short 2–5 night Asia sailings from Singapore and Hong Kong, plus Taiwan–Japan–Korea voyages",
+    "relationship": "Wholesale",
+    "intro": "StarDream Cruises is the umbrella that now carries Asia's best-known cruise heritage — Dream Cruises and StarCruises, the successors to the Genting cruise fleet and the brief Resorts World Cruises relaunch — sailing Singapore, Hong Kong and a Taiwan/Japan/Korea season for GCC clients wanting an Asia fly-cruise.",
+    "description": [
+      "StarDream Cruises, launched in March 2025, is the current legal successor to Resorts World Cruises, itself the post-pandemic relaunch of the original Genting Hong Kong / Star Cruises fleet. It operates two sold-separately sub-brands under one group: Dream Cruises (the flagship Genting Dream, positioned as the luxury tier with an all-suite Palace enclave), homeported year-round in Singapore, and StarCruises (Star Voyager and Star Navigator, the more affordable lifestyle tier), which run seasonal programmes from Hong Kong and Keelung (Taiwan) into Japan and South Korea. Genting Dream also carries genuine Muslim-friendly certification — certified Halal cuisine, Jain vegetarian options and a HalalTrip Gastronomy Awards partnership — that travels well with GCC clientele.",
+      "StarDream is a short-break Asia specialist, and it sells actively into this market — the group runs UAE, Oman and Qatar market sites of its own. We wholesale allocation across Genting Dream from Singapore, Star Voyager from Hong Kong and Malaysia, and Star Navigator from Keelung into Japan and South Korea, so you can build a two- to five-night Asia fly-cruise around a Singapore or Hong Kong stay. Deployments move between seasons under this group — check the current ship and home port with us before you quote."
+    ],
+    "highlights": [
+      "Genting Dream — Dream Cruises' luxury-tier flagship, with an all-suite Palace enclave and 24-hour butler service, homeported year-round in Singapore",
+      "Genuine, officially documented Muslim-friendly credentials: certified Halal cuisine and Jain vegetarian dining fleet-wide",
+      "StarCruises' Star Voyager (Hong Kong) and Star Navigator (Keelung, Taiwan) run seasonal short-break programmes into Japan, South Korea and the China coast",
+      "Easily packaged with a Singapore or Hong Kong stopover either side of the sailing",
+      "Wholesale fares suited to longer-haul, multi-destination Asia itineraries"
+    ],
+    "ships": [
+      "Genting Dream",
+      "Star Voyager",
+      "Star Navigator"
+    ],
+    "atAGlance": {
+      "fleetSize": "3 ships (Genting Dream, Star Voyager, Star Navigator)",
+      "homePorts": "Singapore, Hong Kong, Keelung (Taiwan)",
+      "gccAccess": "Asia fly-cruise — Genting Dream year-round from Singapore, Star Voyager from Hong Kong and Malaysia, Star Navigator from Keelung to Japan and South Korea"
+    },
+    "itineraries": [
+      {
+        "region": "Hong Kong & South China Sea (Star Voyager)",
+        "ports": [
+          "Hong Kong",
+          "Xiamen",
+          "Kaohsiung",
+          "Naha",
+          "Nha Trang"
+        ],
+        "nights": "2–5 nights",
+        "season": "Feb–Nov season · 7 sailings on sale"
+      },
+      {
+        "region": "Singapore & Malaysia (Genting Dream & Star Voyager)",
+        "indexLabels": [
+          "Southeast Asia"
+        ],
+        "ports": [
+          "Singapore",
+          "Melaka",
+          "Port Klang",
+          "Penang",
+          "Phuket",
+          "Koh Samui",
+          "Bali (Benoa)"
+        ],
+        "nights": "1–5 nights",
+        "season": "Year-round · 26 sailings on sale"
+      },
+      {
+        "region": "Taiwan & Japan (Star Navigator)",
+        "indexLabels": [
+          "Asia (Far East)"
+        ],
+        "ports": [
+          "Keelung (Taipei)",
+          "Naha",
+          "Ishigaki",
+          "Fukuoka",
+          "Osaka",
+          "Tokyo (Yokohama)",
+          "Busan"
+        ],
+        "nights": "2–7 nights",
+        "season": "Feb–Dec season · 12 sailings on sale"
+      }
+    ],
+    "bestFor": [
+      "GCC clients wanting an Asia fly-cruise",
+      "Muslim/halal-conscious travellers",
+      "Families wanting a Singapore or Hong Kong stopover",
+      "Multi-destination, longer-haul bookings"
+    ],
+    "whyByond": [
+      "Wholesale rates secured directly across Genting Dream, Star Voyager and Star Navigator",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around a Singapore or Hong Kong city stay",
+      "Honest guidance on the current Asia-only deployment, so no client is promised a Gulf departure that isn't on sale"
+    ],
+    "faqs": [
+      {
+        "q": "Is StarDream Cruises the same as the old Dream Cruises or Resorts World Cruises?",
+        "a": "Yes, in lineage. StarDream Cruises, launched March 2025, is the current legal successor to Resorts World Cruises, which itself was the post-pandemic relaunch of the original Genting Hong Kong / Star Cruises fleet. Dream Cruises (Genting Dream) and StarCruises (Star Voyager, Star Navigator) are its two current sub-brands."
+      },
+      {
+        "q": "Where are StarDream's ships deployed for 2026/27?",
+        "a": "Genting Dream home-ports in Singapore year-round with Malaysia departures from Melaka and Port Klang; Star Voyager sails from Hong Kong and Malaysia; and Star Navigator sails from Keelung in Taiwan into Japan and South Korea. The group sells actively into this market through its own UAE, Oman and Qatar sites, so sell it as a short-break Asia fly-cruise — and check the ship deployment with us before you quote."
+      },
+      {
+        "q": "Which ship is best for a luxury family booking?",
+        "a": "Genting Dream, Dream Cruises' flagship — it carries The Palace, an all-suite enclave with 24-hour butler service, alongside a dedicated children's club and family stateroom categories."
+      },
+      {
+        "q": "Is the halal/Muslim-friendly positioning genuine?",
+        "a": "Yes — Genting Dream is officially described by Dream Cruises as offering certified Halal cuisine and Jain vegetarian dining, and has partnered with the HalalTrip Gastronomy Awards for two consecutive years. This is a real selling point for GCC clients even without a local homeport."
+      },
+      {
+        "q": "What's the difference between Dream Cruises and StarCruises?",
+        "a": "Dream Cruises (Genting Dream) is the group's luxury tier, with an all-suite private enclave and over 3,000 guests. StarCruises (Star Voyager, Star Navigator) is the more affordable lifestyle tier, with mid-sized ships of around 2,000 guests running short, port-intensive itineraries."
+      },
+      {
+        "q": "How would a GCC client best combine this with a cruise?",
+        "a": "As an Asia fly-cruise: Singapore (Genting Dream, year-round) and Hong Kong (Star Voyager, seasonal) are both well served by direct long-haul flights from Gulf hubs, and pair naturally with a city stay either side of the sailing."
+      }
+    ]
+  },
+  {
+    "slug": "msc",
+    "name": "MSC Cruises",
+    "tagline": "The world's largest privately-owned line — a genuine Dubai winter season",
+    "signature": "Year-round Mediterranean 7-nighters and Caribbean with Ocean Cay — plus the Nov–Mar Dubai season",
+    "relationship": "PSA",
+    "intro": "MSC Cruises pairs a modern, fast-growing fleet with a genuinely advertised Dubai winter season, making it one of the region's most bookable lines, alongside a year-round Mediterranean core and a truly worldwide deployment.",
+    "description": [
+      "MSC Cruises has grown into the world's largest privately-owned cruise line — 22 ships today, heading to 24 with two more World Class newbuilds — and describes itself as market leader in Europe, South America and Southern Africa. Its home market for GCC agents is 'Emirates Cruises,' marketed from three home ports (Dubai, Abu Dhabi and Doha) sailing November to March, with calls at Sir Bani Yas, Manama, Muscat and Khasab; MSC Euribia is the ship named on the line's own Dubai page for this programme. Beyond the Gulf, MSC runs a genuinely worldwide network: a year-round Mediterranean core, Northern Europe summers, a Caribbean programme built around its private Ocean Cay MSC Marine Reserve, South America, South Africa, Asia, and 2027/2028 World Cruises — the 2028 edition includes a confirmed overnight call in Dubai.",
+      "As Preferred Sales Agent, we hold direct fares and group inventory across MSC's fleet. One honest note for the Gulf season specifically: MSC's own regional booking status can shift year to year, so we always confirm current on-sale Emirates Cruises dates with MSC directly before quoting — ask us and we'll verify the live sailings for your client."
+    ],
+    "highlights": [
+      "Emirates Cruises — a marketed Nov–Mar Gulf season from Dubai, Abu Dhabi and Doha, with MSC Euribia",
+      "22 ships today, growing to 24 with new World Class ships joining through 2027",
+      "A private Bahamas island, Ocean Cay MSC Marine Reserve, visited by every Bahamas/Western Caribbean sailing",
+      "MSC Yacht Club — a ship-within-a-ship suite enclave with butler service, on every ship class",
+      "Year-round Mediterranean core plus Northern Europe, Caribbean, South America, South Africa and Asia deployments"
+    ],
+    "ships": [
+      "MSC World Europa",
+      "MSC World America",
+      "MSC Euribia",
+      "MSC Grandiosa",
+      "MSC Virtuosa",
+      "MSC Meraviglia",
+      "MSC Bellissima",
+      "MSC Seascape",
+      "MSC Seashore",
+      "MSC Seaside",
+      "MSC Seaview",
+      "MSC Fantasia",
+      "MSC Splendida",
+      "MSC Divina",
+      "MSC Preziosa",
+      "MSC Magnifica",
+      "MSC Musica",
+      "MSC Orchestra",
+      "MSC Poesia",
+      "MSC Armonia",
+      "MSC Lirica",
+      "MSC Opera",
+      "MSC Sinfonia"
+    ],
+    "atAGlance": {
+      "fleetSize": "MSC states a fleet of 22 modern ships, growing to 24 — 23 are sailing today, with MSC World Asia joining December 2026 and MSC World Atlantic in 2027",
+      "homePorts": "Dubai, Abu Dhabi, Doha, Barcelona, Genoa, Miami, Southampton, Cape Town",
+      "gccAccess": "Emirates Cruises — advertised Nov–Mar 2026/27 season ex-Dubai, Abu Dhabi and Doha (MSC Euribia); confirm current sailings with us before quoting"
+    },
+    "itineraries": [
+      {
+        "region": "South America",
+        "ports": [
+          "Rio de Janeiro",
+          "Santos (São Paulo)",
+          "Montevideo",
+          "Buenos Aires"
+        ],
+        "nights": "Confirm with MSC — not published",
+        "season": "2026/27"
+      },
+      {
+        "region": "Mediterranean",
+        "ports": [
+          "Marseille",
+          "Genoa",
+          "Barcelona",
+          "Civitavecchia (Rome)",
+          "Piraeus (Athens)",
+          "Istanbul"
+        ],
+        "nights": "7 nights core (1–12 nights)",
+        "season": "Year-round · 170 itineraries in the current extract"
+      },
+      {
+        "region": "Northern Europe",
+        "indexLabels": [
+          "Northern Europe & Baltic"
+        ],
+        "ports": [
+          "Copenhagen",
+          "Southampton",
+          "Warnemünde (Berlin)",
+          "Hamburg",
+          "Kiel",
+          "Stockholm"
+        ],
+        "nights": "7–14 nights",
+        "season": "Summer 2026 · 107 itineraries — incl. MSC Euribia ahead of her Gulf winter"
+      },
+      {
+        "region": "Caribbean & Ocean Cay",
+        "indexLabels": [
+          "Caribbean"
+        ],
+        "ports": [
+          "Miami",
+          "Port Canaveral",
+          "Galveston"
+        ],
+        "nights": "3–21 nights",
+        "season": "Year-round · 30 itineraries in the current extract"
+      },
+      {
+        "region": "MSC Grand Voyages",
+        "indexLabels": [
+          "World & Grand Voyages"
+        ],
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Barcelona",
+          "Genoa",
+          "Marseille",
+          "Funchal"
+        ],
+        "nights": "3–29 nights",
+        "season": "60 repositioning legs & long voyages on sale"
+      },
+      {
+        "region": "Far East",
+        "indexLabels": [
+          "Asia (Far East)"
+        ],
+        "ports": [
+          "Shanghai"
+        ],
+        "nights": "3–10 nights",
+        "season": "MSC Bellissima ex-Shanghai · 15 itineraries"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Seattle"
+        ],
+        "nights": "7 nights",
+        "season": "MSC Poesia ex-Seattle — MSC's new Alaska season"
+      },
+      {
+        "region": "Arabian Gulf (Emirates Cruises)",
+        "indexLabels": [
+          "Arabian Gulf (Dubai season)"
+        ],
+        "ports": [
+          "Dubai",
+          "Abu Dhabi",
+          "Doha",
+          "Sir Bani Yas",
+          "Manama",
+          "Muscat"
+        ],
+        "nights": "3, 6 or 7 nights",
+        "season": "Nov–Mar 2026/27 (confirm current on-sale dates with us)"
+      },
+      {
+        "region": "South Africa",
+        "ports": [
+          "Cape Town",
+          "Durban",
+          "Walvis Bay",
+          "Port Louis (Mauritius)"
+        ],
+        "nights": "Confirm with MSC — not published",
+        "season": "2026/27"
+      }
+    ],
+    "bestFor": [
+      "Families wanting a Dubai-departure Gulf cruise",
+      "Value-conscious GCC first-timers",
+      "Groups and multi-cabin bookings",
+      "Clients wanting worldwide fly-cruise choice"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations across MSC's fleet",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around the Emirates Cruises season or a Mediterranean fly-cruise",
+      "We verify current Gulf-season sailing dates directly with MSC before you quote a client"
+    ],
+    "faqs": [
+      {
+        "q": "Does MSC Cruises sail from Dubai?",
+        "a": "Yes — MSC markets 'Emirates Cruises,' a Nov–Mar season from three home ports (Dubai, Abu Dhabi and Doha), with MSC Euribia named as the deployed ship on MSC's own Dubai page. Gulf sailing programmes can shift year to year, so we always confirm current on-sale dates with MSC directly before quoting — ask us first."
+      },
+      {
+        "q": "Which ports does the Gulf season call at?",
+        "a": "Alongside the three home ports, representative patterns include Sir Bani Yas Island, Manama (Bahrain), and Muscat and Khasab in Oman, in 7-, 6- and 3-night patterns."
+      },
+      {
+        "q": "How big is MSC's fleet?",
+        "a": "22 ships today, described by MSC as heading to 24 with two more World Class newbuilds — MSC World Asia and MSC World Atlantic — joining through 2027."
+      },
+      {
+        "q": "What is Ocean Cay?",
+        "a": "MSC's private island in the Bahamas — Ocean Cay MSC Marine Reserve — with eight beaches, reachable from Miami, Port Canaveral and New York. MSC states every ship sailing a Bahamas or Western Caribbean itinerary calls there."
+      },
+      {
+        "q": "What does MSC Yacht Club include?",
+        "a": "A ship-within-a-ship suite enclave on every MSC ship class, with a private restaurant, lounge, sundeck and pool, 24/7 butler and concierge service, premium drinks and complimentary Thermal Suite access."
+      },
+      {
+        "q": "Does MSC call at Dubai on a longer voyage too?",
+        "a": "Yes — the MSC World Cruise 2028 includes a confirmed overnight stay in Dubai, one of only seven overnight calls across its 115-night routing from Genoa."
+      }
+    ]
+  },
+  {
+    "slug": "disney",
+    "name": "Disney Cruise Line",
+    "tagline": "Storytelling at sea — and the closest Disney ship to the GCC, in Singapore",
+    "signature": "Caribbean and Bahamas with Disney's private islands, Mediterranean and Alaska summers — and year-round Singapore sailings",
+    "relationship": "PSA",
+    "intro": "Disney Cruise Line brings its trademark storytelling and family service to sea across a genuinely worldwide fleet — and for GCC families, Disney Adventure's new year-round Singapore home port is the closest, easiest fly-cruise Disney has ever offered the region.",
+    "description": [
+      "Disney Cruise Line operates nine ships in total — eight in service (Magic, Wonder, Dream, Fantasy, Wish, Treasure, Destiny and Adventure) plus Disney Believe, an announced 2027 newbuild. Character experiences, themed dining and Broadway-calibre entertainment run fleet-wide, alongside adults-only spaces on every ship — including the Quiet Cove Pool and adult-exclusive restaurants Palo and Remy — sitting comfortably alongside extensive kids' clubs on the same sailing. Two private Bahamian islands, Castaway Cay and the newer Disney Lookout Cay at Lighthouse Point, add exclusive shore days to the Caribbean programme.",
+      "For GCC families, the standout is Disney Adventure — homeported year-round in Singapore since its December 2025 maiden voyage, offering 3-, 4- and 5-night sailings from a city directly reachable on non-stop long-haul flights from every major Gulf hub. Beyond Singapore, Disney's worldwide network spans Caribbean and Bahamas sailings from Florida and Texas, Alaska from Vancouver, Mexico from San Diego, Bermuda from New York, Mediterranean and Northern Europe seasons from Barcelona and Southampton, and Pacific crossings between Hawaii, the South Pacific and Australia/New Zealand. As Preferred Sales Agent, we hold fares, stateroom categories and the concierge-level bookings GCC families ask for by name, across the whole network."
+    ],
+    "highlights": [
+      "Disney Adventure — homeported year-round in Singapore, the closest Disney ship to the GCC on direct long-haul flights",
+      "Two exclusive private islands in the Bahamas: Castaway Cay and Disney Lookout Cay at Lighthouse Point",
+      "Adults-only spaces — including the Quiet Cove Pool, Palo and Remy — on every ship alongside extensive kids' clubs",
+      "A worldwide network spanning the Caribbean, Alaska, Mexico, Bermuda, Mediterranean, Northern Europe and the Pacific",
+      "Disney Believe, a ninth ship, joins the fleet in 2027"
+    ],
+    "ships": [
+      "Disney Adventure",
+      "Disney Destiny",
+      "Disney Dream",
+      "Disney Fantasy",
+      "Disney Magic",
+      "Disney Treasure",
+      "Disney Wish",
+      "Disney Wonder"
+    ],
+    "atAGlance": {
+      "fleetSize": "8 ships in service — Disney Believe debuts 2027",
+      "homePorts": "Singapore, Port Canaveral, Fort Lauderdale, Galveston, Vancouver, San Diego, Barcelona, Southampton",
+      "gccAccess": "Singapore is the nearest gateway — Disney Adventure sails short round-trips from Singapore year-round, direct from every major Gulf hub; elsewhere fly-cruise the Caribbean, Mediterranean and Alaska"
+    },
+    "itineraries": [
+      {
+        "region": "Singapore & Southeast Asia (Disney Adventure)",
+        "indexLabels": [
+          "Southeast Asia"
+        ],
+        "ports": [
+          "Singapore"
+        ],
+        "nights": "3–4 nights",
+        "season": "Year-round 2026/27 · ship-as-destination sailings"
+      },
+      {
+        "region": "Bahamas & Disney private islands",
+        "indexLabels": [
+          "Bahamas"
+        ],
+        "ports": [
+          "Port Canaveral",
+          "Fort Lauderdale",
+          "Galveston",
+          "Nassau"
+        ],
+        "nights": "3–7 nights",
+        "season": "Year-round · 10 itineraries on sale"
+      },
+      {
+        "region": "Caribbean",
+        "ports": [
+          "Port Canaveral",
+          "Fort Lauderdale",
+          "Galveston",
+          "San Juan"
+        ],
+        "nights": "4–10 nights",
+        "season": "Year-round · 13 itineraries on sale"
+      },
+      {
+        "region": "Mediterranean",
+        "ports": [
+          "Barcelona",
+          "Civitavecchia (Rome)"
+        ],
+        "nights": "6–10 nights",
+        "season": "Summer 2026 · 7 itineraries on sale"
+      },
+      {
+        "region": "Hawaii, South Pacific & Australia/New Zealand",
+        "ports": [
+          "Honolulu",
+          "Fiji",
+          "American Samoa",
+          "Sydney",
+          "Auckland"
+        ],
+        "nights": "Confirm with Disney — not published",
+        "season": "Southern hemisphere season"
+      },
+      {
+        "region": "Northern Europe",
+        "indexLabels": [
+          "Northern Europe & Baltic",
+          "Norwegian Fjords"
+        ],
+        "ports": [
+          "Southampton (London)"
+        ],
+        "nights": "3–13 nights",
+        "season": "Summer 2026 · 9 itineraries on sale"
+      },
+      {
+        "region": "Alaska & Pacific Coast",
+        "indexLabels": [
+          "Alaska",
+          "North America & Canada"
+        ],
+        "ports": [
+          "Vancouver",
+          "San Diego"
+        ],
+        "nights": "4–8 nights",
+        "season": "Summer 2026 · 6 itineraries on sale"
+      },
+      {
+        "region": "Baja & Mexican Riviera",
+        "indexLabels": [
+          "Mexico & Baja"
+        ],
+        "ports": [
+          "San Diego"
+        ],
+        "nights": "3–7 nights",
+        "season": "6 itineraries on sale"
+      },
+      {
+        "region": "Panama Canal",
+        "ports": [
+          "San Diego",
+          "Galveston"
+        ],
+        "nights": "14 nights",
+        "season": "Eastbound & westbound repositioning voyages"
+      },
+      {
+        "region": "Bermuda",
+        "ports": [
+          "New York",
+          "Royal Naval Dockyard"
+        ],
+        "nights": "5–6 nights",
+        "season": "Confirm with Disney — not published"
+      }
+    ],
+    "bestFor": [
+      "Families planning a milestone holiday",
+      "GCC families wanting a Singapore stopover",
+      "Multi-generational bookings",
+      "Clients wanting adults-only space alongside kids' clubs"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and priority booking windows across Disney's worldwide programme",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging — a Singapore city stay around Disney Adventure, or Orlando/Walt Disney World around a Port Canaveral sailing",
+      "Guidance on concierge-level staterooms and private-island shore days for milestone family trips"
+    ],
+    "faqs": [
+      {
+        "q": "Which Disney ship is closest to the GCC?",
+        "a": "Disney Adventure, home-ported in Singapore year-round and reachable non-stop from every major Gulf hub. It sails short three- and four-night round trips where the ship itself is the destination — the shortest Disney holiday to reach from this market. Beyond that, sell the Caribbean and Bahamas from Florida, the Mediterranean from Barcelona, or Alaska from Vancouver."
+      },
+      {
+        "q": "What is Disney Adventure like?",
+        "a": "A Marvel-themed ship alongside classic Disney elements, positioned by Disney as an onboard-experience-led sailing — 'the ship itself is the destination' — with 3-, 4- and 5-night itineraries from Singapore."
+      },
+      {
+        "q": "Are there adults-only spaces on a family-focused ship?",
+        "a": "Yes, on every ship: the Quiet Cove Pool, adult-exclusive nightclubs and lounges, a fitness centre and spa, and two adult-exclusive speciality restaurants, Palo and Remy."
+      },
+      {
+        "q": "What are Disney's private islands?",
+        "a": "Castaway Cay, the original resort-style private island in the Bahamas, and the newer Disney Lookout Cay at Lighthouse Point on Eleuthera, positioned around Bahamian culture rather than Castaway Cay's resort focus."
+      },
+      {
+        "q": "Can a Disney cruise be combined with a city or resort stay?",
+        "a": "Yes — Port Canaveral sailings pair naturally with a Walt Disney World Resort stay in Orlando, and Disney Adventure sailings pair with a Singapore city stay either side of the cruise."
+      },
+      {
+        "q": "Is there a new ship coming?",
+        "a": "Yes — Disney Believe, officially announced for 2027, will be the fleet's ninth ship."
+      }
+    ]
+  },
+  {
+    "slug": "royal-caribbean",
+    "name": "Royal Caribbean",
+    "tagline": "The biggest ships in the world, and a private island to match",
+    "signature": "Year-round Caribbean with Perfect Day at CocoCay on the world's largest ships, plus Med and Alaska summers",
+    "relationship": "PSA",
+    "intro": "Royal Caribbean's record-breaking ships turn the cruise itself into the destination — waterparks, ice rinks and whole themed neighbourhoods at sea. For GCC clients it is the headline fly-cruise: the world's largest ships in the Caribbean, the Mediterranean, Alaska and Asia, all within easy reach of a Gulf hub.",
+    "description": [
+      "Royal Caribbean International operates around 30 ships across every major cruising region, from the record-breaking Icon Class (Icon of the Seas, Star of the Seas, with Legend of the Seas and Hero of the Seas to follow by 2027) to the six 'world's largest' Oasis Class ships. Onboard, the ship itself is the destination: waterparks, surf simulators, ice rinks, rock-climbing walls and distinct themed 'neighbourhoods' sit alongside Perfect Day at CocoCay, Royal Caribbean's private Bahamas island.",
+      "For GCC agents, Royal Caribbean is the strongest family fly-cruise on the shelf: Icon Class in the Caribbean out of Miami and Orlando, Oasis Class year-round, plus Mediterranean, Alaska, Asia and Australia seasons. As Preferred Sales Agent, we hold fares and group allocations across the worldwide programme."
+    ],
+    "highlights": [
+      "Icon Class — Icon of the Seas and Star of the Seas — with record-breaking waterparks and seven pools each",
+      "Perfect Day at CocoCay, Royal Caribbean's private Bahamas island, with a waterpark, zip line and adults-only Hideaway Beach",
+      "The six 'world's largest' Oasis Class ships, built around distinct onboard neighbourhoods",
+      "Year-round Caribbean departures from Miami, Orlando (Port Canaveral) and Fort Lauderdale — an easy one-stop fly-cruise from the Gulf",
+      "Mediterranean summers from Barcelona and Rome, Alaska from Seattle, and an Asia season from Singapore"
+    ],
+    "ships": [
+      "Icon of the Seas",
+      "Star of the Seas",
+      "Legend of the Seas",
+      "Utopia of the Seas",
+      "Wonder of the Seas",
+      "Symphony of the Seas",
+      "Harmony of the Seas",
+      "Allure of the Seas",
+      "Oasis of the Seas",
+      "Odyssey of the Seas",
+      "Spectrum of the Seas",
+      "Ovation of the Seas",
+      "Anthem of the Seas",
+      "Quantum of the Seas",
+      "Freedom of the Seas",
+      "Liberty of the Seas",
+      "Independence of the Seas",
+      "Navigator of the Seas",
+      "Voyager of the Seas",
+      "Mariner of the Seas",
+      "Explorer of the Seas",
+      "Adventure of the Seas",
+      "Serenade of the Seas",
+      "Brilliance of the Seas",
+      "Radiance of the Seas",
+      "Jewel of the Seas",
+      "Enchantment of the Seas",
+      "Grandeur of the Seas",
+      "Rhapsody of the Seas",
+      "Vision of the Seas"
+    ],
+    "atAGlance": {
+      "fleetSize": "30 ships in service — Hero of the Seas joins August 2027",
+      "homePorts": "Miami, Port Canaveral, Fort Lauderdale, Rome, Barcelona, Southampton, Singapore, Sydney, Seattle",
+      "gccAccess": "Fly-cruise — year-round Caribbean from Miami, Orlando and Fort Lauderdale, plus Mediterranean, Alaska, Asia and Australia seasons"
+    },
+    "itineraries": [
+      {
+        "region": "Bahamas & Perfect Day at CocoCay",
+        "indexLabels": [
+          "Bahamas"
+        ],
+        "ports": [
+          "Miami",
+          "Fort Lauderdale",
+          "Port Canaveral (Orlando)",
+          "Cape Liberty (New York)"
+        ],
+        "nights": "3–7 nights",
+        "season": "Year-round · 23 departures in 10–30 Jul 2026 alone"
+      },
+      {
+        "region": "Eastern Caribbean",
+        "ports": [
+          "Miami",
+          "Port Canaveral (Orlando)",
+          "Fort Lauderdale"
+        ],
+        "nights": "5–9 nights",
+        "season": "Year-round · Icon & Star of the Seas deployed"
+      },
+      {
+        "region": "Western Caribbean",
+        "ports": [
+          "Tampa",
+          "Galveston",
+          "Miami",
+          "Port Canaveral (Orlando)"
+        ],
+        "nights": "4–8 nights",
+        "season": "Year-round · 16 departures in the mid-Jul window"
+      },
+      {
+        "region": "Southern Caribbean",
+        "ports": [
+          "San Juan",
+          "Cartagena",
+          "Colón (Panama)",
+          "Fort Lauderdale"
+        ],
+        "nights": "7–8 nights",
+        "season": "11 departures in the mid-Jul window"
+      },
+      {
+        "region": "Mexico (West Coast)",
+        "indexLabels": [
+          "Mexico & Baja"
+        ],
+        "ports": [
+          "Los Angeles"
+        ],
+        "nights": "3–7 nights",
+        "season": "Year-round · 8 departures in the mid-Jul window"
+      },
+      {
+        "region": "Mediterranean",
+        "ports": [
+          "Rome (Civitavecchia)",
+          "Ravenna (Venice)",
+          "Athens (Piraeus)",
+          "Barcelona"
+        ],
+        "nights": "7–8 nights",
+        "season": "Summer 2026 · 14 departures in the mid-Jul window"
+      },
+      {
+        "region": "Northern Europe",
+        "indexLabels": [
+          "Northern Europe & Baltic"
+        ],
+        "ports": [
+          "Southampton (London)"
+        ],
+        "nights": "5–9 nights",
+        "season": "Summer 2026 · Liberty of the Seas ex-Southampton"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Seattle",
+          "Vancouver",
+          "Seward"
+        ],
+        "nights": "7 nights",
+        "season": "Summer season · 10 departures in the mid-Jul window"
+      },
+      {
+        "region": "Bermuda",
+        "ports": [
+          "Cape Liberty (New York)",
+          "Baltimore"
+        ],
+        "nights": "5–9 nights",
+        "season": "Summer 2026"
+      },
+      {
+        "region": "Asia (China & Singapore)",
+        "indexLabels": [
+          "Asia (Far East)"
+        ],
+        "ports": [
+          "Shanghai (Baoshan)",
+          "Singapore"
+        ],
+        "nights": "3–12 nights",
+        "season": "Spectrum of the Seas ex-Shanghai in the current window"
+      },
+      {
+        "region": "Australia & South Pacific",
+        "ports": [
+          "Sydney",
+          "Brisbane",
+          "Fiji",
+          "New Caledonia",
+          "Vanuatu"
+        ],
+        "nights": "2–17 nights",
+        "season": "Australian summer 2027/28"
+      }
+    ],
+    "bestFor": [
+      "GCC families wanting the biggest ships at sea",
+      "Adventurous couples and record-ship seekers",
+      "Groups and multi-cabin bookings",
+      "First-time cruisers who want the ship to be the destination"
+    ],
+    "whyByond": [
+      "Preferred Sales Agent fares and group allocations across Royal Caribbean's worldwide programme",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around a Caribbean, Mediterranean or Asia fly-cruise",
+      "Direct PSA access and fast quote turnaround on Royal Caribbean's headline ships"
+    ],
+    "faqs": [
+      {
+        "q": "Which Royal Caribbean ship should I sell for a first-time GCC family?",
+        "a": "Icon of the Seas or Star of the Seas out of Miami and Orlando — the ship is the holiday, with waterparks, neighbourhoods and Perfect Day at CocoCay included in the routing. Both run week-long Caribbean loops that package neatly with a one-stop flight from the Gulf."
+      },
+      {
+        "q": "How do GCC clients sail with Royal Caribbean?",
+        "a": "As a fly-cruise, and the Caribbean is the headline: Icon of the Seas and Star of the Seas run week-long loops from Miami and Orlando (Port Canaveral), with Perfect Day at CocoCay built into the routing. The Mediterranean from Barcelona and Rome, Alaska from Seattle and Asia from Singapore round out the year. Talk to us about the current deployment before you quote."
+      },
+      {
+        "q": "What is Perfect Day at CocoCay?",
+        "a": "Royal Caribbean's private island destination in the Bahamas, with free features including the Oasis Lagoon pool and Splashaway Bay, plus paid add-ons such as the Thrill Waterpark, a zip line, a helium balloon ride and the adults-only Hideaway Beach."
+      },
+      {
+        "q": "Which ships are the newest and biggest?",
+        "a": "Icon of the Seas (2024) and Star of the Seas (2025) are Royal Caribbean's newest Icon Class ships, both featuring record-breaking waterparks; Legend of the Seas joins in Summer 2026 and Hero of the Seas in 2027."
+      },
+      {
+        "q": "How big is Royal Caribbean's fleet?",
+        "a": "Around 30 ships — Royal Caribbean's own pages state slightly different totals (30 vs 31) depending on the page, so treat 'around 30' as the working figure and confirm the exact count with us at time of booking."
+      },
+      {
+        "q": "Is Royal Caribbean a good fit for large family groups?",
+        "a": "Yes — the Icon and Oasis class ships are built around distinct onboard 'neighbourhoods,' waterparks and family-scale dining, making them a strong fit for multi-cabin and multi-generational group bookings."
+      }
+    ]
+  },
+  {
+    "slug": "celebrity",
+    "name": "Celebrity Cruises",
+    "tagline": "Premium cruising, every detail elevated — worldwide, as a fly-cruise",
+    "signature": "Edge-Series design, the all-suite Retreat and All Included fares across the Caribbean, Mediterranean, Alaska and the Galápagos",
+    "relationship": "Wholesale",
+    "intro": "Celebrity is the premium step up from mainstream cruising — the intimate feel of a smaller ship with the range of a large one, and an All Included fare that bundles drinks, Wi-Fi and tips from the outset. Best sold to GCC clients as a fly-cruise, most naturally into the Mediterranean, the Caribbean or the Galápagos.",
+    "description": [
+      "Celebrity Cruises markets itself as an award-winning premium line — \"an elevated premium vacation experience\", with Forbes Travel Guide Four-Star ships and a guest-to-staff ratio close to two to one. The ocean fleet spans the outward-facing Edge Series (Edge, Apex, Beyond, Ascent and the newest, Xcel), the Solstice class and the Millennium class, plus Celebrity Flora, an all-suite mega-yacht built exclusively for the Galápagos. Between them they reach nearly 300 destinations across all seven continents.",
+      "For GCC agents Celebrity is a premium fly-cruise: the Caribbean and Bahamas from Fort Lauderdale and Miami, the Mediterranean from Barcelona and Rome, Alaska from Seattle and Vancouver, and the Galápagos aboard Celebrity Flora. We hold rate access across the worldwide deployment, so you can package a Dubai stay either side of an embarkation with confidence."
+    ],
+    "highlights": [
+      "The Edge Series and its Magic Carpet — a cantilevered platform rising 13 storeys above the sea, with a bar and live music",
+      "The Retreat, an all-suite class with a butler, a private lounge and sundeck, and Luminae, a suite-only restaurant with dishes by chef Daniel Boulud",
+      "\"All Included\" fares bundling the Classic drinks package, basic Wi-Fi and tips as standard",
+      "A celebrity-chef dining programme and signature venues — Eden, Le Voyage, Fine Cut Steakhouse and the open-air Rooftop Garden",
+      "Celebrity Flora — the only purpose-built, all-suite way to cruise the Galápagos, sailing year-round with guided excursions and park fees included"
+    ],
+    "ships": [
+      "Celebrity Apex",
+      "Celebrity Ascent",
+      "Celebrity Beyond",
+      "Celebrity Edge",
+      "Celebrity Xcel",
+      "Celebrity Eclipse",
+      "Celebrity Equinox",
+      "Celebrity Reflection",
+      "Celebrity Silhouette",
+      "Celebrity Solstice",
+      "Celebrity Constellation",
+      "Celebrity Infinity",
+      "Celebrity Millennium",
+      "Celebrity Summit",
+      "Celebrity Flora"
+    ],
+    "atAGlance": {
+      "fleetSize": "15 ships in service — five Edge Series, five Solstice, four Millennium and Celebrity Flora in the Galápagos; Celebrity Xcite joins 2028 and the river fleet debuts 2027",
+      "homePorts": "Fort Lauderdale, Barcelona, Rome (Civitavecchia), Southampton, Seattle, Vancouver, Baltra (Galápagos) and more",
+      "gccAccess": "Fly-cruise — Caribbean and Bahamas from Florida, plus the Mediterranean, Alaska, Bermuda and the Galápagos aboard Celebrity Flora"
+    },
+    "itineraries": [
+      {
+        "region": "Caribbean",
+        "indexLabels": [
+          "Southern Caribbean",
+          "Western Caribbean",
+          "Eastern Caribbean",
+          "Caribbean",
+          "Panama Canal & Caribbean",
+          "Bahamas"
+        ],
+        "ports": [
+          "Fort Lauderdale",
+          "Miami",
+          "San Juan",
+          "St. Thomas",
+          "St. Maarten",
+          "Bahamas"
+        ],
+        "nights": "7 nights core, 4–12 nights",
+        "season": "Winter core, with year-round departures"
+      },
+      {
+        "region": "Mediterranean",
+        "indexLabels": [
+          "Mediterranean",
+          "Greek Isles & Aegean"
+        ],
+        "ports": [
+          "Rome (Civitavecchia)",
+          "Barcelona",
+          "Athens (Piraeus)",
+          "Naples",
+          "Santorini",
+          "Mykonos"
+        ],
+        "nights": "7–12 nights",
+        "season": "Northern-hemisphere summer"
+      },
+      {
+        "region": "Transatlantic & repositioning",
+        "indexLabels": [
+          "Transatlantic",
+          "Transpacific",
+          "Panama Canal",
+          "Pacific Coastal",
+          "Bermuda",
+          "Canada & New England"
+        ],
+        "ports": [
+          "Fort Lauderdale",
+          "Barcelona",
+          "Rome (Civitavecchia)",
+          "Southampton"
+        ],
+        "nights": "12–16 nights",
+        "season": "Spring and autumn crossings, roughly twice a year"
+      },
+      {
+        "region": "Alaska",
+        "indexLabels": [
+          "Alaska"
+        ],
+        "ports": [
+          "Seattle",
+          "Vancouver",
+          "Juneau",
+          "Ketchikan",
+          "Skagway",
+          "Hubbard Glacier"
+        ],
+        "nights": "7 nights",
+        "season": "Summer (May–September)"
+      },
+      {
+        "region": "Galápagos (Celebrity Flora)",
+        "indexLabels": [
+          "Galápagos"
+        ],
+        "ports": [
+          "Baltra",
+          "San Cristóbal",
+          "Santa Cruz",
+          "Isabela",
+          "Fernandina"
+        ],
+        "nights": "7 nights, plus 10–16-night in-depth journeys",
+        "season": "Year-round, with Quito, Lima and Machu Picchu land options"
+      },
+      {
+        "region": "Northern Europe & British Isles",
+        "indexLabels": [
+          "Northern Europe & Baltic",
+          "Norwegian Fjords"
+        ],
+        "ports": [
+          "Southampton",
+          "Amsterdam",
+          "Copenhagen",
+          "Stockholm",
+          "Reykjavik"
+        ],
+        "nights": "7–14 nights",
+        "season": "Northern-hemisphere summer"
+      },
+      {
+        "region": "Asia · Australia & New Zealand",
+        "indexLabels": [
+          "Asia (Far East)",
+          "Southeast Asia",
+          "Australia & New Zealand",
+          "South Pacific",
+          "Hawaii"
+        ],
+        "ports": [
+          "Singapore",
+          "Tokyo",
+          "Hong Kong",
+          "Sydney",
+          "Auckland"
+        ],
+        "nights": "Multi-week, confirm with us",
+        "season": "Winter–spring season"
+      }
+    ],
+    "bestFor": [
+      "Premium clients",
+      "Couples and honeymooners",
+      "Suite and Retreat buyers",
+      "Galápagos and bucket-list travellers"
+    ],
+    "whyByond": [
+      "Rate access across Celebrity's worldwide fly-cruise programme through our representation",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging — pair a Dubai or Abu Dhabi stay with a Mediterranean, Caribbean or Galápagos embarkation",
+      "Guidance on the Retreat versus balcony question, and on the All Included versus Always Included upgrade, so clients book the right fare"
+    ],
+    "faqs": [
+      {
+        "q": "Which Celebrity sailing suits a GCC client best?",
+        "a": "For a first Celebrity booking, the Edge Series in the Caribbean out of Fort Lauderdale is the easiest sell — the Retreat suite class and All Included fares land well with this market. The Mediterranean from Barcelona and Rome is the summer alternative, and Celebrity Flora in the Galápagos is the bucket-list option, sold with Quito and Machu Picchu land stays."
+      },
+      {
+        "q": "What kind of cruise line is Celebrity?",
+        "a": "Premium — a clear step above mainstream cruising without being ultra-luxury. Celebrity describes it as an elevated premium experience, with Forbes Travel Guide Four-Star ships, a near two-to-one guest-to-staff ratio, and the feel of a smaller ship with the range of a large one."
+      },
+      {
+        "q": "What is The Retreat?",
+        "a": "Celebrity's all-suite class. Retreat guests get a dedicated butler, an exclusive Retreat Lounge and private sundeck, and Luminae, a suite-only restaurant serving signature dishes from chef Daniel Boulud. It is the closest Celebrity comes to a luxury, all-inclusive experience within the ship."
+      },
+      {
+        "q": "What does the All Included fare cover?",
+        "a": "Celebrity's All Included fare bundles the Classic drinks package, basic Wi-Fi and tips as standard, on top of accommodation, main dining, entertainment and the pools and fitness facilities that come with every fare. The drinks and Wi-Fi tiers can be upgraded, and suite and Galápagos fares are more fully all-inclusive again."
+      },
+      {
+        "q": "Can Celebrity take clients to the Galápagos?",
+        "a": "Yes — Celebrity Flora is an all-suite mega-yacht built exclusively for the Galápagos, sailing year-round on 7-night itineraries plus longer 10-to-16-night in-depth journeys with Quito, Lima and Machu Picchu land options. Galápagos fares include onboard drinks, gratuities, park fees and guided excursions."
+      },
+      {
+        "q": "Can a Celebrity cruise be combined with a Dubai stopover?",
+        "a": "Yes — because Celebrity's seasons all require a flight from the Gulf, we typically build a Dubai or Abu Dhabi stay either side of the cruise as part of the same booking."
+      }
+    ]
+  },
+  {
+    "slug": "silversea",
+    "name": "Silversea Cruises",
+    "tagline": "Ultra-luxury, all-inclusive — with genuine Dubai embarkation calls",
+    "signature": "All-inclusive luxury worldwide — Mediterranean and Northern Europe summers plus polar and Galápagos expeditions",
+    "relationship": "Wholesale",
+    "intro": "Silversea sets the benchmark for ultra-luxury at sea, from intimate all-suite classic voyages to true polar expeditions — and its Africa & Indian Ocean season gives GCC agents a genuine Dubai embarkation and disembarkation point for your most discerning clients.",
+    "description": [
+      "Silversea operates 12 ships split into two distinct fleets: 8 classic ultra-luxury ships (Silver Nova and Silver Ray, the newest 'Nova Class'; Silver Dawn, Silver Moon, Silver Spirit, Silver Muse, Silver Shadow, Silver Whisper), all all-suite with private verandas and a personal butler in every suite, and 4 expedition ships (Silver Cloud, Silver Wind, Silver Endeavour, and Silver Origin, purpose-built for the Galápagos) carrying 100–274 guests for high-access, Zodiac-led voyages. Fares are genuinely all-inclusive — dining, premium beverages, Wi-Fi and butler service as standard, with an 'All-Inclusive Plus' tier adding a shore-excursion credit.",
+      "The key regional hook: Silversea's Africa & Indian Ocean itineraries include confirmed classic-fleet voyages embarking and disembarking in Dubai — a Mahé (Seychelles)-to-Dubai routing via Muscat, Khasab, Abu Dhabi, Doha and Bahrain, and a return Dubai-to-Athens routing via Salalah, Aqaba, Safaga and the Suez Canal. Beyond the Gulf, Silversea's worldwide network spans the Mediterranean, Northern Europe, the Caribbean, Alaska, Asia, Australia/New Zealand and the Kimberley, the Galápagos, and polar expeditions to Antarctica and the Arctic. We wholesale Silversea inventory for agents packaging bucket-list itineraries around these genuine Dubai sailings or the wider worldwide programme."
+    ],
+    "highlights": [
+      "Genuine Dubai embarkation and disembarkation on Silversea's Africa & Indian Ocean classic voyages",
+      "12 ships across two distinct fleets — 8 classic ultra-luxury, 4 expedition — each with a butler in every suite",
+      "All-inclusive fares as standard: dining, premium beverages, Wi-Fi and butler service, with an All-Inclusive Plus shore-excursion tier",
+      "A dedicated expedition fleet reaching the Galápagos, Antarctica and the Arctic, with near-daily Zodiac landings",
+      "Silver Origin, purpose-built exclusively for the Galápagos with Ecuadorian national expert guides"
+    ],
+    "ships": [
+      "Silver Nova",
+      "Silver Ray",
+      "Silver Dawn",
+      "Silver Moon",
+      "Silver Muse",
+      "Silver Spirit",
+      "Silver Shadow",
+      "Silver Whisper",
+      "Silver Cloud",
+      "Silver Wind",
+      "Silver Endeavour",
+      "Silver Origin"
+    ],
+    "atAGlance": {
+      "fleetSize": "12 ships (8 classic, 4 expedition)",
+      "homePorts": "Athens, Rome, Venice, Barcelona, Copenhagen, Miami, Vancouver, Tokyo, Papeete, Sydney — plus Dubai turnarounds in April 2028",
+      "gccAccess": "Dubai embarkation on sale for spring 2028 aboard Silver Shadow — Mahé–Dubai, and the Dubai–Athens 'Egypt, Oman & Jordan' voyage calling Salalah and Aqaba for Petra; elsewhere fly-cruise the Mediterranean, Galápagos and Antarctica"
+    },
+    "itineraries": [
+      {
+        "region": "Africa & Indian Ocean (Dubai voyages)",
+        "indexLabels": [
+          "Africa & Indian Ocean — Dubai voyage",
+          "Africa & Indian Ocean"
+        ],
+        "ports": [
+          "Dubai",
+          "Mahé (Seychelles)",
+          "Cape Town",
+          "Singapore",
+          "Lisbon"
+        ],
+        "nights": "13–21 nights",
+        "season": "Oct 2026 – Apr 2028 · 8 voyages — including two genuine Dubai sailings (Apr 2028)"
+      },
+      {
+        "region": "Mediterranean",
+        "ports": [
+          "Athens (Piraeus)",
+          "Civitavecchia (Rome)",
+          "Fusina (Venice)",
+          "Barcelona",
+          "Nice",
+          "Monte Carlo"
+        ],
+        "nights": "4–27 nights",
+        "season": "Jul 2026 – Nov 2028 · 255 voyages across six ships"
+      },
+      {
+        "region": "Asia",
+        "ports": [
+          "Tokyo",
+          "Singapore",
+          "Hong Kong",
+          "Incheon (Seoul)"
+        ],
+        "nights": "9–32 nights",
+        "season": "Sep 2026 – Apr 2029 · 87 voyages"
+      },
+      {
+        "region": "Central America & Caribbean",
+        "ports": [
+          "Miami",
+          "Bridgetown (Barbados)",
+          "San Juan"
+        ],
+        "nights": "6–39 nights",
+        "season": "Nov 2026 – Oct 2028 · 76 voyages"
+      },
+      {
+        "region": "Northern Europe & British Isles",
+        "ports": [
+          "Copenhagen",
+          "Stockholm",
+          "Southampton",
+          "Ijmuiden (Amsterdam)"
+        ],
+        "nights": "6–27 nights",
+        "season": "Jul 2026 – Sep 2028 · 72 voyages"
+      },
+      {
+        "region": "Alaska",
+        "ports": [
+          "Vancouver",
+          "Seward (Anchorage)",
+          "Seattle"
+        ],
+        "nights": "6–15 nights",
+        "season": "Summers Jul 2026 – Aug 2028 · 70 voyages"
+      },
+      {
+        "region": "Grand Voyages",
+        "ports": [
+          "Lisbon",
+          "Miami",
+          "Singapore",
+          "Istanbul"
+        ],
+        "nights": "49–76 nights",
+        "season": "Sep 2026 – Sep 2028 · 6 voyages"
+      },
+      {
+        "region": "Transoceanic",
+        "ports": [
+          "Lisbon",
+          "Miami",
+          "Bridgetown (Barbados)",
+          "Vancouver",
+          "Tokyo"
+        ],
+        "nights": "11–25 nights",
+        "season": "Sep 2026 – Nov 2028 · 33 crossings"
+      },
+      {
+        "region": "Australia & New Zealand",
+        "ports": [
+          "Sydney",
+          "Melbourne",
+          "Auckland",
+          "Singapore"
+        ],
+        "nights": "9–33 nights",
+        "season": "Southern summers Nov 2026 – Feb 2029 · 20 voyages"
+      },
+      {
+        "region": "Canada & New England",
+        "ports": [
+          "Montreal",
+          "New York",
+          "Bayonne (New Jersey)"
+        ],
+        "nights": "10–24 nights",
+        "season": "Autumns Oct 2026 – Sep 2028 · 13 voyages"
+      },
+      {
+        "region": "South America",
+        "ports": [
+          "Rio de Janeiro",
+          "Buenos Aires",
+          "Miami",
+          "Valparaíso"
+        ],
+        "nights": "9–32 nights",
+        "season": "Jan 2027 – Feb 2028 · 13 voyages, timed around Rio Carnival"
+      },
+      {
+        "region": "French Polynesia & Pacific",
+        "ports": [
+          "Papeete (Tahiti)",
+          "Honolulu"
+        ],
+        "nights": "6–26 nights",
+        "season": "Sep 2026 – Jan 2029 · 60 voyages"
+      },
+      {
+        "region": "World Cruise",
+        "ports": [
+          "Los Angeles",
+          "Miami"
+        ],
+        "nights": "131–148 nights",
+        "season": "January departures 2027 & 2028"
+      },
+      {
+        "region": "The Kimberley (Silver Cloud, expedition)",
+        "ports": [
+          "Darwin",
+          "Broome"
+        ],
+        "nights": "Around 10 days — confirm with us",
+        "season": "Australian dry season (winter) — expedition fleet, quoted separately"
+      },
+      {
+        "region": "Galápagos (Silver Origin, expedition)",
+        "ports": [
+          "San Cristóbal",
+          "Baltra",
+          "Fernandina",
+          "Genovesa"
+        ],
+        "nights": "Confirm with us — not published",
+        "season": "Year-round archipelago — expedition fleet, quoted separately"
+      },
+      {
+        "region": "Antarctica & Arctic/Greenland (expedition)",
+        "ports": [
+          "Ushuaia",
+          "Valparaiso",
+          "Reykjavik",
+          "Nuuk",
+          "Longyearbyen"
+        ],
+        "nights": "10–12 days",
+        "season": "Antarctica in the southern summer; Arctic in the northern summer — expedition fleet, quoted separately"
+      }
+    ],
+    "bestFor": [
+      "Ultra-luxury and repeat cruise clients",
+      "Clients wanting a genuine Dubai embarkation",
+      "Expedition-minded travellers (Galápagos, Antarctica, Arctic)",
+      "High-net-worth GCC clients wanting all-inclusive privacy"
+    ],
+    "whyByond": [
+      "Wholesale rates secured directly across Silversea's classic and expedition fleets",
+      "AED invoicing and one Dubai support desk",
+      "Cruise-and-stay packaging around the Africa & Indian Ocean Dubai embarkation season",
+      "Guidance distinguishing the classic ultra-luxury fleet from the expedition fleet, so clients book the right ship"
+    ],
+    "faqs": [
+      {
+        "q": "Does Silversea sail from Dubai?",
+        "a": "Yes, genuinely — and both voyages are on sale now for April 2028 on Silver Shadow: a 16-night Mahé (Seychelles)-to-Dubai voyage featuring Doha, and a 16-night return Dubai-to-Athens voyage featuring Petra via the Suez Canal. Both are classic (ultra-luxury), not expedition, sailings."
+      },
+      {
+        "q": "What's the difference between Silversea's classic and expedition fleets?",
+        "a": "The 8 classic ships are all-suite, all-inclusive ultra-luxury vessels sailing traditional itineraries such as the Mediterranean and Caribbean. The 4 expedition ships carry just 100–274 guests, use Zodiacs for near-daily shore landings, and reach remote destinations such as the Galápagos, Antarctica, the Arctic and the Kimberley."
+      },
+      {
+        "q": "Is Silversea genuinely all-inclusive?",
+        "a": "Yes — Silversea's stated fare tiers cover dining, premium beverages, Wi-Fi and a personal butler in every suite as standard, with an 'All-Inclusive Plus' tier adding a shore-excursion credit, and expedition fares additionally including charter flights, hotel stays and expedition gear where required."
+      },
+      {
+        "q": "Does every suite get a butler?",
+        "a": "Yes — Silversea states plainly that every suite has its own butler, fleet-wide."
+      },
+      {
+        "q": "Which ship is purpose-built for the Galápagos?",
+        "a": "Silver Origin — a 100-guest expedition ship built specifically for the archipelago, with a team of Ecuadorian national expert guides and 8 Zodiacs."
+      },
+      {
+        "q": "Who handles Silversea trade enquiries in the GCC?",
+        "a": "We do — that is the point of the representation. Silversea's own offices are in Miami, Monaco, London, Frankfurt, Singapore and Sydney, so GCC agents get a Dubai desk, AED invoicing and local-hours support by coming through us."
+      }
+    ]
+  }
+]
