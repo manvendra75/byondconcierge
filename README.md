@@ -98,6 +98,27 @@ These show **real contact details** (for authorized internal use) — unlike `tr
 Note `data/app.db` is local to wherever the app runs; on an ephemeral host it won't persist across
 redeploys (leads are also emailed to the sales desk, but registrations live only in this file).
 
+## Deploying to production (Railway)
+
+The app is deployed on Railway from this repo. `railway.json` sets the build (Nixpacks) and the start
+command, which **rebuilds the local stores on boot** (`python -m engine.ingest.load`, idempotent) then
+launches Streamlit on `$PORT`.
+
+Persistent state (SQLite + Chroma) lives on a Railway **volume mounted at `/data`** — *not* `/app/data`,
+which would hide the committed source snapshots. The env vars point the app at the volume:
+
+| Variable | Value | Notes |
+|---|---|---|
+| `OPENAI_API_KEY` | `sk-…` | chat models + embeddings |
+| `EMBEDDINGS_PROVIDER` | `openai` | avoids the local-model download on cold start |
+| `RESEND_API_KEY` | `re_…` | omit → leads are console-logged, not emailed |
+| `SALES_EMAIL` | the desk inbox | where lead notifications go |
+| `DB_PATH` | `/data/app.db` | on the volume, so registrations/leads persist |
+| `CHROMA_DIR` | `/data/chroma` | on the volume |
+
+Push to `main` → Railway auto-deploys. Pull the captured data anytime with the report commands above,
+run against the service (Railway shell or `railway run`).
+
 ## Documentation
 
 - `docs/PRD.md` — product requirements
