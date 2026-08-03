@@ -114,9 +114,49 @@ def test_lead_good():
 
 
 def test_lead_rejects_negative_party_size():
+    # agency/full_name are valid here so the raise is genuinely about party_size.
     with pytest.raises(ValidationError):
-        LeadEnquiry(user_email="a@b.com", agency="X", full_name="Jo",
+        LeadEnquiry(user_email="a@b.com", agency="X Co", full_name="Jo Lee",
                     phone="+12345678", summary="hi", party_size=-1)
+
+
+# --- LeadEnquiry validation hooks (shape enforced at construction) ---------
+def test_lead_normalizes_phone_and_trims_text():
+    lead = LeadEnquiry(
+        user_email="a@b.com", agency="  Sunrise Travel  ", full_name="Aisha Khan",
+        phone="+971 4 458 0111", summary="  Wants MSC Gulf fares.  ",
+    )
+    assert lead.phone == "+97144580111"        # shared phone hook stripped spaces
+    assert lead.agency == "Sunrise Travel"     # blank-check trimmed the padding
+    assert lead.summary == "Wants MSC Gulf fares."
+
+
+def test_lead_rejects_blank_summary():
+    with pytest.raises(ValidationError):
+        LeadEnquiry(user_email="a@b.com", agency="X Co", full_name="Jo Lee",
+                    phone="+12345678", summary="   ")   # whitespace-only
+
+
+def test_lead_rejects_bad_phone():
+    with pytest.raises(ValidationError):
+        LeadEnquiry(user_email="a@b.com", agency="X Co", full_name="Jo Lee",
+                    phone="12345", summary="hi")        # no '+', too short
+
+
+def test_lead_month_accepts_name_and_yyyymm():
+    # A month NAME (from build_lead_draft/detect_month) is title-cased; 'YYYY-MM'
+    # (from other callers) is kept as-is; None stays unset.
+    base = dict(user_email="a@b.com", agency="X Co", full_name="Jo Lee",
+                phone="+12345678", summary="hi")
+    assert LeadEnquiry(**base, month="december").month == "December"
+    assert LeadEnquiry(**base, month="2026-12").month == "2026-12"
+    assert LeadEnquiry(**base).month is None
+
+
+def test_lead_rejects_garbage_month():
+    with pytest.raises(ValidationError):
+        LeadEnquiry(user_email="a@b.com", agency="X Co", full_name="Jo Lee",
+                    phone="+12345678", summary="hi", month="sometime soon")
 
 
 # ---------------------------------------------------------------------------

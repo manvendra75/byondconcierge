@@ -1,0 +1,17 @@
+{
+  "name": "byond-borders-data-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sailings data pipeline (acquisition + build) for the Byond Borders conversational engine. Node is build-time only; the engine itself is Python.",
+  "scripts": {
+    "build:index": "node scripts/build-sailings-index.mjs",
+    "test:build-guards": "node --test scripts/build-guards.test.mjs scripts/itinerary/from-compass.test.mjs",
+    "fetch:carnival": "node scripts/itinerary/fetch-carnival.mjs",
+    "fetch:disney": "node scripts/itinerary/fetch-disney.mjs",
+    "fetch:silversea": "node scripts/itinerary/fetch-silversea.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

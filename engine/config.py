@@ -51,6 +51,13 @@ class Settings:
     model_small: str            # cheap/fast model: intent gate + extraction
     model_large: str            # stronger model: synthesis + comparison
 
+    # Which embedding backend the RAG store uses. Default "local" (a bundled
+    # model, no key, works offline). This is deliberately DECOUPLED from the
+    # OpenAI key: setting the key enables the chat models but keeps embeddings
+    # local, so an existing local-built Chroma store keeps matching at query time.
+    # Set EMBEDDINGS_PROVIDER=openai to use OpenAI embeddings (then rebuild ingest).
+    embeddings_provider: str
+
     # --- Lead notifications ---
     resend_api_key: str         # blank => dev mode (log the email instead of sending)
     sales_email: str
@@ -71,6 +78,7 @@ settings = Settings(
     openai_api_key=os.getenv("OPENAI_API_KEY", ""),
     model_small=os.getenv("OPENAI_MODEL_SMALL", "gpt-4o-mini"),
     model_large=os.getenv("OPENAI_MODEL_LARGE", "gpt-4o"),
+    embeddings_provider=os.getenv("EMBEDDINGS_PROVIDER", "local"),
     resend_api_key=os.getenv("RESEND_API_KEY", ""),
     sales_email=os.getenv("SALES_EMAIL", "sales@byondborders.com"),
     db_path=_resolve(os.getenv("DB_PATH", "data/app.db")),

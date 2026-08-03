@@ -12,11 +12,29 @@
 data/app.db
 data/chroma/
 
-# NOTE: data/cruise-lines.json is deliberately NOT ignored. It is generated in
-# the *website* repo (scripts/export-cruise-content.mjs) but committed HERE so
-# this repo is self-contained at runtime — clone, install, ingest, run, with no
-# website checkout required. Refresh it only when website cruise content changes
-# (see README "Refreshing cruise content"). It holds no secrets and no prices.
+# NOTE: the committed source snapshots below are deliberately NOT ignored, so this
+# repo is self-contained at runtime — clone, install, ingest, run. `sailings-index.json`
+# is now built HERE by `npm run build:index` (scripts/build-sailings-index.mjs);
+# `cruise-lines.json` + the knowledge briefs are still published from the website repo
+# (scripts/export-cruise-content.mjs). No secrets, no prices:
+#   data/cruise-lines.json     (cruise-line content — from website)
+#   data/sailings-index.json   (sailings search index — built here)
+#   data/knowledge/*.md        (research briefs — the RAG source prose)
+
+# --- Node (build-time data pipeline only; the engine runtime is Python) -----
+node_modules/
+
+# --- Scraper sessions & caches (acquisition scripts, moved here in TD.1) -----
+# Portal logins save SESSION COOKIES (never passwords) and the fetchers cache raw
+# page bodies. None of this may ever be committed — it's machine-local and
+# credentials-adjacent. Ignored wherever it lands under the repo.
+**/workdir/
+**/.auth/
+**/storageState.json
+**/raw/
+**/samples/
+**/request-shape.json
+**/disney-urls.json
 
 # --- Python bytecode / caches ----------------------------------------------
 __pycache__/

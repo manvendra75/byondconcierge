@@ -119,16 +119,20 @@ CREATE TABLE IF NOT EXISTS traces (
 -- No single natural key (aggregated rows repeat lines/ships), so the implicit
 -- rowid is the key; the deterministic search filters on the indexed columns.
 CREATE TABLE IF NOT EXISTS sailings (
-    line         TEXT,
-    ship         TEXT,
-    name         TEXT,
-    dest         TEXT,
-    dest_label   TEXT,
-    nights       TEXT,
-    port         TEXT,
-    months_json  TEXT,                  -- the months[] array, stored as JSON
-    season_hint  TEXT,
-    count        INTEGER
+    line           TEXT,
+    ship           TEXT,
+    name           TEXT,
+    dest           TEXT,
+    dest_label     TEXT,
+    nights         TEXT,
+    port           TEXT,
+    months_json    TEXT,                -- the months[] array, stored as JSON
+    season_hint    TEXT,
+    count          INTEGER,
+    ports_json     TEXT,                -- ordered ports of call, JSON array (TA.4)
+    port_disembark TEXT,                -- arrival/disembark port, may be NULL (TA.4)
+    sail_date      TEXT,                -- exact departure date (dated lines only), else NULL (TB.3)
+    itinerary_days_json TEXT            -- numbered day-by-day schedule, JSON array, NULL if none (TC.1)
 );
 
 -- Indexes on the columns search filters by most often.
@@ -138,13 +142,43 @@ CREATE INDEX IF NOT EXISTS idx_sailings_line ON sailings(line);
 """
 
 
+# Columns added to existing tables after the first schema shipped. `CREATE TABLE IF
+# NOT EXISTS` only ever creates a *missing* table — it never alters one that already
+# exists — so a database built by an earlier version keeps its old shape. This map lets
+# init_db top up those columns on an existing DB (see _ensure_columns). New Phase 4B
+# itinerary columns are added here so an app.db from a prior task keeps working.
+_ADDED_COLUMNS = {
+    "sailings": [
+        ("ports_json", "TEXT"),            # ordered ports of call, JSON array (TA.4)
+        ("port_disembark", "TEXT"),        # arrival/disembark port (TA.4)
+        ("sail_date", "TEXT"),             # exact departure date, dated lines only (TB.3)
+        ("itinerary_days_json", "TEXT"),   # numbered day-by-day schedule, JSON array (TC.1)
+    ],
+}
+
+
+def _ensure_columns(conn: sqlite3.Connection) -> None:
+    """Add any columns in `_ADDED_COLUMNS` that an older on-disk table is missing.
+    SQLite has no 'ADD COLUMN IF NOT EXISTS', so we read the current columns from
+    PRAGMA table_info and ALTER in only the absent ones. Idempotent: on a fresh DB
+    (where _SCHEMA already created the columns) every column is present, so this is a
+    no-op; on an old DB it backfills the new columns as NULLable."""
+    for table, columns in _ADDED_COLUMNS.items():
+        existing = {row["name"] for row in conn.execute(f"PRAGMA table_info({table})")}
+        for name, coltype in columns:
+            if name not in existing:
+                conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {coltype}")
+
+
 def init_db() -> None:
-    """Create all tables and indexes if they are missing. Idempotent: running it
-    on an already-initialised database is a harmless no-op. Call this once at
-    application start (and it is what the T0.4 acceptance command runs)."""
+    """Create all tables and indexes if they are missing, then top up any columns an
+    older database is missing. Idempotent: running it on an already-initialised database
+    is a harmless no-op. Call this once at application start (and it is what the T0.4
+    acceptance command runs)."""
     conn = _connect()
     try:
         conn.executescript(_SCHEMA)   # executescript runs the multi-statement DDL
+        _ensure_columns(conn)         # migrate an existing DB to the current column set
         conn.commit()
     finally:
         conn.close()
@@ -205,6 +239,94 @@ def add_message(session_id: str, role: str, content: str) -> int:
         )
         conn.commit()
         return cur.lastrowid
+    finally:
+        conn.close()
+
+
+# ---------------------------------------------------------------------------
+# Read helpers — used by the UI to restore a session after a browser refresh
+# ---------------------------------------------------------------------------
+# Streamlit's in-memory state is lost on a hard refresh; these let the app reload
+# the user + conversation from SQLite using the session id kept in the URL.
+def get_session(session_id: str) -> dict | None:
+    """Return the session row ``{id, user_email}`` for a session id, or None."""
+    conn = _connect()
+    try:
+        row = conn.execute(
+            "SELECT id, user_email FROM sessions WHERE id = ?", (session_id,)
+        ).fetchone()
+        return dict(row) if row else None
+    finally:
+        conn.close()
+
+
+def get_user(email: str) -> dict | None:
+    """Return the user row ``{email, agency, full_name, phone}`` for an email, or None."""
+    conn = _connect()
+    try:
+        row = conn.execute(
+            "SELECT email, agency, full_name, phone FROM users WHERE email = ?", (email,)
+        ).fetchone()
+        return dict(row) if row else None
+    finally:
+        conn.close()
+
+
+def get_messages(session_id: str) -> list[dict]:
+    """Return the session's messages as ``[{role, content}, ...]`` in order."""
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            "SELECT role, content FROM messages WHERE session_id = ? ORDER BY id",
+            (session_id,),
+        ).fetchall()
+        return [{"role": r["role"], "content": r["content"]} for r in rows]
+    finally:
+        conn.close()
+
+
+# ---------------------------------------------------------------------------
+# Reporting reads — the whole users / leads tables, for the export report (T7.3)
+# ---------------------------------------------------------------------------
+# These back `python -m engine.reports` and return every row (not one keyed lookup
+# like get_user). They intentionally include real contact details — the report is
+# for authorized internal use — unlike the trace layer, which masks PII.
+def list_users() -> list[dict]:
+    """Return every registered agency, newest first, each with a count of the
+    enquiries (leads) it has raised. The LEFT JOIN keeps agencies with zero
+    enquiries (they show ``enquiries = 0``)."""
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            """
+            SELECT u.agency, u.full_name, u.email, u.phone, u.created_at,
+                   COUNT(l.id) AS enquiries
+            FROM users u
+            LEFT JOIN leads l ON l.user_email = u.email
+            GROUP BY u.email
+            ORDER BY u.created_at DESC, u.email
+            """
+        ).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
+
+
+def list_leads() -> list[dict]:
+    """Return every captured lead, newest first, with the raising agency's name
+    joined in (LEFT JOIN so a lead survives even if its user row was removed)."""
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            """
+            SELECT l.created_at, u.agency, l.user_email, l.line_slug, l.month,
+                   l.party_size, l.email_status, l.summary
+            FROM leads l
+            LEFT JOIN users u ON u.email = l.user_email
+            ORDER BY l.created_at DESC, l.id DESC
+            """
+        ).fetchall()
+        return [dict(r) for r in rows]
     finally:
         conn.close()
 

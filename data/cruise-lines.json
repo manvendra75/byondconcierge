@@ -126,6 +126,194 @@
         "season": "Segments across Jul 2026 – Jun 2027"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Western Mediterranean",
+        "name": "Italy, France, Spain & Balearic Islands — flagship weekly loop",
+        "ship": "Costa Toscana",
+        "nights": "7 nights · 57 departures",
+        "departs": "Civitavecchia (Rome)",
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Genoa (Portofino)",
+          "Marseille",
+          "Barcelona",
+          "Cagliari",
+          "Naples"
+        ]
+      },
+      {
+        "region": "Western Mediterranean",
+        "name": "France, Spain & Balearics — weekly from France and Spain",
+        "ship": "Costa Toscana",
+        "nights": "7 nights · 66 departures",
+        "departs": "Marseille & Barcelona",
+        "ports": [
+          "France",
+          "Spain",
+          "Balearic Islands",
+          "Italy"
+        ]
+      },
+      {
+        "region": "Western Mediterranean",
+        "name": "Italy, France, Spain & Ibiza",
+        "ship": "Costa Smeralda",
+        "nights": "7 nights",
+        "departs": "Civitavecchia (Rome)",
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Savona",
+          "Marseille",
+          "Barcelona",
+          "Ibiza",
+          "Palermo"
+        ]
+      },
+      {
+        "region": "Western Mediterranean",
+        "name": "Mediterranean short breaks",
+        "ship": "Costa Smeralda & Costa Pacifica",
+        "nights": "2–5 nights · 125 departures",
+        "departs": "Barcelona, Marseille, Palermo & more",
+        "ports": []
+      },
+      {
+        "region": "Eastern Mediterranean",
+        "name": "Greece & Turkey",
+        "ship": "Costa Fortuna",
+        "nights": "7 nights",
+        "departs": "Piraeus (Athens)",
+        "ports": [
+          "Piraeus (Athens)",
+          "Istanbul",
+          "Mykonos",
+          "Heraklion (Crete)",
+          "Rhodes",
+          "Thira (Santorini)"
+        ]
+      },
+      {
+        "region": "Eastern Mediterranean",
+        "name": "Italy, Greece, Croatia & Montenegro",
+        "ship": "Costa Deliziosa",
+        "nights": "7 nights",
+        "departs": "Marghera (Venice)",
+        "ports": [
+          "Marghera (Venice)",
+          "Bari",
+          "Corfu",
+          "Zakynthos",
+          "Argostoli (Kefalonia)",
+          "Bar",
+          "Rijeka"
+        ]
+      },
+      {
+        "region": "Eastern Mediterranean",
+        "name": "Greece, Malta & Italy",
+        "ship": "Costa Fascinosa",
+        "nights": "7 nights · 34 departures",
+        "departs": "Taranto, La Valletta & Catania",
+        "ports": [
+          "Greece",
+          "Malta",
+          "Italy"
+        ]
+      },
+      {
+        "region": "Northern Europe & Fjords",
+        "name": "Germany, Denmark & the Norwegian fjords",
+        "ship": "Costa Diadema",
+        "nights": "7 nights · 34 departures",
+        "departs": "Kiel & Copenhagen",
+        "ports": [
+          "Germany",
+          "Denmark",
+          "Norway"
+        ]
+      },
+      {
+        "region": "Northern Europe & Fjords",
+        "name": "Norway & Iceland voyages",
+        "ship": "Costa Favolosa",
+        "nights": "8–15 nights",
+        "departs": "Hamburg",
+        "ports": [
+          "Germany",
+          "Norway",
+          "Iceland"
+        ]
+      },
+      {
+        "region": "Caribbean & Antilles",
+        "name": "Antilles & Virgin Islands",
+        "ship": "Costa Favolosa",
+        "nights": "7 nights · 27 departures",
+        "departs": "Santo Domingo",
+        "ports": [
+          "Antilles",
+          "Virgin Islands"
+        ]
+      },
+      {
+        "region": "Caribbean & Antilles",
+        "name": "Dominican Republic, Antilles & Turks Islands",
+        "ship": "Costa Fascinosa",
+        "nights": "7 or 14 nights",
+        "departs": "La Romana",
+        "ports": [
+          "Dominican Republic",
+          "Antilles",
+          "Virgin Islands",
+          "Turks Islands"
+        ]
+      },
+      {
+        "region": "Canaries & African Atlantic",
+        "name": "Canary Islands, Spain & Madeira",
+        "ship": "Costa Smeralda",
+        "nights": "7 nights, weekly in season",
+        "departs": "Las Palmas & Santa Cruz (Tenerife)",
+        "ports": [
+          "Canary Islands",
+          "Spain",
+          "Madeira"
+        ]
+      },
+      {
+        "region": "South America",
+        "name": "Argentina, Uruguay & Brazil",
+        "ship": "Costa Serena",
+        "nights": "8–9 nights",
+        "departs": "Buenos Aires & Rio de Janeiro",
+        "ports": [
+          "Argentina",
+          "Uruguay",
+          "Brazil"
+        ]
+      },
+      {
+        "region": "Asia",
+        "name": "Taiwan & Japan short cruises",
+        "ship": "Costa Serena",
+        "nights": "2–5 nights",
+        "departs": "Keelung (Taipei) & Naha (Okinawa)",
+        "ports": [
+          "Taiwan",
+          "Japan"
+        ]
+      },
+      {
+        "region": "World Cruise (bookable by segment)",
+        "name": "Pacific & world-voyage segments",
+        "ship": "Costa Serena & Costa Deliziosa",
+        "nights": "26–140 nights",
+        "departs": "Sydney, San Francisco, Tokyo & more",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026, covering the full July 2026 – June 2027 programme (631 itineraries · 1,280 departures)",
     "bestFor": [
       "Families",
       "First-time cruisers",
@@ -466,6 +654,252 @@
         "season": "2 voyages on sale — incl. Athens to Muscat via the Red Sea"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Caribbean",
+        "name": "Caribbean from Port Canaveral",
+        "ship": "Norwegian Epic",
+        "nights": "7 days · 10 departures on sale",
+        "departs": "Orlando (Port Canaveral)",
+        "ports": [
+          "Orlando (Port Canaveral)",
+          "Puerto Plata",
+          "St. Thomas",
+          "Tortola",
+          "Great Stirrup Cay"
+        ]
+      },
+      {
+        "region": "Caribbean",
+        "name": "Southern Caribbean from San Juan",
+        "ship": "Norwegian Prima",
+        "nights": "7 days · 8 departures on sale",
+        "departs": "San Juan",
+        "ports": [
+          "San Juan",
+          "Basseterre",
+          "Bridgetown",
+          "St. John's",
+          "Philipsburg",
+          "Tortola",
+          "St. Thomas"
+        ]
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Western Mediterranean & Iberia",
+        "ship": "Norwegian Dawn",
+        "nights": "10 days · 6 departures on sale",
+        "departs": "Barcelona",
+        "ports": [
+          "Barcelona",
+          "Palma (Majorca)",
+          "Valencia",
+          "Gibraltar",
+          "Seville (Cadiz)",
+          "Portimão"
+        ]
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Mediterranean to the Gulf — one-way ending in Dubai",
+        "ship": "Norwegian Sun",
+        "nights": "21 days",
+        "departs": "Athens (Piraeus)",
+        "ports": [
+          "Athens (Piraeus)",
+          "Limassol",
+          "Alexandria",
+          "Aqaba",
+          "Jeddah",
+          "Muscat",
+          "Doha",
+          "Abu Dhabi",
+          "Dubai"
+        ]
+      },
+      {
+        "region": "Greek Isles",
+        "name": "Greek Isles & Adriatic",
+        "ship": "Norwegian Gem",
+        "nights": "7 days · 6 departures on sale",
+        "departs": "Athens (Piraeus)",
+        "ports": [
+          "Athens (Piraeus)",
+          "Santorini",
+          "Olympia (Katakolon)",
+          "Corfu",
+          "Zadar",
+          "Koper"
+        ]
+      },
+      {
+        "region": "Northern Europe",
+        "name": "Northern Europe capitals & British Isles",
+        "ship": "Norwegian Star",
+        "nights": "10–11 days · 16 departures on sale",
+        "departs": "London (Southampton)",
+        "ports": [
+          "London (Southampton)",
+          "Paris (Le Havre)",
+          "Amsterdam (Ijmuiden)",
+          "Oslo",
+          "Copenhagen",
+          "Edinburgh (Newhaven)"
+        ]
+      },
+      {
+        "region": "Alaska",
+        "name": "Alaska glaciers & fjords",
+        "ship": "Norwegian Joy",
+        "nights": "9 days · 6 departures on sale",
+        "departs": "Seattle",
+        "ports": [
+          "Seattle",
+          "Sitka",
+          "Skagway",
+          "Juneau",
+          "Ketchikan (Ward Cove)",
+          "Victoria"
+        ]
+      },
+      {
+        "region": "Bahamas",
+        "name": "Bahamas short breaks",
+        "ship": "Norwegian Dawn",
+        "nights": "5 days · 6 departures on sale",
+        "departs": "Jacksonville",
+        "ports": [
+          "Jacksonville",
+          "Grand Bahama Island",
+          "Great Stirrup Cay",
+          "Nassau"
+        ]
+      },
+      {
+        "region": "Hawaii",
+        "name": "Hawaii & French Polynesia",
+        "ship": "Norwegian Spirit",
+        "nights": "15 days · 12 departures on sale",
+        "departs": "Honolulu",
+        "ports": [
+          "Honolulu",
+          "Kahului",
+          "Hilo",
+          "Kona",
+          "Bora Bora",
+          "Raiatea",
+          "Moorea"
+        ]
+      },
+      {
+        "region": "Asia",
+        "name": "Japan & South Korea",
+        "ship": "Norwegian Jade",
+        "nights": "9 days · 5 departures on sale",
+        "departs": "Seoul (Incheon)",
+        "ports": [
+          "Seoul (Incheon)",
+          "Jeju",
+          "Nagasaki",
+          "Hakata (Fukuoka)",
+          "Hiroshima",
+          "Matsuyama"
+        ]
+      },
+      {
+        "region": "Australia & New Zealand",
+        "name": "Australia & New Zealand",
+        "ship": "Norwegian Spirit",
+        "nights": "11–14 days · 16 departures on sale",
+        "departs": "Sydney",
+        "ports": [
+          "Sydney",
+          "Melbourne",
+          "Burnie (Tasmania)",
+          "Wellington",
+          "Tauranga",
+          "Auckland"
+        ]
+      },
+      {
+        "region": "Canada & New England",
+        "name": "Boston, Halifax & Bermuda",
+        "ship": "Norwegian Breakaway",
+        "nights": "9 days · 10 departures on sale",
+        "departs": "Boston",
+        "ports": [
+          "Boston",
+          "Halifax",
+          "Royal Naval Dockyard"
+        ]
+      },
+      {
+        "region": "Panama Canal",
+        "name": "Panama Canal from Miami",
+        "ship": "Norwegian Sun",
+        "nights": "12 days · 4 departures on sale",
+        "departs": "Miami",
+        "ports": [
+          "Miami",
+          "Great Stirrup Cay",
+          "Oranjestad",
+          "Willemstad",
+          "Cartagena",
+          "Panama Canal (Gatun Lake)"
+        ]
+      },
+      {
+        "region": "South Pacific",
+        "name": "Tahiti, Cook Islands & Samoa",
+        "ship": "Norwegian Spirit",
+        "nights": "13 days · 4 departures on sale",
+        "departs": "Papeete (Tahiti)",
+        "ports": [
+          "Papeete (Tahiti)",
+          "Moorea",
+          "Bora Bora",
+          "Raiatea",
+          "Rarotonga",
+          "Pago Pago",
+          "Apia"
+        ]
+      },
+      {
+        "region": "Extraordinary Journeys",
+        "name": "Hawaii to Tahiti crossing",
+        "ship": "Norwegian Spirit",
+        "nights": "12 days · 6 departures on sale",
+        "departs": "Honolulu",
+        "ports": [
+          "Honolulu",
+          "Kahului",
+          "Nāwiliwili",
+          "Hilo",
+          "Bora Bora",
+          "Raiatea",
+          "Moorea"
+        ]
+      },
+      {
+        "region": "Africa",
+        "name": "Eastern Mediterranean, Red Sea & Arabia — ends in Muscat",
+        "ship": "Norwegian Sky",
+        "nights": "18 days",
+        "departs": "Athens (Piraeus)",
+        "ports": [
+          "Athens (Piraeus)",
+          "Rhodes",
+          "Alexandria",
+          "Safaga",
+          "Sharm el Sheikh",
+          "Aqaba",
+          "Jeddah",
+          "Muscat"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 (785 sailings across 20 regions on sale)",
     "bestFor": [
       "Independent travellers",
       "Solo cruisers (Studios)",
@@ -560,6 +994,101 @@
         "season": "2026 season · 3 itineraries"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Greek Islands (The Elysium)",
+        "name": "Divine Cyclades",
+        "ship": "The Elysium",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Delos & Mykonos",
+          "Naxos",
+          "Ios & Santorini",
+          "Milos & Kimolos",
+          "Sifnos",
+          "Serifos"
+        ]
+      },
+      {
+        "region": "Greek Islands (The Elysium)",
+        "name": "Greece UNESCO Heritage",
+        "ship": "The Elysium",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Itea (Delphi)",
+          "Kyllini (Ancient Olympia)",
+          "Gytheion (Mystras)",
+          "Elafonissos & Monemvasia",
+          "Nafplion (Mycenae & Epidaurus)",
+          "Hydra"
+        ]
+      },
+      {
+        "region": "Greek Islands (The Elysium)",
+        "name": "Mythic Adventure — Greece & Türkiye",
+        "ship": "The Elysium",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Delos & Mykonos",
+          "Kusadasi (Türkiye)",
+          "Samos",
+          "Patmos",
+          "Paros",
+          "Sifnos"
+        ]
+      },
+      {
+        "region": "Greek Islands (The Elysium)",
+        "name": "Aegean Flourish — wellness retreat at sea",
+        "ship": "The Elysium",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Delos & Mykonos",
+          "Ikaria",
+          "Patmos",
+          "Amorgos",
+          "Ios",
+          "Paros"
+        ]
+      },
+      {
+        "region": "Aegean & Saronic (M/Y Gemaya)",
+        "name": "Sparkling Cyclades",
+        "ship": "M/Y Gemaya",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Kythnos",
+          "Milos",
+          "Sifnos",
+          "Despotiko & Paros",
+          "Delos & Mykonos",
+          "Syros",
+          "Kea"
+        ]
+      },
+      {
+        "region": "Aegean & Saronic (M/Y Gemaya)",
+        "name": "Saronic Gems",
+        "ship": "M/Y Gemaya",
+        "nights": "7 nights (Fri–Fri)",
+        "departs": "Lavrion (Athens)",
+        "ports": [
+          "Cape Sounion",
+          "Epidaurus & Aegina",
+          "Poros",
+          "Porto Cheli",
+          "Nafplion",
+          "Spetses",
+          "Hydra"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — the full 2026 season catalogue (9 itineraries, all ex-Lavrion)",
     "bestFor": [
       "Honeymooners",
       "Small groups and private charters",
@@ -837,6 +1366,125 @@
         "season": "2026/27"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "European rivers (Scenic Space-Ships)",
+        "name": "Jewels of Europe",
+        "ship": "Scenic Space-Ship",
+        "nights": "15–24 days",
+        "departs": "Amsterdam & Budapest",
+        "ports": [
+          "Amsterdam",
+          "Budapest"
+        ]
+      },
+      {
+        "region": "European rivers (Scenic Space-Ships)",
+        "name": "Romantic Rhine & Moselle with Bruges",
+        "ship": "Scenic Space-Ship",
+        "nights": "18 days",
+        "departs": "Brussels",
+        "ports": [
+          "Brussels",
+          "Basel"
+        ]
+      },
+      {
+        "region": "European rivers (Scenic Space-Ships)",
+        "name": "Beautiful Bordeaux",
+        "ship": "Scenic Space-Ship",
+        "nights": "11–16 days",
+        "departs": "Bordeaux & Paris",
+        "ports": [
+          "Bordeaux",
+          "Paris"
+        ]
+      },
+      {
+        "region": "European rivers (Scenic Space-Ships)",
+        "name": "Delightful Douro with Lisbon",
+        "ship": "Scenic Space-Ship",
+        "nights": "11 days",
+        "departs": "Lisbon",
+        "ports": [
+          "Lisbon",
+          "Porto"
+        ]
+      },
+      {
+        "region": "Eastern Europe & Balkans (river)",
+        "name": "Eastern Europe & Balkans Unveiled with Turkey",
+        "ship": "Scenic Space-Ship",
+        "nights": "15–17 days",
+        "departs": "Budapest",
+        "ports": [
+          "Budapest",
+          "Bucharest",
+          "Istanbul"
+        ]
+      },
+      {
+        "region": "Antarctica & South Georgia (Scenic Eclipse)",
+        "name": "Antarctica in Depth",
+        "ship": "Scenic Eclipse",
+        "nights": "13 days",
+        "departs": "Buenos Aires",
+        "ports": []
+      },
+      {
+        "region": "Antarctica & South Georgia (Scenic Eclipse)",
+        "name": "Antarctica, South Georgia & Falkland Islands",
+        "ship": "Scenic Eclipse",
+        "nights": "20–22 days",
+        "departs": "Buenos Aires",
+        "ports": []
+      },
+      {
+        "region": "Arctic, Iceland & Greenland (Scenic Eclipse)",
+        "name": "Iceland to Greenland & the Glaciers of Disko Bay",
+        "ship": "Scenic Eclipse",
+        "nights": "14 days",
+        "departs": "Reykjavik",
+        "ports": [
+          "Reykjavik",
+          "Copenhagen"
+        ]
+      },
+      {
+        "region": "Mediterranean & Ancient Empires (Scenic Eclipse)",
+        "name": "Ultimate Pyramids & Ancient Empires — Rome to Istanbul",
+        "ship": "Scenic Eclipse",
+        "nights": "26 days",
+        "departs": "Civitavecchia (Rome)",
+        "ports": [
+          "Civitavecchia (Rome)",
+          "Istanbul"
+        ]
+      },
+      {
+        "region": "Mekong & Asia",
+        "name": "Highlights of Vietnam, Cambodia & Luxury Mekong",
+        "ship": "Scenic river ship",
+        "nights": "20 days",
+        "departs": "Hanoi",
+        "ports": [
+          "Hanoi",
+          "Siem Reap"
+        ]
+      },
+      {
+        "region": "Australia & New Zealand (Scenic Eclipse)",
+        "name": "Ultimate New Zealand",
+        "ship": "Scenic Eclipse",
+        "nights": "24 days",
+        "departs": "Auckland",
+        "ports": [
+          "Auckland",
+          "Christchurch"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — 504 Scenic tours and voyages on sale across 2026–2029 seasons (Emerald programmes additional)",
     "bestFor": [
       "Repeat luxury cruisers",
       "River-cruise clients wanting all-inclusive fares",
@@ -1030,6 +1678,84 @@
         "season": "2026–2028 · 19 crossings"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Arabian Gulf & Red Sea (Dubai turnaround)",
+        "name": "Dubai to Jeddah — Gulf & Red Sea",
+        "ship": "Crystal Symphony",
+        "nights": "9 nights (Apr 2028)",
+        "departs": "Dubai",
+        "ports": [
+          "Dubai",
+          "Fujairah",
+          "Muscat",
+          "Salalah",
+          "Jeddah"
+        ]
+      },
+      {
+        "region": "Arabian Gulf & Red Sea (Dubai turnaround)",
+        "name": "Singapore to Dubai",
+        "ship": "Crystal Symphony",
+        "nights": "20 nights (Apr 2028)",
+        "departs": "Singapore",
+        "ports": [
+          "Singapore",
+          "Phuket",
+          "Colombo",
+          "Kochi",
+          "Mumbai",
+          "Musandam Peninsula",
+          "Abu Dhabi",
+          "Dubai"
+        ]
+      },
+      {
+        "region": "Alaska",
+        "name": "Vancouver to Seward",
+        "ship": "Crystal Symphony",
+        "nights": "7 nights",
+        "departs": "Vancouver",
+        "ports": [
+          "Vancouver",
+          "Ketchikan",
+          "Wrangell",
+          "Juneau",
+          "Sitka",
+          "Hubbard Glacier",
+          "Seward (Anchorage)"
+        ]
+      },
+      {
+        "region": "Baltics & Northern Europe",
+        "name": "Hamburg to Copenhagen",
+        "ship": "Crystal Serenity",
+        "nights": "4 nights",
+        "departs": "Hamburg",
+        "ports": [
+          "Hamburg",
+          "Oslo",
+          "Copenhagen"
+        ]
+      },
+      {
+        "region": "Europe & Mediterranean",
+        "name": "Mediterranean seasons across three ships",
+        "ship": "Crystal Serenity, Symphony & Grace",
+        "nights": "3–65 nights",
+        "departs": "Rome, Barcelona & Lisbon",
+        "ports": []
+      },
+      {
+        "region": "World Cruise",
+        "name": "2028 Crystal World Cruise",
+        "ship": "Crystal Symphony",
+        "nights": "136–150 nights",
+        "departs": "Fort Lauderdale",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — 268 voyages on sale through January 2029",
     "bestFor": [
       "Experienced luxury cruisers",
       "Long-voyage clients (multi-week)",
@@ -1133,6 +1859,86 @@
         "season": "Jul–Sep 2026, resuming Jun 2027 · 5 sailings listed"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Red Sea (from Jeddah)",
+        "name": "National Day Voyage",
+        "ship": "Aroya",
+        "nights": "5 nights",
+        "departs": "Jeddah",
+        "ports": [
+          "Jeddah",
+          "Sharm El Sheikh",
+          "Aqaba"
+        ]
+      },
+      {
+        "region": "Red Sea (from Jeddah)",
+        "name": "Sharm El Sheikh getaway",
+        "ship": "Aroya",
+        "nights": "4 nights",
+        "departs": "Jeddah",
+        "ports": [
+          "Jeddah",
+          "Sharm El Sheikh"
+        ]
+      },
+      {
+        "region": "Red Sea (from Jeddah)",
+        "name": "Jabal Al-Sabaya weekend",
+        "ship": "Aroya",
+        "nights": "3 nights",
+        "departs": "Jeddah",
+        "ports": [
+          "Jeddah",
+          "Jabal Al-Sabaya"
+        ]
+      },
+      {
+        "region": "Mediterranean (from Istanbul)",
+        "name": "Greek Islands & Athens",
+        "ship": "Aroya",
+        "nights": "7 nights",
+        "departs": "Istanbul",
+        "ports": [
+          "Istanbul",
+          "Bodrum",
+          "Rhodes",
+          "Mykonos",
+          "Piraeus (Athens)"
+        ]
+      },
+      {
+        "region": "Mediterranean (from Istanbul)",
+        "name": "Turkish Riviera & Alexandria",
+        "ship": "Aroya",
+        "nights": "7 nights",
+        "departs": "Istanbul",
+        "ports": [
+          "Istanbul",
+          "Marmaris",
+          "Bodrum",
+          "Kas",
+          "Alexandria"
+        ]
+      },
+      {
+        "region": "Red Sea ↔ Mediterranean repositioning",
+        "name": "Istanbul to Jeddah via the Suez Canal",
+        "ship": "Aroya",
+        "nights": "8 nights",
+        "departs": "Istanbul",
+        "ports": [
+          "Istanbul",
+          "Marmaris",
+          "Bodrum",
+          "Suez Canal",
+          "Sharm El Sheikh",
+          "Jeddah"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — the complete 14-sailing listing on aroya.com",
     "bestFor": [
       "Saudi and GCC families",
       "Faith-conscious travellers",
@@ -1382,6 +2188,121 @@
         "season": "Aug 2026 – Jul 2027 · 57 departures"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "The Bahamas",
+        "name": "Bahamas mid-week breaks",
+        "ship": "Carnival Elation",
+        "nights": "5 nights · 50 departures",
+        "departs": "Jacksonville",
+        "ports": []
+      },
+      {
+        "region": "The Bahamas",
+        "name": "Bahamas long weekends",
+        "ship": "Carnival Conquest",
+        "nights": "3 nights · 41 departures",
+        "departs": "Miami",
+        "ports": []
+      },
+      {
+        "region": "Western Caribbean",
+        "name": "Western Caribbean",
+        "ship": "Carnival Valor",
+        "nights": "5 nights · 40 departures",
+        "departs": "New Orleans",
+        "ports": []
+      },
+      {
+        "region": "Western Caribbean",
+        "name": "Western Caribbean",
+        "ship": "Carnival Breeze",
+        "nights": "5 nights · 38 departures",
+        "departs": "Galveston",
+        "ports": []
+      },
+      {
+        "region": "Eastern Caribbean",
+        "name": "Eastern Caribbean on the flagship",
+        "ship": "Carnival Celebration",
+        "nights": "7 nights · 36 departures",
+        "departs": "Miami",
+        "ports": []
+      },
+      {
+        "region": "Eastern Caribbean",
+        "name": "Eastern Caribbean",
+        "ship": "Mardi Gras",
+        "nights": "7 nights · 32 departures",
+        "departs": "Port Canaveral (Orlando)",
+        "ports": []
+      },
+      {
+        "region": "Australia & South Pacific",
+        "name": "Tangalooma – Moreton Island short breaks",
+        "ship": "Carnival Splendor",
+        "nights": "4 nights · 24 departures",
+        "departs": "Sydney",
+        "ports": []
+      },
+      {
+        "region": "Australia & South Pacific",
+        "name": "Airlie Beach getaways",
+        "ship": "Carnival Encounter",
+        "nights": "4 nights · 18 departures",
+        "departs": "Brisbane",
+        "ports": []
+      },
+      {
+        "region": "Mexican Riviera & Baja",
+        "name": "Baja Mexico quick breaks",
+        "ship": "Carnival Radiance",
+        "nights": "4 nights · 26 departures",
+        "departs": "Long Beach (Los Angeles)",
+        "ports": []
+      },
+      {
+        "region": "Mexican Riviera & Baja",
+        "name": "Mexican Riviera",
+        "ship": "Carnival Panorama",
+        "nights": "6 or 8 nights · 47 departures",
+        "departs": "Long Beach (Los Angeles)",
+        "ports": []
+      },
+      {
+        "region": "Southern Caribbean",
+        "name": "Southern Caribbean",
+        "ship": "Carnival Horizon",
+        "nights": "8 nights · 19 departures",
+        "departs": "Miami",
+        "ports": []
+      },
+      {
+        "region": "Alaska",
+        "name": "Alaska Inside Passage & Glacier",
+        "ship": "Carnival Spirit",
+        "nights": "7 nights · 20 departures",
+        "departs": "Seattle",
+        "ports": []
+      },
+      {
+        "region": "Bermuda",
+        "name": "Bermuda",
+        "ship": "Carnival Pride",
+        "nights": "7 nights · 8 departures",
+        "departs": "Baltimore",
+        "ports": []
+      },
+      {
+        "region": "Europe & Mediterranean",
+        "name": "Europe summer seasons",
+        "ship": "Carnival Legend, Miracle & Sunshine",
+        "nights": "8–12 nights",
+        "departs": "London, Barcelona & Rome (Civitavecchia)",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026, covering the July 2026 – July 2027 programme (1,667 departures)",
     "bestFor": [
       "Families and multi-generational groups",
       "First-time cruisers",
@@ -1497,6 +2418,79 @@
         "season": "Feb–Dec season · 12 sailings on sale"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Singapore & Malaysia (Genting Dream & Star Voyager)",
+        "name": "South Bali & Lombok",
+        "ship": "Genting Dream",
+        "nights": "5 nights",
+        "departs": "Singapore",
+        "ports": [
+          "South Bali (Benoa)",
+          "Lombok"
+        ]
+      },
+      {
+        "region": "Singapore & Malaysia (Genting Dream & Star Voyager)",
+        "name": "Koh Samui & Redang",
+        "ship": "Genting Dream",
+        "nights": "4 nights",
+        "departs": "Singapore",
+        "ports": [
+          "Koh Samui",
+          "Pulau Redang"
+        ]
+      },
+      {
+        "region": "Singapore & Malaysia (Genting Dream & Star Voyager)",
+        "name": "Penang & Port Klang",
+        "ship": "Genting Dream",
+        "nights": "3 nights",
+        "departs": "Singapore",
+        "ports": [
+          "Penang",
+          "Port Klang"
+        ]
+      },
+      {
+        "region": "Taiwan & Japan (Star Navigator)",
+        "name": "Kochi, Tokyo, Shimizu & Osaka",
+        "ship": "Star Navigator",
+        "nights": "7 nights",
+        "departs": "Keelung (Taipei)",
+        "ports": [
+          "Kochi",
+          "Tokyo (Yokohama)",
+          "Shimizu",
+          "Osaka"
+        ]
+      },
+      {
+        "region": "Taiwan & Japan (Star Navigator)",
+        "name": "Naha, Ishigaki & Miyakojima",
+        "ship": "Star Navigator",
+        "nights": "4 nights",
+        "departs": "Keelung (Taipei)",
+        "ports": [
+          "Naha",
+          "Ishigaki",
+          "Miyakojima"
+        ]
+      },
+      {
+        "region": "Hong Kong & South China Sea (Star Voyager)",
+        "name": "Naha, Keelung & Penghu",
+        "ship": "Star Voyager",
+        "nights": "5 nights",
+        "departs": "Hong Kong",
+        "ports": [
+          "Naha",
+          "Keelung (Taipei)",
+          "Peng Hu (Magong)"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — the full 45-sailing programme across three ships",
     "bestFor": [
       "GCC clients wanting an Asia fly-cruise",
       "Muslim/halal-conscious travellers",
@@ -1700,6 +2694,118 @@
         "season": "2026/27"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Mediterranean",
+        "name": "Eastern Mediterranean grand loop",
+        "ship": "MSC Fantasia",
+        "nights": "9 nights",
+        "departs": "Istanbul",
+        "ports": [
+          "Istanbul",
+          "Corfu",
+          "Bari",
+          "Trieste (Venice)",
+          "Katakolon (Olympia)",
+          "Piraeus (Athens)",
+          "Izmir"
+        ]
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Western Mediterranean",
+        "ship": "MSC Seaview",
+        "nights": "7 nights",
+        "departs": "Genoa",
+        "ports": [
+          "Italy",
+          "Spain",
+          "France"
+        ]
+      },
+      {
+        "region": "Northern Europe",
+        "name": "Baltic capitals & fjords",
+        "ship": "MSC Magnifica",
+        "nights": "14 nights",
+        "departs": "Copenhagen",
+        "ports": [
+          "Denmark",
+          "Germany",
+          "Norway",
+          "Latvia",
+          "Sweden"
+        ]
+      },
+      {
+        "region": "Caribbean & Ocean Cay",
+        "name": "Bahamas & Ocean Cay loops",
+        "ship": "MSC Seaside",
+        "nights": "7 nights",
+        "departs": "Miami",
+        "ports": [
+          "Miami",
+          "Nassau",
+          "Ocean Cay"
+        ]
+      },
+      {
+        "region": "Caribbean & Ocean Cay",
+        "name": "Eastern Caribbean on the flagship",
+        "ship": "MSC World America",
+        "nights": "7 nights",
+        "departs": "Miami",
+        "ports": [
+          "Miami",
+          "Puerto Plata",
+          "San Juan",
+          "Ocean Cay"
+        ]
+      },
+      {
+        "region": "Caribbean & Ocean Cay",
+        "name": "Western Caribbean",
+        "ship": "MSC Seascape",
+        "nights": "7 nights",
+        "departs": "Galveston",
+        "ports": [
+          "Galveston",
+          "Costa Maya",
+          "Isla de Roatán",
+          "Cozumel"
+        ]
+      },
+      {
+        "region": "Far East",
+        "name": "China, Korea & Japan",
+        "ship": "MSC Bellissima",
+        "nights": "9 nights",
+        "departs": "Shanghai",
+        "ports": [
+          "Shanghai",
+          "Gangjeong (Jeju)",
+          "Busan",
+          "Fukuoka"
+        ]
+      },
+      {
+        "region": "Alaska",
+        "name": "Alaska from Seattle",
+        "ship": "MSC Poesia",
+        "nights": "7 nights",
+        "departs": "Seattle",
+        "ports": []
+      },
+      {
+        "region": "MSC Grand Voyages",
+        "name": "Repositioning legs & long voyages",
+        "ship": "Multiple MSC ships",
+        "nights": "3–29 nights",
+        "departs": "Mediterranean home ports",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — a trade-system extract of 385 itineraries (1,298 dated departures); the Nov–Mar Gulf season sits outside this extract",
     "bestFor": [
       "Families wanting a Dubai-departure Gulf cruise",
       "Value-conscious GCC first-timers",
@@ -1885,6 +2991,135 @@
         "season": "Confirm with Disney — not published"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Singapore & Southeast Asia (Disney Adventure)",
+        "name": "Singapore short cruise",
+        "ship": "Disney Adventure",
+        "nights": "3–4 nights",
+        "departs": "Singapore",
+        "ports": []
+      },
+      {
+        "region": "Bahamas & Disney private islands",
+        "name": "3-Night Bahamian",
+        "ship": "Disney Cruise Line",
+        "nights": "3 nights",
+        "departs": "Port Canaveral",
+        "ports": [
+          "Nassau",
+          "Disney Castaway Cay"
+        ]
+      },
+      {
+        "region": "Bahamas & Disney private islands",
+        "name": "4-Night Bahamian",
+        "ship": "Disney Cruise Line",
+        "nights": "4 nights",
+        "departs": "Fort Lauderdale",
+        "ports": [
+          "Disney Lookout Cay at Lighthouse Point",
+          "Nassau"
+        ]
+      },
+      {
+        "region": "Caribbean",
+        "name": "5-Night Western Caribbean",
+        "ship": "Disney Cruise Line",
+        "nights": "5 nights",
+        "departs": "Fort Lauderdale",
+        "ports": [
+          "Cozumel",
+          "Disney Castaway Cay"
+        ]
+      },
+      {
+        "region": "Caribbean",
+        "name": "4-Night Eastern Caribbean (one-way)",
+        "ship": "Disney Cruise Line",
+        "nights": "4 nights",
+        "departs": "Fort Lauderdale",
+        "ports": [
+          "Disney Castaway Cay",
+          "Disney Lookout Cay at Lighthouse Point",
+          "San Juan"
+        ]
+      },
+      {
+        "region": "Mediterranean",
+        "name": "7-Night Mediterranean",
+        "ship": "Disney Cruise Line",
+        "nights": "7 nights",
+        "departs": "Barcelona",
+        "ports": [
+          "Naples (Pompeii)",
+          "Civitavecchia (Rome)",
+          "Livorno (Florence/Pisa)",
+          "Genoa (Milan)"
+        ]
+      },
+      {
+        "region": "Mediterranean",
+        "name": "8-Night Adriatic & Greece",
+        "ship": "Disney Cruise Line",
+        "nights": "8 nights",
+        "departs": "Civitavecchia (Rome)",
+        "ports": [
+          "Corfu",
+          "Trieste (Venice)",
+          "Zadar",
+          "Dubrovnik"
+        ]
+      },
+      {
+        "region": "Northern Europe",
+        "name": "Amsterdam short break",
+        "ship": "Disney Cruise Line",
+        "nights": "3 nights",
+        "departs": "Southampton (London)",
+        "ports": [
+          "Rotterdam (Amsterdam)"
+        ]
+      },
+      {
+        "region": "Alaska & Pacific Coast",
+        "name": "6-Night Alaskan",
+        "ship": "Disney Cruise Line",
+        "nights": "6 nights",
+        "departs": "Vancouver",
+        "ports": [
+          "Glacier viewing (Stikine Icecap)",
+          "Icy Strait Point",
+          "Ketchikan"
+        ]
+      },
+      {
+        "region": "Baja & Mexican Riviera",
+        "name": "5-Night Mexican Riviera",
+        "ship": "Disney Cruise Line",
+        "nights": "5 nights",
+        "departs": "San Diego",
+        "ports": [
+          "Cabo San Lucas",
+          "Ensenada"
+        ]
+      },
+      {
+        "region": "Panama Canal",
+        "name": "14-Night Panama Canal (eastbound)",
+        "ship": "Disney Cruise Line",
+        "nights": "14 nights",
+        "departs": "San Diego",
+        "ports": [
+          "Cabo San Lucas",
+          "Puerto Vallarta",
+          "Panama Canal",
+          "Cartagena",
+          "George Town (Grand Cayman)"
+        ]
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — 55 distinct itineraries in the current catalogue",
     "bestFor": [
       "Families planning a milestone holiday",
       "GCC families wanting a Singapore stopover",
@@ -2103,6 +3338,105 @@
         "season": "Australian summer 2027/28"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Bahamas & Perfect Day at CocoCay",
+        "name": "Bahamas long weekends",
+        "ship": "Utopia of the Seas",
+        "nights": "3 nights",
+        "departs": "Port Canaveral (Orlando)",
+        "ports": []
+      },
+      {
+        "region": "Bahamas & Perfect Day at CocoCay",
+        "name": "Bahamas long weekends",
+        "ship": "Wonder of the Seas",
+        "nights": "3 nights",
+        "departs": "Miami",
+        "ports": []
+      },
+      {
+        "region": "Eastern Caribbean",
+        "name": "Eastern Caribbean on the world's largest ship",
+        "ship": "Icon of the Seas",
+        "nights": "7 nights",
+        "departs": "Miami",
+        "ports": []
+      },
+      {
+        "region": "Eastern Caribbean",
+        "name": "Eastern Caribbean",
+        "ship": "Star of the Seas",
+        "nights": "7 nights",
+        "departs": "Port Canaveral (Orlando)",
+        "ports": []
+      },
+      {
+        "region": "Western Caribbean",
+        "name": "Western Caribbean",
+        "ship": "Radiance of the Seas",
+        "nights": "5 nights",
+        "departs": "Tampa",
+        "ports": []
+      },
+      {
+        "region": "Southern Caribbean",
+        "name": "Southern Caribbean",
+        "ship": "Rhapsody of the Seas",
+        "nights": "7 nights",
+        "departs": "San Juan",
+        "ports": []
+      },
+      {
+        "region": "Alaska",
+        "name": "Alaska glaciers",
+        "ship": "Anthem of the Seas",
+        "nights": "7 nights",
+        "departs": "Seattle",
+        "ports": []
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Eastern Mediterranean & Greek Isles",
+        "ship": "Explorer of the Seas",
+        "nights": "7 nights",
+        "departs": "Ravenna (Venice)",
+        "ports": []
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Western Mediterranean",
+        "ship": "Harmony of the Seas",
+        "nights": "7 nights",
+        "departs": "Barcelona",
+        "ports": []
+      },
+      {
+        "region": "Northern Europe",
+        "name": "Northern Europe from London",
+        "ship": "Liberty of the Seas",
+        "nights": "5–9 nights",
+        "departs": "Southampton (London)",
+        "ports": []
+      },
+      {
+        "region": "Mexico (West Coast)",
+        "name": "Mexican Riviera",
+        "ship": "Navigator of the Seas",
+        "nights": "7 nights",
+        "departs": "Los Angeles",
+        "ports": []
+      },
+      {
+        "region": "Asia (China & Singapore)",
+        "name": "China short cruises",
+        "ship": "Spectrum of the Seas",
+        "nights": "4 nights",
+        "departs": "Shanghai (Baoshan)",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "8 July 2026 — an availability snapshot of 110 Royal Caribbean departures (10–30 Jul 2026)",
     "bestFor": [
       "GCC families wanting the biggest ships at sea",
       "Adventurous couples and record-ship seekers",
@@ -2307,6 +3641,49 @@
         "season": "Winter–spring season"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Caribbean",
+        "name": "Eastern & Western Caribbean",
+        "ship": "Celebrity Beyond & Celebrity Ascent",
+        "nights": "7 nights",
+        "departs": "Fort Lauderdale",
+        "ports": []
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Greek Isles & the Aegean",
+        "ship": "Celebrity Edge-Series",
+        "nights": "7–10 nights",
+        "departs": "Rome (Civitavecchia) & Athens (Piraeus)",
+        "ports": []
+      },
+      {
+        "region": "Alaska",
+        "name": "Glaciers & the Inside Passage",
+        "ship": "Solstice-class",
+        "nights": "7 nights",
+        "departs": "Seattle & Vancouver",
+        "ports": []
+      },
+      {
+        "region": "Galápagos (Celebrity Flora)",
+        "name": "The Galápagos, all-suite aboard Flora",
+        "ship": "Celebrity Flora",
+        "nights": "7 nights (10–16-night in-depth options)",
+        "departs": "Baltra & San Cristóbal",
+        "ports": []
+      },
+      {
+        "region": "Transatlantic & repositioning",
+        "name": "Transatlantic crossing",
+        "ship": "Edge-Series",
+        "nights": "12–16 nights",
+        "departs": "Barcelona & Fort Lauderdale",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — worldwide programme researched from celebritycruises.com; ask us for live dates and fares",
     "bestFor": [
       "Premium clients",
       "Couples and honeymooners",
@@ -2561,6 +3938,65 @@
         "season": "Antarctica in the southern summer; Arctic in the northern summer — expedition fleet, quoted separately"
       }
     ],
+    "featuredItineraries": [
+      {
+        "region": "Africa & Indian Ocean (Dubai voyages)",
+        "name": "Seychelles, Oman & the United Arab Emirates featuring Doha — Mahé to Dubai",
+        "ship": "Silver Shadow",
+        "nights": "16 nights (Apr 2028)",
+        "departs": "Mahé (Seychelles)",
+        "ports": []
+      },
+      {
+        "region": "Africa & Indian Ocean (Dubai voyages)",
+        "name": "Egypt, Oman & Jordan featuring Petra — Dubai to Athens",
+        "ship": "Silver Shadow",
+        "nights": "16 nights (Apr 2028)",
+        "departs": "Dubai",
+        "ports": []
+      },
+      {
+        "region": "Mediterranean",
+        "name": "Greece & Turkey featuring Mykonos and Santorini — weekly Athens round-trips",
+        "ship": "Silver Nova & Silver Ray",
+        "nights": "6 nights",
+        "departs": "Athens (Piraeus)",
+        "ports": []
+      },
+      {
+        "region": "South America",
+        "name": "Rio Carnival",
+        "ship": "Silver Nova",
+        "nights": "9 nights (Feb 2027)",
+        "departs": "Rio de Janeiro",
+        "ports": []
+      },
+      {
+        "region": "Grand Voyages",
+        "name": "Grand Mediterranean",
+        "ship": "Silver Spirit",
+        "nights": "49 nights (Sep 2026)",
+        "departs": "Lisbon",
+        "ports": []
+      },
+      {
+        "region": "World Cruise",
+        "name": "The Three Oceans",
+        "ship": "Silver Dawn",
+        "nights": "148 nights (Jan 2027)",
+        "departs": "Los Angeles",
+        "ports": []
+      },
+      {
+        "region": "World Cruise",
+        "name": "An Ode to the Moment",
+        "ship": "Silver Shadow",
+        "nights": "131 nights (Jan 2028)",
+        "departs": "Miami",
+        "ports": []
+      }
+    ],
+    "featuredItinerariesAsOf": "July 2026 — 715 classic-fleet voyages on sale through April 2029 (expedition fleet quoted separately)",
     "bestFor": [
       "Ultra-luxury and repeat cruise clients",
       "Clients wanting a genuine Dubai embarkation",

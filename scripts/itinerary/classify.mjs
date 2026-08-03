@@ -1,0 +1,182 @@
+// TD.2 — Shared destination classification for the acquisition pipeline.
+//
+// The builder used to own one bespoke region→destination map or classifier per line, tied to each
+// line's markdown format. As lines move to acquisition (Stage D), classification moves HERE — one
+// module the importers share — so the builder's generic `buildFromAcquired` path just reads a
+// canonical `dest` off each snapshot itinerary. `from-compass.mjs` validateOutput imports
+// `isDestination` to reject a non-canonical dest at acquisition time.
+//
+// The canonical taxonomy MUST mirror website/src/lib/searchTypes.ts DESTINATIONS (and the copy in
+// build-sailings-index.mjs). If you add a destination there, add it here too.
+
+// ---------------------------------------------------------------------------------------
+// Canonical destination taxonomy (22) — the only values a record's `dest` may take.
+// ---------------------------------------------------------------------------------------
+export const DESTINATIONS = new Set([
+  "Mediterranean",
+  "Greek Isles & Aegean",
+  "Caribbean",
+  "Bahamas",
+  "Arabian Gulf",
+  "Red Sea",
+  "Northern Europe & Baltic",
+  "Norwegian Fjords",
+  "Alaska",
+  "Asia (Far East)",
+  "Southeast Asia",
+  "Australia & New Zealand",
+  "South Pacific",
+  "Hawaii",
+  "Mexico & Baja",
+  "South America",
+  "Transatlantic & repositioning",
+  "World & Grand Voyages",
+  "European rivers",
+  "Expedition (Polar)",
+  "North America & Canada",
+  "Middle East & Africa journeys",
+]);
+
+export const isDestination = (d) => DESTINATIONS.has(d);
+
+// ---------------------------------------------------------------------------------------
+// Carnival — GoCCL `destinationCode` → canonical destination.
+// ---------------------------------------------------------------------------------------
+// GoCCL gives a stable 1–3 letter code per sailing (the display name drifts — "The Bahamas" vs
+// "Bahamas" — but the code does not), so we classify off the code. All 40 codes present in the live
+// catalogue are mapped; an unmapped code throws (a new GoCCL region should be noticed, not silently
+// dropped), mirroring the old parseCarnival's strictness. Caribbean sub-regions (East/West/South/
+// Panama) collapse to "Caribbean"; every Australian coastal region → "Australia & New Zealand".
+export const CARNIVAL_DEST_CODE = {
+  AB: "Australia & New Zealand",         // Airlie Beach
+  AJ: "Alaska",                          // Alaska & Japan
+  BF: "South Pacific",                   // Mutiny on the Bounty & Fiji
+  BH: "Bahamas",
+  BI: "Northern Europe & Baltic",        // British Isles
+  BM: "North America & Canada",          // Bermuda
+  CE: "Caribbean",                       // Eastern Caribbean
+  CG: "Greek Isles & Aegean",            // Croatia, Greece & Italy
+  CP: "Caribbean",                       // Caribbean & Panama
+  CS: "Caribbean",                       // Southern Caribbean
+  CW: "Caribbean",                       // Western Caribbean
+  EC: "Mediterranean",                   // Eclipse Spain/Portugal/France
+  EN: "Northern Europe & Baltic",        // Northern Europe
+  ES: "Northern Europe & Baltic",        // Scandinavia & Baltic
+  ET: "Transatlantic & repositioning",   // Transatlantic
+  FS: "South Pacific",                   // Fiji & South Pacific
+  GB: "Australia & New Zealand",         // Great Barrier Reef
+  GC: "North America & Canada",          // Greenland & Canada
+  GE: "Australia & New Zealand",         // Getaway
+  GI: "Greek Isles & Aegean",            // Greek Isles, Turkey & Italy
+  GL: "Alaska",                          // Inside Passage & Glacier
+  H: "Hawaii",
+  IB: "Mediterranean",                   // Spain, Portugal & France
+  KB: "Australia & New Zealand",         // Tasmania
+  KI: "Australia & New Zealand",         // Kangaroo Island
+  MB: "Mexico & Baja",                   // Baja Mexico
+  MC: "Australia & New Zealand",         // Melbourne Cup
+  ME: "Mediterranean",
+  MI: "Australia & New Zealand",         // Moreton Island
+  MR: "Mexico & Baja",                   // Mexican Riviera
+  NI: "Australia & New Zealand",         // Norfolk Island
+  NO: "North America & Canada",          // Canada
+  NV: "South Pacific",                   // Vanuatu & New Caledonia
+  NZ: "Australia & New Zealand",         // New Zealand
+  PI: "Australia & New Zealand",         // Phillip Island
+  S: "South America",
+  T: "Caribbean",                        // Panama Canal
+  TH: "South Pacific",                   // Tahiti & Pacific Islands
+  VN: "South Pacific",                   // Vanuatu
+  XS: "Southeast Asia",
+};
+
+export function carnivalDest(code) {
+  const dest = CARNIVAL_DEST_CODE[code];
+  if (!dest) throw new Error(`classify: unmapped Carnival destinationCode "${code}"`);
+  return dest;
+}
+
+// ---------------------------------------------------------------------------------------
+// Disney — region phrase (from the itinerary name) + embark port → canonical destination.
+// ---------------------------------------------------------------------------------------
+// Disney names read "N-Night <Region> Cruise from <Port> [ending in <Port>]"; the region phrase is
+// the classifying signal, with the Singapore short cruises (bare "N-Night Cruise from Singapore",
+// empty region) resolved by port. Migrated verbatim from the builder.
+export function disneyRegionOf(name) {
+  const m = String(name).match(/^\d+-Night\s+(.+?)\s+(?:Cruise\s+)?from\s+/i);
+  let r = m ? m[1].replace(/\s+Cruise$/i, "").trim() : String(name);
+  if (r.toLowerCase() === "cruise") r = "";
+  return r;
+}
+
+export function disneyDest(regionPhrase, port = "") {
+  const p = String(regionPhrase).trim();
+  if (/bahamian/i.test(p)) return "Bahamas";
+  if (/baja/i.test(p)) return "Mexico & Baja";
+  if (/mexican riviera/i.test(p)) return "Mexico & Baja";
+  if (/belgium|netherlands|northern europe|british isles|spain|western europe/i.test(p)) return "Northern Europe & Baltic";
+  if (/norwegian fjords/i.test(p)) return "Norwegian Fjords";
+  if (/alaskan/i.test(p)) return "Alaska";
+  if (/pacific coast/i.test(p)) return "North America & Canada";
+  if (/transatlantic/i.test(p)) return "Transatlantic & repositioning";
+  if (/panama canal/i.test(p)) return "Transatlantic & repositioning";
+  if (/mediterranean|adriatic/i.test(p)) return "Mediterranean";
+  if (/southern caribbean|eastern caribbean|western caribbean/i.test(p)) return "Caribbean";
+  if (p === "" && /singapore/i.test(port)) return "Southeast Asia";
+  throw new Error(`classify: unmapped Disney region phrase "${p}"`);
+}
+
+/** Classify an acquired Disney itinerary; returns a canonical dest or null (caller skips + logs). */
+export function disneyDestForItin(itin) {
+  for (const cand of [disneyRegionOf(itin.name), itin.name]) {
+    try { return disneyDest(cand, itin.departPort || ""); } catch { /* try next */ }
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------------------
+// Silversea — page-data `destination.name.en` → canonical destination.
+// ---------------------------------------------------------------------------------------
+// silversea.com tags each voyage with one destination (the value at cruise.data.destination.name.en,
+// e.g. "MEDITERRANEAN", "CARIBBEAN & CENTRAL AMERICA"). All 13 live values are mapped; lookup is
+// case-insensitive (the source is uppercase). Galápagos → South America (Ecuador); Antarctica →
+// Expedition (Polar).
+export const SILVERSEA_DEST = {
+  "africa & indian ocean": "Middle East & Africa journeys",
+  "alaska": "Alaska",
+  "antarctica": "Expedition (Polar)",
+  "asia": "Asia (Far East)",
+  "australia & new zealand": "Australia & New Zealand",
+  "canada & new england": "North America & Canada",
+  "caribbean & central america": "Caribbean",
+  "french polynesia & pacific": "South Pacific",
+  "galápagos islands": "South America",
+  "mediterranean": "Mediterranean",
+  "northern europe & british isles": "Northern Europe & Baltic",
+  "south america": "South America",
+  "transoceanic": "Transatlantic & repositioning",
+};
+
+export function silverseaDest(region) {
+  const dest = SILVERSEA_DEST[String(region).trim().toLowerCase()];
+  if (!dest) throw new Error(`classify: unmapped Silversea destination "${region}"`);
+  return dest;
+}
+
+// ---------------------------------------------------------------------------------------
+// Dispatcher — classify one acquired itinerary for a line into a canonical destination.
+// ---------------------------------------------------------------------------------------
+// Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
+// region). A snapshot that already carries a canonical `dest` is accepted as-is (curated lines,
+// TD.14). Returns the canonical dest, or null when a lenient source can't be classified (the caller
+// skips + logs rather than guessing). Carnival/Silversea throw on an unmapped code/region.
+export function classify(line, itin) {
+  if (itin.dest && isDestination(itin.dest)) return itin.dest;   // already canonical (curated)
+  switch (line) {
+    case "carnival": return carnivalDest(itin.destinationCode);
+    case "disney": return disneyDestForItin(itin);
+    case "silversea": return silverseaDest(itin.region);
+    default:
+      throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
+  }
+}

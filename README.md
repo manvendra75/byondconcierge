@@ -49,24 +49,54 @@ Data build, running the app, and the eval suite are documented as those pieces l
 
 ## Refreshing cruise content
 
-`data/cruise-lines.json` is the cruise-line corpus, exported from the website repo's
-`src/content/cruises.ts` (the single source of truth). It is committed to this repo, so you only
-regenerate it when that website content changes. Check out **both repos as sibling folders**:
+The engine reads committed source snapshots in `data/`:
 
-```
-Byond Borders/Marketing/
-  website/                 # the website repo
-  conversational-engine/   # this repo
-```
+- `data/sailings-index.json` — the sailings search index, **built here** by `npm run build:index`
+  (`scripts/build-sailings-index.mjs`) from the datasets in `docs/research/cruise-lines/`. The
+  sailings **data pipeline** (acquisition + build) lives in this repo (`scripts/`, Node build-time only).
+- `data/cruise-lines.json` — cruise-line content, still shaped from the website's `src/content/cruises.ts`
+- `data/knowledge/*.md` — the 13 research briefs + `gcc-cruise-facts.md`, the RAG source prose
 
-Then, from `website/`:
+All are committed here, so you only regenerate them when content changes.
+
+**Rebuild the sailings index (no website checkout needed):**
 
 ```bash
-npx tsx scripts/export-cruise-content.mjs   # writes ../conversational-engine/data/cruise-lines.json
+npm install               # one-time: Node build tooling (playwright for the live fetch scripts)
+npm run build:index       # writes data/sailings-index.json AND publishes a copy to the website bundle
 ```
 
-Commit the updated JSON here, then re-run ingest to rebuild the SQLite + Chroma stores. The export
-script strips nothing (there are no prices in the content); it only drops UI-only fields.
+**Publish the cruise-line content + knowledge briefs** (only when the website's `cruises.ts` changes) —
+this step still lives in the website repo because it reads the site's TypeScript source:
+
+```bash
+cd ../website && npx tsx scripts/export-cruise-content.mjs   # writes cruise-lines.json + knowledge/ here
+```
+
+Commit the updated files here, then re-run ingest to rebuild the SQLite + Chroma stores:
+
+```bash
+python -m engine.ingest.load_sailings     # -> data/app.db  (sailings table)
+python -m engine.ingest.load_knowledge    # -> data/chroma/ (knowledge collection)
+```
+
+The export strips nothing (there are no prices in the content); it only drops UI-only fields.
+
+## Accessing captured data (agencies & leads)
+
+When an agency signs in (agency, name, email, phone) it's saved to the **`users`** table in
+`data/app.db` (SQLite); fare/booking enquiries land in the **`leads`** table. To read them without
+writing SQL, use the report command — a console table by default, or `--csv` to pipe to a file:
+
+```bash
+python -m engine.reports users          # every registered agency + its enquiry count
+python -m engine.reports users --csv    # same, as CSV (e.g. > agencies.csv)
+python -m engine.reports leads --csv    # every captured enquiry, with the agency name
+```
+
+These show **real contact details** (for authorized internal use) — unlike `traces`, which mask PII.
+Note `data/app.db` is local to wherever the app runs; on an ephemeral host it won't persist across
+redeploys (leads are also emailed to the sales desk, but registrations live only in this file).
 
 ## Documentation
 
