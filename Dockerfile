@@ -34,7 +34,8 @@ RUN python -m engine.ingest.load_knowledge
 # and the healthcheck fails with "service unavailable". A stub credentials file +
 # headless + telemetry-off guarantees a clean, silent boot.
 ENV STREAMLIT_SERVER_HEADLESS=true \
-    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
+    PYTHONUNBUFFERED=1
 RUN mkdir -p /root/.streamlit \
     && printf '[general]\nemail = ""\n' > /root/.streamlit/credentials.toml
 
@@ -45,4 +46,4 @@ EXPOSE 8080
 # fast, no embeddings, and it only clears the sailings table so users/leads persist —
 # then launch Streamlit. Boot stays quick, so the healthcheck passes in seconds.
 # (railway.json's startCommand mirrors this and takes precedence.)
-CMD python -m engine.ingest.load_sailings ; python -m streamlit run app.py --server.port ${PORT:-8080} --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false
+CMD python -m engine.ingest.load_sailings ; python -m streamlit run app.py --server.port 8080 --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false
