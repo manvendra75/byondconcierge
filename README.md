@@ -100,21 +100,24 @@ redeploys (leads are also emailed to the sales desk, but registrations live only
 
 ## Deploying to production (Railway)
 
-The app is deployed on Railway from this repo. `railway.json` sets the build (Nixpacks) and the start
-command, which **rebuilds the local stores on boot** (`python -m engine.ingest.load`, idempotent) then
-launches Streamlit on `$PORT`.
+The app is deployed on Railway from this repo via the **`Dockerfile`** (`railway.json` sets the builder,
+start command, and healthcheck). The image **bakes the Chroma knowledge store at build time** (local
+embeddings, no key needed), so boot is fast: it only loads the sailings table into the app DB, then
+launches Streamlit. The `/_stcore/health` healthcheck holds traffic until Streamlit is actually ready.
 
-Persistent state (SQLite + Chroma) lives on a Railway **volume mounted at `/data`** — *not* `/app/data`,
-which would hide the committed source snapshots. The env vars point the app at the volume:
+Persistence: mount a Railway **volume at `/data`** (not `/app/data`, which would hide the committed
+source snapshots). Only the app DB lives there — the read-only Chroma store is baked into the image.
 
 | Variable | Value | Notes |
 |---|---|---|
-| `OPENAI_API_KEY` | `sk-…` | chat models + embeddings |
-| `EMBEDDINGS_PROVIDER` | `openai` | avoids the local-model download on cold start |
+| `OPENAI_API_KEY` | `sk-…` | the chat models (agent) |
+| `DB_PATH` | `/data/app.db` | on the volume, so registrations/leads persist |
+| `PORT` | `8080` | app binds this and Railway routes to it |
 | `RESEND_API_KEY` | `re_…` | omit → leads are console-logged, not emailed |
 | `SALES_EMAIL` | the desk inbox | where lead notifications go |
-| `DB_PATH` | `/data/app.db` | on the volume, so registrations/leads persist |
-| `CHROMA_DIR` | `/data/chroma` | on the volume |
+
+**Do NOT set** `CHROMA_DIR` or `EMBEDDINGS_PROVIDER`: the store is baked at `/app/data/chroma` with the
+local model, and queries must use the same defaults to match it.
 
 Push to `main` → Railway auto-deploys. Pull the captured data anytime with the report commands above,
 run against the service (Railway shell or `railway run`).
