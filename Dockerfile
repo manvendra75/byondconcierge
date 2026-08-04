@@ -29,6 +29,15 @@ COPY . .
 #     * EMBEDDINGS_PROVIDER -> defaults to the same local model the store was built with
 RUN python -m engine.ingest.load_knowledge
 
+# Preempt Streamlit's first-run interactive "enter your email" prompt. In a
+# non-interactive container it blocks on stdin, so the server never binds the port
+# and the healthcheck fails with "service unavailable". A stub credentials file +
+# headless + telemetry-off guarantees a clean, silent boot.
+ENV STREAMLIT_SERVER_HEADLESS=true \
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+RUN mkdir -p /root/.streamlit \
+    && printf '[general]\nemail = ""\n' > /root/.streamlit/credentials.toml
+
 # Railway routes to this port and uses EXPOSE to auto-detect it.
 EXPOSE 8080
 
