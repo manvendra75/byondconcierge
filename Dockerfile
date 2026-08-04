@@ -25,4 +25,4 @@ COPY . .
 # form so $PORT expands and && chains. (railway.json's startCommand, if set,
 # overrides this — keep the two in step.)
 CMD python -m engine.ingest.load \
-    && python -m streamlit run app.py --server.port ${PORT:-8501} --server.address 0.0.0.0 --server.headless true
+    && python -m streamlit run app.py --server.port ${PORT:-8080} --server.address 0.0.0.0 --server.headless true --server.enableCORS false --server.enableXsrfProtection false
