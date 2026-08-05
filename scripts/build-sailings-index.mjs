@@ -791,89 +791,9 @@ function parseMSC() {
   return rows;
 }
 
-// =========================================================================================
-// CRYSTAL — `## N. Title` blocks with Nights/Ports/Depart/Ship/Destination + day lists.
-// =========================================================================================
-
-const CRYSTAL_DEST = {
-  "Europe & Mediterranean": "Mediterranean",
-  "The Americas & Caribbean": "Caribbean",
-  "Baltics & Northern Europe": "Northern Europe & Baltic",
-  Alaska: "Alaska",
-  Transoceanic: "Transatlantic & repositioning",
-  "North America & Canada": "North America & Canada",
-  "South America": "South America",
-  Asia: "Asia (Far East)",
-  "South Pacific": "South Pacific",
-  "World Cruise": "World & Grand Voyages",
-  "Australia & New Zealand": "Australia & New Zealand",
-  "Africa & Indian Ocean": "Middle East & Africa journeys",
-};
-
-function parseCrystal() {
-  const txt = readData("crystal-sailings-jul2026.md");
-  const blocks = txt.split(/\n(?=## \d+\. )/);
-  const rows = [];
-  for (const block of blocks) {
-    const titleMatch = block.match(/^## \d+\.\s+(.+)$/m);
-    if (!titleMatch) continue;
-    const name = titleMatch[1].trim();
-    const nightsMatch = block.match(/\*\*Nights:\*\*\s*(\d+)/);
-    const portMatch = block.match(/\*\*Departure Port:\*\*\s*(.+)/);
-    const departMatch = block.match(/\*\*Depart:\*\*\s*([A-Za-z]{3}\s+\d{1,2},\s*\d{4})/);
-    const shipMatch = block.match(/\*\*Ship:\*\*\s*(.+)/);
-    const destMatch = block.match(/\*\*Destination:\*\*\s*(.+)/);
-    if (!nightsMatch || !portMatch || !departMatch || !shipMatch || !destMatch) {
-      throw new Error(`Crystal: missing fields for "${name}"`);
-    }
-    const rawDest = destMatch[1].trim();
-    const embarkPort = normPort("crystal", portMatch[1].trim());
-    let dest;
-    let destLabel;
-    if (embarkPort === "Dubai") {
-      dest = "Arabian Gulf";
-      destLabel = "Arabian Gulf & Red Sea (Dubai turnaround)";
-    } else {
-      dest = CRYSTAL_DEST[rawDest];
-      if (!dest) throw new Error(`Crystal: unmapped destination "${rawDest}"`);
-      destLabel = rawDest;
-    }
-    // Capture each "- Day N (Mon DD, YYYY): place" line: number, optional per-day date (in parens
-    // BEFORE the colon), and the place text (after it). Used for both the flat route and the
-    // day-by-day schedule. The date group only ever matches the leading date parens, never the
-    // parens inside a place like "Seward (Anchorage, Alaska)", which sit after the colon.
-    const dayMatches = [...block.matchAll(/^- Day (\d+)\s*(?:\(([^)]+)\))?\s*:\s*(.+)$/gm)];
-    // Flat route (unchanged behaviour): normalize each day's place into `ports`.
-    const stops = dayMatches.map(([, , , text]) => {
-      let p = text.replace(/_\(overnight\)_/gi, "").trim();
-      p = p.replace(/^Cruising\s+/i, "");
-      return normPort("crystal", p);
-    });
-    const ports = capRoute(stops);                // day list ends on the arrival day
-    // Day-by-day (TC.2): one entry per day WITH its exact date — Crystal dates every day — and sea
-    // days flagged (the "Cruising <place>" scenic days). A multi-segment day (e.g. three NZ sounds
-    // cruised the same date) legitimately repeats the day number, one entry per source line.
-    const itineraryDays = dayMatches.map(([, num, dateText, text]) =>
-      makeItineraryDay("crystal", Number(num), dateText ? parseLooseDate(dateText) : undefined, text));
-    rows.push({
-      line: "crystal",
-      ship: shipMatch[1].trim(),
-      name,
-      dest: checkDest(dest, `Crystal "${name}"`),
-      destLabel,
-      nights: nightsLabel(Number(nightsMatch[1])),
-      nightsNum: Number(nightsMatch[1]),
-      port: embarkPort,
-      month: parseLooseDate(departMatch[1]).slice(0, 7),   // month the aggregation still groups on
-      date: parseLooseDate(departMatch[1]),                // exact sail date (TB.1)
-      ports,
-      // The final day is the disembark port (TA.2).
-      portTo: ports.length ? ports[ports.length - 1] : undefined,
-      itineraryDays,
-    });
-  }
-  return rows;
-}
+// (Crystal is now sourced from acquisition — buildFromAcquired reads the crystal-itineraries-<date>.json
+// snapshot produced by scripts/itinerary/fetch-crystal.mjs; parseCrystal + CRYSTAL_DEST were removed
+// when it cut over to the live crystalcruises.com feed. classify.mjs::crystalDest maps its regions.) — TD.17
 
 // =========================================================================================
 // Build + write
@@ -891,7 +811,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1191,8 +1111,8 @@ function main() {
     // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9
     ["msc", parseMSC],
     // disney: sourced from acquisition (buildFromAcquired, undated) — TD.6
-    ["crystal", parseCrystal],
-    // scenic-emerald: sourced from acquisition (buildFromAcquired, curated JSON, undated) — TD.11/TD.14
+    // crystal: sourced from acquisition (buildFromAcquired, crystalcruises.com __NEXT_DATA__, day-by-day) — TD.17
+    // scenic-emerald: sourced from acquisition (buildFromAcquired, scenic/emerald.cruises, day-by-day) — TD.11
     // silversea: sourced from acquisition (buildFromAcquired) — TD.5
     // celebrity: sourced from acquisition (buildFromAcquired, RCG GraphQL, day-by-day) — TD.8
   ];

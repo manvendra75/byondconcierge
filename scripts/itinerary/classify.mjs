@@ -301,6 +301,28 @@ export function scenicDest(productLine, productDestination, name = "") {
 }
 
 // ---------------------------------------------------------------------------------------
+// Crystal — crystalcruises.com publishes a fixed set of region names in the voyage's
+// destination.title; map each to its canonical bucket. Unknown → null (caller skips + logs).
+// ---------------------------------------------------------------------------------------
+const CRYSTAL_DEST = {
+  "europe & mediterranean": "Mediterranean",
+  "the americas & caribbean": "Caribbean",
+  "baltics & northern europe": "Northern Europe & Baltic",
+  "alaska": "Alaska",
+  "transoceanic": "Transatlantic & repositioning",
+  "north america & canada": "North America & Canada",
+  "south america": "South America",
+  "asia": "Asia (Far East)",
+  "south pacific": "South Pacific",
+  "world cruise": "World & Grand Voyages",
+  "australia & new zealand": "Australia & New Zealand",
+  "africa & indian ocean": "Middle East & Africa journeys",
+};
+export function crystalDest(destinationTitle) {
+  return CRYSTAL_DEST[String(destinationTitle || "").trim().toLowerCase()] || null;
+}
+
+// ---------------------------------------------------------------------------------------
 // Dispatcher — classify one acquired itinerary for a line into a canonical destination.
 // ---------------------------------------------------------------------------------------
 // Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
@@ -318,6 +340,7 @@ export function classify(line, itin) {
     case "royal-caribbean": return rclDest(itin.destination);
     case "celebrity": return rclDest(itin.destination);     // same RCG GraphQL destination names
     case "scenic-emerald": return itin.dest || null;        // fetcher bakes dest (scenicDest); unmapped → skip
+    case "crystal": return itin.dest || null;               // fetcher bakes dest (crystalDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

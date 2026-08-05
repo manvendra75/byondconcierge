@@ -336,8 +336,8 @@ def resolve_port(text: str) -> str | None:
     """Map free text to a canonical departure port, or ``None``.
 
     Tries an exact normalised match first (ignoring '(...)' qualifiers), then a
-    substring overlap. When several ports match, the shortest name is chosen so
-    'rome' -> 'Rome' rather than 'Rome (Civitavecchia)'.
+    substring overlap. When several ports match, the shortest name is chosen (so a
+    bare port name wins over a longer qualified one).
     """
     if not text:
         return None

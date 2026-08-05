@@ -725,6 +725,29 @@ and groups a product's sailings into one route with `dates[]`. Full run: 678 ok 
 routes, 678 departures**. Build emits **678 dated Disney records** (was 91); "Disney in Asia, Aug
 2026" now returns 7 real dated sailings; validate 27 ok, all suites green.
 
+#### TD.17 — Crystal importer + cutover (public)
+**Goal:** Replace the last hand-maintained markdown parser (`parseCrystal` + `crystal-sailings-jul2026.md`)
+with a live scrape of crystalcruises.com, keeping Crystal dated + day-by-day.
+**Files:** `scripts/itinerary/fetch-crystal.mjs` (new), `classify.mjs`, `build-sailings-index.mjs`.
+**Spec:** crystalcruises.com is Next.js; each `/cruises/<slug>` page embeds the full voyage in
+`__NEXT_DATA__.props.pageProps.result` (server-rendered, no browser/auth). Enumerate `/cruises/<slug>`
+from `/sitemap-0.xml`; per page read name (`title`), ship (`shipInfo.name`), nights (`duration`),
+region (`destination.title` → `crystalDest`), embark date, and the day-by-day from `itineraries[]`
+(one entry/day: `day`, `itineraryDate`, `port.city`, sea days flagged `country "At sea"`/code ZZ).
+Source through `buildFromAcquired` (`ACQUIRED_DATED.crystal = true`); delete `parseCrystal` + `CRYSTAL_DEST`.
+No prices read (price/suite fields ignored). Respect the site (no robots.txt present; fetch politely).
+**Depends on:** TD.2, TD.3
+**Done when:** Crystal snapshot-sourced; guards + validate green.
+**DONE (2026-08-05):** `fetch-crystal.mjs` reads the 267 sitemap voyage pages. Standard voyages carry a
+clean `itineraries[]` (resolved port cities + per-day dates); the 11 A&K land-combo pages instead use a
+`dayByDay[]` with no port schedule and are **skipped, not guessed**. `crystalDest` (classify.mjs) maps
+Crystal's 12 region names → canonical (moved off the old builder map). Result: **256 voyages → 256 dated
+records, 100% day-by-day** (Crystal Symphony/Serenity/Grace, 12 dests, to Jan 2029; 0 unmapped). Wired
+`ACQUIRED_DATED.crystal`; removed `parseCrystal`/`CRYSTAL_DEST` (crystal stays in DATED_LINES +
+DAYBYDAY_LINES + engine `_DAY_BY_DAY_LINES`). One data-coupled test updated: `resolve_port("rome")` now
+returns `Rome (Civitavecchia)` (the bare "Rome" only the old markdown emitted is gone). `engine.validate`
+27 ok; full suite **144 passed**. Refresh: re-run `node scripts/itinerary/fetch-crystal.mjs`.
+
 ---
 
 ## PHASE 4C — Umbrella-region search

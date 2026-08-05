@@ -101,7 +101,9 @@ def test_destination_unknown_is_none():
 # ---------------------------------------------------------------------------
 def test_port_exact_and_shortest_pref():
     assert resolve_port("Dubai") == "Dubai"
-    assert resolve_port("rome") == "Rome"             # shortest over "Rome (Civitavecchia)"
+    # "rome" exact-matches the Rome port via its qualifier-stripped name. (The bare "Rome" the old
+    # Crystal markdown emitted is gone now Crystal is scraped live; every source qualifies the port.)
+    assert resolve_port("rome") == "Rome (Civitavecchia)"
 
 
 def test_port_qualifier_ignored():
