@@ -628,15 +628,23 @@ scrape, no browser: (1) sitemap `…/sitemaps/<region>` → every `/tours/<code>
 …&products=<CODE>` → dated departures, nights, product line, destination. Land tours (productLine "Land")
 skipped; **no prices read**. Ship name isn't published per-tour, so a generic per-line label is used
 (Scenic Space-Ship / Scenic Eclipse). `scenicDest()` (classify.mjs) maps productLine+destination+name → 16
-canonical dests. **Emerald** shares the same API (`brand=ec`) but its site (emeraldcruises.com) is client-
-rendered (day-by-day only via the disallowed `_rsc` route), so it's **not compliantly scrapable** — and the
-prior curated data was already Scenic-only (no Emerald ships), so acquiring Scenic alone is a strict upgrade,
-not a regression. Wired as a **dated + day-by-day** line (`ACQUIRED_DATED["scenic-emerald"] = true`; added
+canonical dests. Wired as a **dated + day-by-day** line (`ACQUIRED_DATED["scenic-emerald"] = true`; added
 to `DATED_LINES`, `DAYBYDAY_LINES`, engine `_DAY_BY_DAY_LINES`; classify dispatcher returns the baked dest,
-skip+log if unmapped). Result: **372 itineraries → 2232 dated records, all carrying day-by-day** (up from
-396 undated route-only; 2 skipped for unmapped dest, 111 tour pages failed/omitted, 86 no-dates, 48 land).
-Deleted `parseScenic` + `expandYearSeason` + markdown. `engine.validate` 27 ok; full suite **143 passed**.
-Refresh: re-run `node scripts/itinerary/fetch-scenic-emerald.mjs` (dates as of run day; `--limit N` to test).
+skip+log if unmapped). Scenic: **372 itineraries → 2232 dated records, all carrying day-by-day** (up from
+396 undated route-only). Deleted `parseScenic` + `expandYearSeason` + markdown.
+
+**Emerald added (2026-08-05):** a first pass wrongly concluded Emerald wasn't scrapable — that probed
+`emeraldcruises.com` (the old marketing SPA, client-rendered). The real platform is **`emerald.cruises`, the
+exact parallel of `scenic.cruises`**: same Next.js stack, real robots.txt (same allow rules), base
+`/tours/<code>` pages **server-render the day-by-day**, and the shared scenic-catalog departures API serves
+Emerald via **`brand=ec`**. So the same fetcher handles both — it was refactored to a `BRANDS` loop
+(scenic.cruises brand=st + emerald.cruises brand=ec, generic ship labels Emerald Star-Ship / Emerald yacht),
+combined into the ONE `scenic-emerald` snapshot (the catalogue line is literally "Scenic & Emerald", and its
+cruise-lines.json ships list already spans both brands). The existing `scenicDest()`/parser handled Emerald
+as-is (1 unmapped of 259). Combined result: **631 itineraries → 4129 dated records, all day-by-day** (372
+Scenic + 259 Emerald; 3 skipped for unmapped dest). `engine.validate` 27 ok; full suite **144 passed**.
+Refresh: `node scripts/itinerary/fetch-scenic-emerald.mjs` fetches **both** brands (`--limit N` to test;
+`--base/--brand` overrides to one brand for probes).
 
 #### TD.12 — Costa importer + cutover (auth portal)
 **Goal:** Source Costa from CostaExtra.
