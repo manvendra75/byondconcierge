@@ -332,12 +332,31 @@ def _norm_port(name: str) -> str:
     return _norm(re.sub(r"\([^)]*\)", "", name))
 
 
-def resolve_port(text: str) -> str | None:
-    """Map free text to a canonical departure port, or ``None``.
+def _port_term_pairs(name: str) -> list[tuple[str, str]]:
+    """A port's match tokens as (raw, normalised) pairs: its main name AND each
+    '(...)' qualifier city — so 'Civitavecchia (Rome)' yields both 'Civitavecchia'
+    and 'Rome'. Lets a city query find a port however each line spells it."""
+    pairs = []
+    main = re.sub(r"\s*\([^)]*\)", "", name).strip()
+    if main:
+        pairs.append((main, _norm(main)))
+    for q in re.findall(r"\(([^)]*)\)", name):
+        q = q.strip()
+        if q:
+            pairs.append((q, _norm(q)))
+    return pairs
 
-    Tries an exact normalised match first (ignoring '(...)' qualifiers), then a
-    substring overlap. When several ports match, the shortest name is chosen (so a
-    bare port name wins over a longer qualified one).
+
+def resolve_port(text: str) -> str | None:
+    """Map free text to a departure-port search token, or ``None``.
+
+    The search filters ports with ``LIKE '%token%'``, so this returns the properly
+    cased CITY/PORT token the query names — not a single full port string. That way
+    one token matches every port serving that city, however each line spells it:
+    'rome' -> 'Rome' hits both 'Civitavecchia (Rome)' and 'Rome (Civitavecchia)';
+    'venice' -> 'Venice' hits 'Venice', 'Ravenna (Venice)', 'Fusina (Venice)', … .
+    A distinct single port (e.g. 'Dubai') still resolves to itself. Falls back to a
+    loose substring overlap when the query isn't a whole token.
     """
     if not text:
         return None
@@ -346,11 +365,15 @@ def resolve_port(text: str) -> str | None:
         return None
 
     ports = _known_ports()
-    exact = [p for p in ports if _norm_port(p) == q]
-    if exact:
-        return min(exact, key=lambda p: (len(p), p))
+    # Whole-token match: the query IS a port's main name or a qualifier city. Return that token
+    # (properly cased) so the LIKE filter catches every spelling variant. Deterministic: scan the
+    # sorted port list and take the first token whose normalised form equals the query.
+    for p in ports:
+        for raw, norm in _port_term_pairs(p):
+            if norm == q:
+                return raw
 
-    # Substring overlap in either direction (e.g. "civitavecchia" within a port).
+    # Loose substring overlap in either direction (partial names); shortest whole port wins.
     loose = [p for p in ports if q in _norm_port(p) or _norm_port(p) in q]
     if loose:
         return min(loose, key=lambda p: (len(p), p))

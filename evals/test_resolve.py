@@ -99,11 +99,13 @@ def test_destination_unknown_is_none():
 # ---------------------------------------------------------------------------
 # resolve_port
 # ---------------------------------------------------------------------------
-def test_port_exact_and_shortest_pref():
+def test_port_city_token_matches_all_spellings():
     assert resolve_port("Dubai") == "Dubai"
-    # "rome" exact-matches the Rome port via its qualifier-stripped name. (The bare "Rome" the old
-    # Crystal markdown emitted is gone now Crystal is scraped live; every source qualifies the port.)
-    assert resolve_port("rome") == "Rome (Civitavecchia)"
+    # A city query returns the bare city token so the search LIKE catches every spelling of its port
+    # ("Rome" hits both "Civitavecchia (Rome)" and "Rome (Civitavecchia)" across lines).
+    assert resolve_port("rome") == "Rome"
+    assert resolve_port("athens") == "Athens"
+    assert resolve_port("venice") == "Venice"
 
 
 def test_port_qualifier_ignored():
