@@ -54,8 +54,14 @@ const goodCosta = () => ({
     { day: 2, date: "2026-08-07", port: "At Sea", is_sea_day: true },
   ],
 });
+const goodRoyalCaribbean = () => ({
+  line: "royal-caribbean", name: "Perfect Day CocoCay & Bahamas", itineraryDays: [
+    { day: 1, date: "2026-08-10", port: "Miami", is_sea_day: false },   // RCL is dated (GraphQL API, TD.10)
+    { day: 2, date: "2026-08-11", port: "At Sea", is_sea_day: true },
+  ],
+});
 // Valid records covering EVERY day-by-day line — the coverage floor for a negative fixture.
-const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta()];
+const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta(), goodRoyalCaribbean()];
 
 // A tiny assertion helper: the guard must throw, and its message must mention the reason.
 function mustThrow(records, needle, label) {

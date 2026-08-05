@@ -246,6 +246,40 @@ export function nclDest(code) {
 }
 
 // ---------------------------------------------------------------------------------------
+// Royal Caribbean — the GraphQL itinerary.destination.name (POST /cruises/graph). Names are
+// descriptive, so classify by keyword (more robust than learning RCL's internal codes).
+// ---------------------------------------------------------------------------------------
+const RCL_NAME_DEST = [
+  [/bahamas|perfect day|coco ?cay/i, "Bahamas"],
+  [/caribbean|antilles/i, "Caribbean"],
+  [/alaska/i, "Alaska"],
+  [/bermuda/i, "North America & Canada"],
+  [/canada|new england/i, "North America & Canada"],
+  [/hawaii/i, "Hawaii"],
+  [/mexico|baja/i, "Mexico & Baja"],
+  [/greek|greece|aegean/i, "Greek Isles & Aegean"],
+  [/fjord/i, "Norwegian Fjords"],
+  [/baltic|scandinav|iceland|northern europe/i, "Northern Europe & Baltic"],
+  [/mediterran/i, "Mediterranean"],
+  [/japan|\basia\b|far east|singapore|vietnam|thailand/i, "Asia (Far East)"],
+  [/australia|new zealand/i, "Australia & New Zealand"],
+  [/south pacific|tahiti|fiji|hawaii/i, "South Pacific"],
+  [/dubai|middle east|arabia|africa|suez/i, "Middle East & Africa journeys"],
+  [/pacific northwest/i, "North America & Canada"],
+  [/panama/i, "Transatlantic & repositioning"],
+  [/transatlantic|transpacific|repositioning|crossing/i, "Transatlantic & repositioning"],
+  [/south america/i, "South America"],
+  [/world|grand voyage/i, "World & Grand Voyages"],
+  [/europe/i, "Mediterranean"],   // generic "Europe" (RCL's is mostly Med) — broad, last
+];
+
+export function rclDest(name) {
+  if (!name) return undefined;
+  for (const [re, dest] of RCL_NAME_DEST) if (re.test(name)) return dest;
+  return undefined;
+}
+
+// ---------------------------------------------------------------------------------------
 // Dispatcher — classify one acquired itinerary for a line into a canonical destination.
 // ---------------------------------------------------------------------------------------
 // Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
@@ -260,6 +294,7 @@ export function classify(line, itin) {
     case "silversea": return silverseaDest(itin.region);
     case "costa": return costaDest(itin.destination);       // fetcher usually bakes dest already
     case "norwegian": return nclDest(itin.destination);     // fetcher usually bakes dest already
+    case "royal-caribbean": return rclDest(itin.destination);
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

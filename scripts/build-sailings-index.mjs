@@ -109,15 +109,6 @@ function parseLooseDate(raw) {
   return isoDate(Number(m[3]), mon, Number(m[2]));
 }
 
-/** "10JUL2026" or "11JUL2026Closed" -> { date: "2026-07-10", closed: bool } (TB.1). */
-function parseRCDate(raw) {
-  const m = raw.trim().match(/^(\d{2})([A-Z]{3})(\d{4})(Closed)?$/);
-  if (!m) throw new Error(`RC: unparseable date "${raw}"`);
-  const mon = MONTHS[m[2]];
-  if (!mon) throw new Error(`RC: unknown month "${m[2]}"`);
-  return { date: isoDate(Number(m[3]), mon, Number(m[1])), closed: Boolean(m[4]) };
-}
-
 /** Scenic "Season" is year-level: "2026" | "2026/2027" -> all months of each year. */
 function expandYearSeason(raw) {
   const years = raw.trim().split("/").map((y) => Number(y.trim()));
@@ -567,95 +558,6 @@ function recordFromDatedRow(row) {
 function nightsLabel(n) {
   const num = Number(n);
   return `${num} night${num === 1 ? "" : "s"}`;
-}
-
-// =========================================================================================
-// ROYAL CARIBBEAN — availability table, filter Brand === "Royal Caribbean", drop Closed rows.
-// =========================================================================================
-
-const RC_PORT_CODES = {
-  PCN: "Port Canaveral (Orlando)",
-  MIA: "Miami",
-  FLL: "Fort Lauderdale",
-  LAX: "Los Angeles",
-  YVR: "Vancouver",
-  SEA: "Seattle",
-  BCN: "Barcelona",
-  BLQ: "Ravenna (Venice)",
-  SJU: "San Juan",
-  TPA: "Tampa",
-  ATH: "Athens (Piraeus)",
-  BAO: "Shanghai (Baoshan)",
-  BWI: "Baltimore",
-  BYE: "Cape Liberty (New York)",
-  CTG: "Cartagena",
-  GAL: "Galveston",
-  ONX: "Colón (Panama)",
-  ROM: "Rome (Civitavecchia)",
-  STH: "Southampton (London)",
-  SWD: "Seward",
-};
-
-const RC_DEST = {
-  Bahamas: "Bahamas",
-  "Western Caribbean": "Caribbean",
-  "Southern Caribbean": "Caribbean",
-  "Eastern Caribbean": "Caribbean",
-  Alaska: "Alaska",
-  "Eastern Mediterranean": "Mediterranean",
-  "Western Mediterranean": "Mediterranean",
-  Mexico: "Mexico & Baja",
-  Bermuda: "North America & Canada",
-  "Far East": "Asia (Far East)",
-  "Europe North": "Northern Europe & Baltic",
-  Canada: "North America & Canada",
-  Transatlantic: "Transatlantic & repositioning",
-};
-
-function parseRC() {
-  const txt = readData("royal-caribbean-sailings-08jul2026.md");
-  const lines = txt.split(/\r?\n/).filter((l) => isTableRow(l));
-  const rows = [];
-  for (const line of lines) {
-    const cols = splitRow(line);
-    if (!cols[1] || cols[1] === "#" || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing (Ship) | Brand | Nights | Departure Port | Itinerary / Destination | Sail Date |
-    const ship = cols[2];
-    const brand = cols[3];
-    const nights = Number(cols[4]);
-    const portRaw = cols[5];
-    const region = cols[6];
-    const dateRaw = cols[7];
-    if (brand !== "Royal Caribbean") continue;
-    const { date, closed } = parseRCDate(dateRaw);   // full YYYY-MM-DD sail date (TB.1)
-    if (closed) continue;
-    const month = date.slice(0, 7);                  // month the aggregation still groups on
-    const dest = RC_DEST[region];
-    if (!dest) throw new Error(`RC: unmapped region "${region}"`);
-    const codeMatch = portRaw.match(/^([A-Z]{3})(\s*\(.+\))?$/);
-    let port;
-    if (codeMatch && RC_PORT_CODES[codeMatch[1]]) {
-      port = RC_PORT_CODES[codeMatch[1]];
-    } else if (codeMatch && codeMatch[2]) {
-      const inner = codeMatch[2].trim().replace(/^\(/, "").replace(/\)$/, "").split(",")[0].trim();
-      port = normPort("royal-caribbean", inner);
-    } else {
-      port = normPort("royal-caribbean", portRaw);
-    }
-    rows.push({
-      line: "royal-caribbean",
-      ship,
-      name: region,
-      dest: checkDest(dest, `RC region ${region}`),
-      destLabel: dest,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port,
-      month,
-      date,                                       // exact sail date (TB.1)
-    });
-  }
-  return rows;
 }
 
 // =========================================================================================
@@ -1284,7 +1186,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1369,7 +1271,7 @@ function validateRecords(records, allRows) {
 // come from the source markdown (Crystal/Elixir, TC.2); three come from the acquired snapshots
 // merged in TC.6 (Carnival/Silversea via enrichment, Disney via replacement). Keep in step with
 // parseCrystal / parseElixir and the TC.6 merge, and mirror engine `_DAY_BY_DAY_LINES`.
-const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa"]);
+const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean"]);
 
 /**
  * TC.2 validation hook (build-time). Validates the EMITTED `itineraryDays` on each record — the
@@ -1572,7 +1474,7 @@ function main() {
   const parsers = [
     // carnival: sourced from acquisition (buildFromAcquired) — TD.4
     // costa: sourced from acquisition (buildFromAcquired, CostaClick API) — TD.12
-    ["royal-caribbean", parseRC],
+    // royal-caribbean: sourced from acquisition (buildFromAcquired, RCL GraphQL, day-by-day) — TD.10
     ["aroya", parseAroya],
     ["elixir", () => attachElixirShips(parseElixir())],
     ["dream-star", parseStardream],

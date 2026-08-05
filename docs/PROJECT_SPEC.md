@@ -588,6 +588,18 @@ norwegian 1,612; `engine.validate` 27 ok; full suite **143 passed**. Refresh: re
 **Spec:** Same pattern; low volume (~13 RC-brand itineraries). Delete `parseRC` + `RC_DEST`/`RC_PORT_CODES` + markdown.
 **Depends on:** TD.2, TD.3
 **Done when:** Royal Caribbean snapshot-sourced; guards + validate green.
+**DONE (2026-08-05):** RCL's site uses a public **GraphQL** API (POST `/cruises/graph`) — robots.txt permits
+the content; we never touch the disallowed /booking, /room-selection, /mycruises, /flights. `fetch-royal-caribbean.mjs`
+sends ONE minimal query (`CruisesSearchResults`, no pricing selections) paged over `total` (930 cruises,
+50/page) through a real browser on the royalcaribbean.com origin. `masterSailing.itinerary` carries the FULL
+day-by-day (`days[].type == "CRUISING"` ⇒ sea day), ship, nights, destination, embark port, and `sailings[]`
+gives every date — so unlike NCL, RCL is a **day-by-day** line. Resilient paging: a transient 504 retries with
+backoff, skips a page only after 4 fails (none needed on the full run). `classify.mjs`: `rclDest` keyword map
+on `destination.name` + name/route fallback → 100% dest. Wired `ACQUIRED_DATED` + `DAYBYDAY_LINES` (RCL was
+already in `DATED_LINES`); removed `parseRC`/`parseRCDate`/`RC_PORT_CODES`/`RC_DEST` + markdown.
+**Result: 505 itineraries → 3,412 dated departures with full day-by-day** (was 104 region-only markdown rows),
+31 ships, 11 regions, dates to Apr 2028. No prices read (minimal query omits pricing). Rebuild:
+royal-caribbean 3,412; `engine.validate` 27 ok; full suite **143 passed**. Refresh: re-run `fetch-royal-caribbean.mjs`.
 
 #### TD.11 — Scenic importer + cutover (public)
 **Goal:** Source Scenic/Emerald from scenic.cruises.
