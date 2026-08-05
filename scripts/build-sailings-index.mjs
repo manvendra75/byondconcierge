@@ -996,188 +996,13 @@ function parseScenic() {
 }
 
 // =========================================================================================
-// CELEBRITY — single summary table, no dates (undated catalogue like NCL/StarDream):
-// | # | Sailing Name | Nights | Departure / Route | Ship | Ports of Call |
-// No explicit region column, so each sailing is classified into a canonical destination from
-// its name + full ports-of-call run + embarkation/disembarkation ports. Celebrity Flora is the
-// Galápagos expedition ship; every Flora sailing is Galápagos regardless of route text.
-// =========================================================================================
-
-// Caribbean sub-region, from the itinerary text, for a nicer "All sailings" grouping.
-function celebrityCaribbeanLabel(t) {
-  if (/southern caribbean|aruba|curacao|bonaire|barbados|grenada|st\. lucia|antigua|dominica|martinique|roseau/i.test(t)) {
-    return "Southern Caribbean";
-  }
-  if (/western caribbean|cozumel|grand cayman|belize|honduras|roatan|costa maya|jamaica|\bmexico\b/i.test(t)) {
-    return "Western Caribbean";
-  }
-  if (/eastern caribbean|st\. thomas|st\. maarten|st\. kitts|puerto plata|san juan|tortola|grand turk|dominican|perfect day|d\.r\./i.test(t)) {
-    return "Eastern Caribbean";
-  }
-  return "Caribbean";
-}
-
-const CELEBRITY_NORTH_PORTS = new Set([
-  "Amsterdam", "Southampton", "Reykjavik", "Cape Liberty (New York)",
-]);
-const CELEBRITY_NORTH_CONTENT =
-  /fjord|iceland|reykjavik|greenland|norway|norwegian|bergen|scandinav|stockholm|copenhagen|tallinn|helsinki|\boslo\b|baltic|british isles|dublin|edinburgh|invergordon|kirkwall|arctic|canaries/i;
-
-/** Returns [dest, destLabel]. Throws on anything it cannot place, so the build surfaces gaps. */
-function celebrityClassify(name, embPort, endPort, portsStr, ship) {
-  const t = `${name} ~ ${portsStr}`.toLowerCase();
-  const has = (re) => re.test(t);
-
-  if (ship === "Celebrity Flora" || /galapagos/i.test(t)) return ["South America", "Galápagos"];
-  if (has(/antarctica/)) return ["Expedition (Polar)", "Antarctica"];
-  if (has(/transatlantic/)) return ["Transatlantic & repositioning", "Transatlantic"];
-  if (has(/patagonia|\bargentina\b|buenos aires|montevideo|\bchile\b|\bbrazil\b|rio de janeiro|valparaiso|ushuaia|punta arenas|\bperu\b|\blima\b/)) {
-    return ["South America", "South America"];
-  }
-  if (has(/tahiti|\bfiji\b|vanuatu|south pacific|bora bora|new caledonia|\bsamoa\b|\btonga\b|cook islands/)) {
-    return ["South Pacific", "South Pacific"];
-  }
-  if (has(/transpacific/)) return ["Transatlantic & repositioning", "Transpacific"];
-  if (has(/alaska|cruisetour|denali|hubbard|dawes glacier|talkeetna|\bseward\b|kenai|\bhomer\b|gold rush|tundra|glacier bay|endicott|skagway|juneau|ketchikan|icy strait|\bsitka\b|inside passage/)) {
-    return ["Alaska", "Alaska"];
-  }
-  if (has(/hawaii|honolulu|\bmaui\b|\bkona\b|kauai|\boahu\b|\bhilo\b|lahaina/)) {
-    return ["Hawaii", "Hawaii"];
-  }
-  if (has(/panama canal/)) {
-    return embPort === endPort
-      ? ["Caribbean", "Panama Canal & Caribbean"]
-      : ["Transatlantic & repositioning", "Panama Canal"];
-  }
-  if (has(/pacific coastal/) || (embPort === "Los Angeles" && endPort === "Vancouver") || (embPort === "Vancouver" && endPort === "Los Angeles")) {
-    return ["North America & Canada", "Pacific Coastal"];
-  }
-  if (has(/bermuda/)) return ["North America & Canada", "Bermuda"];
-  if (has(/\bcanada\b|new england|bar harbor|halifax|saint john|\bquebec\b|\bboston\b|portland, maine|\bmaine\b/)) {
-    return ["North America & Canada", "Canada & New England"];
-  }
-  if (has(/australia|new zealand|sydney|auckland|melbourne|tasmania|hobart|brisbane|cairns|great barrier reef|wellington|christchurch|adelaide/)) {
-    return ["Australia & New Zealand", "Australia & New Zealand"];
-  }
-  if (has(/\bbali\b|singapore|malaysia|thailand|vietnam|phuket|penang|ko samui|kuala lumpur|laem chabang|ho chi minh|hanoi|halong|langkawi|benoa|komodo|cambodia|\blaos\b/)) {
-    return ["Southeast Asia", "Southeast Asia"];
-  }
-  if (has(/japan|korea|tokyo|kyoto|osaka|yokohama|nagasaki|\bkobe\b|okinawa|hiroshima|taiwan|hong kong|shanghai|seoul|incheon|busan|\bchina\b|nebuta|cherry blossom|hydrangea|golden week|gion|kanazawa/)) {
-    return ["Asia (Far East)", "Asia (Far East)"];
-  }
-  // Europe cluster.
-  if (has(/fjord/)) return ["Norwegian Fjords", "Norwegian Fjords"];
-  const north = (CELEBRITY_NORTH_PORTS.has(embPort) || CELEBRITY_NORTH_PORTS.has(endPort)) && CELEBRITY_NORTH_CONTENT.test(t);
-  if (north) return ["Northern Europe & Baltic", "Northern Europe & Baltic"];
-  const greek =
-    /greek isle/i.test(t) ||
-    (/athens|piraeus|mykonos|santorini|rhodes|\bcorfu\b/i.test(t) &&
-      (embPort === "Athens (Piraeus)" || endPort === "Athens (Piraeus)" || embPort === "Ravenna (Venice)" || endPort === "Ravenna (Venice)") &&
-      !/barcelona/i.test(t));
-  if (greek) return ["Greek Isles & Aegean", "Greek Isles & Aegean"];
-  if (has(/barcelona|civitavecchia|\bravenna\b|\bitaly\b|\bspain\b|\bfrance\b|\bmalta\b|morocco|portugal|canaries|adriatic|croatia|\bgreece\b|\bturkey\b|mediterranean|madeira|\briviera\b|monaco|amalfi|sicily|dubrovnik|\bkotor\b/)) {
-    return ["Mediterranean", "Mediterranean"];
-  }
-  // Caribbean / Bahamas fallback (US-Florida / Puerto Rico embarks).
-  const caribDeep = /cayman|cozumel|\bmexico\b|jamaica|\baruba\b|curacao|bonaire|puerto plata|dominican|\bantigua\b|martinique|dominica|roseau|san juan|tortola|barbados|grenada|belize|honduras|roatan|costa maya|st\. thomas|st\. maarten|st\. kitts|st\. lucia|grand turk|d\.r\./i;
-  if (caribDeep.test(t)) return ["Caribbean", celebrityCaribbeanLabel(t)];
-  if (/bahamas|perfect day|cococay|key west|nassau|bimini|grand bahama/i.test(t)) return ["Bahamas", "Bahamas"];
-  const FLORIDA_EMBARKS = new Set(["Fort Lauderdale", "Miami", "Tampa", "Orlando (Port Canaveral)", "San Juan"]);
-  if (FLORIDA_EMBARKS.has(embPort)) return ["Caribbean", celebrityCaribbeanLabel(t)];
-  throw new Error(`Celebrity: unclassified "${name}" (emb=${embPort}, end=${endPort})`);
-}
-
-// Season hint per canonical dest + label (research-backed; Celebrity publishes no dates here).
-function celebritySeasonHint(dest, destLabel) {
-  if (destLabel === "Galápagos") return "Year-round (Celebrity Flora)";
-  if (destLabel === "Antarctica") return "Austral-summer season";
-  if (dest === "Alaska") return "Summer season (Apr–Sep)";
-  if (dest === "Mediterranean" || dest === "Greek Isles & Aegean" || dest === "Northern Europe & Baltic" || dest === "Norwegian Fjords") {
-    return "Summer season";
-  }
-  if (dest === "Australia & New Zealand" || dest === "South Pacific") return "Austral-summer season";
-  if (dest === "South America") return "Austral-summer season";
-  if (dest === "Transatlantic & repositioning") return "Spring & autumn repositioning";
-  return undefined;
-}
-
-function parseCelebrity() {
-  const txt = readData("celebrity-sailings-2026-2027.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing Name | Nights | Departure / Route | Ship | Ports of Call |
-    const name = cols[2];
-    const nights = Number(cols[3]);
-    const route = cols[4];
-    const ship = cols[5];
-    // Repair a source glitch where a BVI stop is glued to the next port ("Tortola, BVISan Juan").
-    const portsRaw = cols[6].replace(/\bBVI(?=[A-Z])/g, "BVI; ");
-    const portList = portsRaw.split(";").map((p) => p.trim()).filter(Boolean);
-    if (!portList.length) continue;
-
-    const isFlora = ship === "Celebrity Flora";
-    // Embarkation: prefer the route column, fall back to the first port of call.
-    let depRaw;
-    const rt = route.match(/^Roundtrip from\s+(.+)$/i);
-    if (rt) depRaw = rt[1];
-    else if (route.includes("→")) depRaw = route.split("→")[0].trim();
-    else depRaw = route;
-    if (!depRaw || /land tour/i.test(depRaw) || depRaw === "null") depRaw = portList[0];
-    const embPort = isFlora ? "Baltra Island (Galápagos)" : normPort("celebrity", depRaw);
-
-    // Disembarkation, for one-way classification signals (Panama/Pacific coastal).
-    let arrRaw;
-    if (rt) arrRaw = rt[1];
-    else if (route.includes("→")) arrRaw = route.split("→").pop().trim();
-    else arrRaw = depRaw;
-    if (!arrRaw || /land tour/i.test(arrRaw) || arrRaw === "null") arrRaw = portList[portList.length - 1];
-    const endPort = isFlora ? "Baltra Island (Galápagos)" : normPort("celebrity", arrRaw);
-
-    const portsStr = portList.join("; ");
-    const [dest, destLabel] = celebrityClassify(name, embPort, endPort, portsStr, ship);
-
-    // Collapse cosmetic name variants so pre/post-tour pairs and "X" / "X Cruise" / "X Holiday"
-    // aggregate together; the display name is still the most-voted original.
-    const nameKey = name
-      .toLowerCase()
-      .replace(/\s+cruisetour\s+\((pre|post)\s+tour\)$/i, " cruisetour")
-      .replace(/\s+(cruise|holiday|itinerary)$/i, "")
-      .trim();
-
-    const seasonHint = celebritySeasonHint(dest, destLabel);
-    const row = {
-      line: "celebrity",
-      ship,
-      name,
-      nameKey,
-      dest: checkDest(dest, `Celebrity "${name}"`),
-      destLabel,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port: embPort,
-      // endPort was already derived from the route for classification — reuse it (TA.2).
-      portTo: endPort,
-      months: [],
-      ports: capRoute(portList.map((p) => normPort("celebrity", p))),
-    };
-    if (seasonHint) row.seasonHint = seasonHint;
-    rows.push(row);
-  }
-  return rows;
-}
-
-// =========================================================================================
 // Build + write
 // =========================================================================================
 
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -1186,7 +1011,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1271,7 +1096,7 @@ function validateRecords(records, allRows) {
 // come from the source markdown (Crystal/Elixir, TC.2); three come from the acquired snapshots
 // merged in TC.6 (Carnival/Silversea via enrichment, Disney via replacement). Keep in step with
 // parseCrystal / parseElixir and the TC.6 merge, and mirror engine `_DAY_BY_DAY_LINES`.
-const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean"]);
+const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity"]);
 
 /**
  * TC.2 validation hook (build-time). Validates the EMITTED `itineraryDays` on each record — the
@@ -1484,7 +1309,7 @@ function main() {
     ["crystal", parseCrystal],
     ["scenic-emerald", parseScenic],
     // silversea: sourced from acquisition (buildFromAcquired) — TD.5
-    ["celebrity", parseCelebrity],
+    // celebrity: sourced from acquisition (buildFromAcquired, RCG GraphQL, day-by-day) — TD.8
   ];
 
   const allRows = [];

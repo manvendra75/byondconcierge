@@ -229,7 +229,7 @@ def _check_disembark_coverage(records: list[dict]) -> Check:
 # replaced outright). Kept here as the documented expectation so a refresh that silently drops
 # day-by-day for one of them is caught. Mirror the builder's `DAYBYDAY_LINES`; this set grows as
 # the acquisition track lands day-by-day for more lines.
-_DAY_BY_DAY_LINES = {"crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean"}
+_DAY_BY_DAY_LINES = {"crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity"}
 
 
 def _check_day_by_day_coverage(records: list[dict]) -> Check:

@@ -73,10 +73,12 @@ async function main() {
       const stem = (url.split("?")[0].split("/").filter(Boolean).pop() || "hit").replace(/[^\w.-]/g, "_").slice(0, 30);
       const file = path.join(samplesDir, `${seen.length}-${stem}.json`);
       try { fs.writeFileSync(file, body); } catch { /* ignore */ }
-      // Also capture the REQUEST body (the .svc POST payload) so a fetcher can replay the exact call.
+      // Also capture the REQUEST body + headers, so a fetcher can replay the exact call (some APIs
+      // scope by a custom header, e.g. the shared RCG GraphQL gateway picks the brand from a header).
       let reqBody = null;
       try { reqBody = res.request().postData(); } catch { /* ignore */ }
       if (reqBody) { try { fs.writeFileSync(path.join(samplesDir, `${seen.length}-${stem}.req.json`), reqBody); } catch { /* ignore */ } }
+      try { fs.writeFileSync(path.join(samplesDir, `${seen.length}-${stem}.headers.json`), JSON.stringify(res.request().headers(), null, 2)); } catch { /* ignore */ }
       seen.push({
         method: res.request().method(), status: res.status(), url,
         bytes: body.length, itineraryLike: looksItinerary(body),

@@ -561,6 +561,17 @@ Celebrity entry to `classify` → source through `buildFromAcquired` → delete 
 + `celebrityClassify`/maps. May split TD.8a (survey) / TD.8b (fetch+cutover) per the TC.5a/b precedent.
 **Depends on:** TD.2, TD.3
 **Done when:** Celebrity snapshot-sourced; coverage reported; guards + validate green.
+**DONE (2026-08-05):** Celebrity is Royal Caribbean Group, so celebritycruises.com uses the SAME GraphQL
+backend as RCL (POST `/cruises/graph`, `CruisesSearchResults`). `fetch-celebrity.mjs` is the RCL fetcher
+pointed at Celebrity's origin — the one difference is the shared gateway defaults to Royal Caribbean, so
+the request must send header **`brand: C`** to scope it to Celebrity (found by capturing request headers
+in `survey-portal`; RCL works because the default is Royal). Full day-by-day (`days[].type CRUISING` = sea
+day), `filters: "voyageType:OCEAN"`. Reuses `rclDest` (added Galápagos → South America) + route fallback →
+100% dest. Wired `ACQUIRED_DATED` + `DATED_LINES` + `DAYBYDAY_LINES`; removed `parseCelebrity`/`CELEBRITY_*`
+maps + markdown. Three `test_sailings` "undated line" cases repointed to `scenic-emerald` (Celebrity is now
+dated). **Result: 343 itineraries → 1,568 dated departures with full day-by-day** (was 486 undated markdown
+rows), 15 ships, dates to Dec 2028. No prices read. Rebuild: celebrity 1,568; `engine.validate` 27 ok; full
+suite **143 passed**. Refresh: re-run `fetch-celebrity.mjs`.
 
 #### TD.9 — Norwegian importer + cutover (public)
 **Goal:** Source NCL from ncl.com.

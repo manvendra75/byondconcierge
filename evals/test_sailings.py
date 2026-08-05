@@ -48,7 +48,7 @@ def test_mediterranean_january_returns_capped_page():
 # Undated catalogue lines stay honest — "on request", never a fabricated date
 # ---------------------------------------------------------------------------
 def test_undated_line_shows_on_request():
-    out = search_sailings(SailingFilters(line="celebrity", dest="Mediterranean"))
+    out = search_sailings(SailingFilters(line="scenic-emerald", dest="Mediterranean"))
     assert out.status == "ok"
     assert any("on request" in r.coverage for r in out.rows)
 
@@ -77,7 +77,7 @@ def test_past_dates_are_filtered_out():
 
 
 def test_past_date_filter_keeps_undated_rows():
-    out = search_sailings(SailingFilters(line="celebrity"), today="2027-06-01")
+    out = search_sailings(SailingFilters(line="scenic-emerald"), today="2027-06-01")
     assert out.status == "ok"
     assert all(r.sail_date is None for r in out.rows)   # undated rows carry no date, never filtered
 
@@ -168,8 +168,8 @@ def test_nights_range_filter():
 # Undated rows keep the departure-count ranking (TB.4 leaves them on count DESC)
 # ---------------------------------------------------------------------------
 def test_undated_rows_ranked_by_count():
-    # Celebrity is an undated line, so every row is count-ranked (no dates to sort by).
-    out = search_sailings(SailingFilters(line="celebrity"))
+    # Scenic & Emerald is an undated line, so every row is count-ranked (no dates to sort by).
+    out = search_sailings(SailingFilters(line="scenic-emerald"))
     assert all(r.sail_date is None for r in out.rows)
     counts = [r.count for r in out.rows]
     assert counts == sorted(counts, reverse=True)

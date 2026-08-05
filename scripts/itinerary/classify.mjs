@@ -268,9 +268,10 @@ const RCL_NAME_DEST = [
   [/pacific northwest/i, "North America & Canada"],
   [/panama/i, "Transatlantic & repositioning"],
   [/transatlantic|transpacific|repositioning|crossing/i, "Transatlantic & repositioning"],
+  [/gal[aá]pagos/i, "South America"],   // Celebrity's Galápagos (canonical has no Galápagos bucket)
   [/south america/i, "South America"],
   [/world|grand voyage/i, "World & Grand Voyages"],
-  [/europe/i, "Mediterranean"],   // generic "Europe" (RCL's is mostly Med) — broad, last
+  [/europe/i, "Mediterranean"],   // generic "Europe" (RCG's is mostly Med) — broad, last
 ];
 
 export function rclDest(name) {
@@ -295,6 +296,7 @@ export function classify(line, itin) {
     case "costa": return costaDest(itin.destination);       // fetcher usually bakes dest already
     case "norwegian": return nclDest(itin.destination);     // fetcher usually bakes dest already
     case "royal-caribbean": return rclDest(itin.destination);
+    case "celebrity": return rclDest(itin.destination);     // same RCG GraphQL destination names
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }
