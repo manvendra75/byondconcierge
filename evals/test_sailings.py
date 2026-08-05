@@ -124,6 +124,25 @@ def test_name_filter_finds_a_specific_sailing():
 
 
 # ---------------------------------------------------------------------------
+# An unmapped destination is matched as a name keyword, never dropped
+# ---------------------------------------------------------------------------
+def test_unmapped_dest_falls_back_to_name_keyword():
+    # A destination outside the canonical taxonomy (e.g. "India") must NOT silently widen the search
+    # to the whole catalogue — the agent tool reuses it as a name keyword, so the real India sailings
+    # surface, while a nonsense destination stays honest at no-results. Regression: the concierge once
+    # answered "no India sailings" because the unmapped dest was dropped and 2000+ unrelated sailings
+    # came back, reading as "nothing India-specific".
+    from engine.agent import _tool_search_sailings
+
+    out = _tool_search_sailings(line="Scenic", dest="India")
+    assert "India" in out and "Ganges" in out          # the real India (Lower Ganges) sailings surface...
+    assert "matching sailings" in out                  # ...as a bounded match, not an empty/error card
+
+    nonsense = _tool_search_sailings(line="Scenic", dest="the moon")
+    assert "No sailings" in nonsense                    # an unmatched term falls through to honest empty
+
+
+# ---------------------------------------------------------------------------
 # A nonsense port matches nothing -> no_results
 # ---------------------------------------------------------------------------
 def test_nonsense_port_is_no_results():

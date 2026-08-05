@@ -135,6 +135,17 @@ def _tool_search_sailings(dest: str | None = None, month: str | None = None,
         if not dest_set:
             dest_single = resolve_destination(dest)
 
+    # A destination we can't map to a canonical bucket or umbrella region must NOT silently widen the
+    # search to the whole catalogue — that reads back as "here is everything" and is exactly what made
+    # the concierge wrongly answer "no India sailings" (India isn't a canonical bucket, so the filter
+    # was dropped and 2200+ unrelated sailings came back). Instead, reuse the unmapped word as an
+    # itinerary-name keyword: a geographic term we don't bucket (e.g. "India") still surfaces the
+    # sailings whose name mentions it, and a genuine nonsense term falls through to an honest
+    # no_results. Only when the caller gave no explicit name, so an intentional name filter always wins.
+    name_kw = name
+    if dest and not dest_set and not dest_single and not name:
+        name_kw = dest
+
     # Resolve the loose text filters to the canonical values the SQL tool expects.
     filters = SailingFilters(
         dest=dest_single,
@@ -147,7 +158,7 @@ def _tool_search_sailings(dest: str | None = None, month: str | None = None,
         nights_max=nights_max,
         date_from=date_from,
         date_to=date_to,
-        name=name,
+        name=name_kw,
     )
     # Inject "now" here (the tool boundary) so the search core stays clock-free and testable;
     # this hides sailings that have already departed (TB.4).
