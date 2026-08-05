@@ -164,6 +164,56 @@ export function silverseaDest(region) {
 }
 
 // ---------------------------------------------------------------------------------------
+// Costa — the CostaClick API's `Destination.Name` on each cruise (GetExtendedCruiseListData).
+// ---------------------------------------------------------------------------------------
+// Costa groups by a handful of coarse marketing regions. The clear geographic ones map straight to a
+// canonical bucket; the duration/type labels (Mini/Special) that aren't a place map to their usual
+// region (Costa's mini breaks are Mediterranean) or are left unmapped rather than guessed.
+export const COSTA_DEST = {
+  "western mediterranean": "Mediterranean",
+  "eastern mediterranean": "Mediterranean",
+  "mediterranean": "Mediterranean",
+  "asia": "Asia (Far East)",
+  "asian cruises": "Asia (Far East)",
+  "northern europe & fjords": "Norwegian Fjords",
+  "north europe and fjords": "Norwegian Fjords",
+  "mini cruises": "Mediterranean",       // Costa mini-breaks are Med short hops
+  "ocean cruises": "Transatlantic & repositioning",
+  "world cruise": "World & Grand Voyages",
+  "caribbean & antilles": "Caribbean",
+  "canaries & african atlantic": "Middle East & Africa journeys",
+  // "Special Cruises" left unmapped on purpose — it's a themed/type label, not a place, so the
+  // sailing is kept with no dest rather than guessed.
+};
+
+// Lenient (unlike Silversea): an unmapped/absent Costa destination returns undefined so the sailing is
+// still kept rather than dropped. The fetcher then falls back to costaDestFromName.
+export function costaDest(name) {
+  if (!name) return undefined;
+  return COSTA_DEST[String(name).trim().toLowerCase()];   // undefined when unmapped
+}
+
+// Fallback for Costa's "Special Cruises" catch-all (spans several real regions): infer the canonical
+// destination from the itinerary NAME, which Costa builds from the countries visited ("Argentina,
+// Uruguay, Brazil", "Germany, Norway", "Italy, France, Balearic Islands, Spain"). Region-specific
+// patterns are tried before the broad Mediterranean one, and the first match wins.
+const COSTA_NAME_DEST = [
+  [/argentin|uruguay|brazil|brasil|chile|falkland|patagon/i, "South America"],
+  [/norway|norweg|fjord|bergen|narvik|geiranger|tromso/i, "Norwegian Fjords"],
+  [/germany|denmark|iceland|baltic|sweden|finland|hamburg|norther/i, "Northern Europe & Baltic"],
+  [/caribbe|antilles|bahamas/i, "Caribbean"],
+  [/canar|africa|morocco|senegal|cape verde|namibia/i, "Middle East & Africa journeys"],
+  [/japan|china|korea|taiwan|\basia\b|singapore|thailand|vietnam/i, "Asia (Far East)"],
+  [/italy|france|spain|balearic|malta|greece|croatia|portugal|mediterran|adriatic/i, "Mediterranean"],
+];
+
+export function costaDestFromName(name) {
+  if (!name) return undefined;
+  for (const [re, dest] of COSTA_NAME_DEST) if (re.test(name)) return dest;
+  return undefined;
+}
+
+// ---------------------------------------------------------------------------------------
 // Dispatcher — classify one acquired itinerary for a line into a canonical destination.
 // ---------------------------------------------------------------------------------------
 // Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
@@ -176,6 +226,7 @@ export function classify(line, itin) {
     case "carnival": return carnivalDest(itin.destinationCode);
     case "disney": return disneyDestForItin(itin);
     case "silversea": return silverseaDest(itin.region);
+    case "costa": return costaDest(itin.destination);       // fetcher usually bakes dest already
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

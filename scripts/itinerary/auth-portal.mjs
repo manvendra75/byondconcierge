@@ -36,8 +36,20 @@ async function main() {
   const authDir = path.join(ROOT, "skills", "cruise-line-scraper", "workdir", line, ".auth");
   const statePath = path.join(authDir, "storageState.json");
 
-  const browser = await chromium.launch({ headless: false, channel: "chrome" });
+  // Launch real Chrome WITHOUT the automation fingerprints. Some portals (MSC) sit behind
+  // Akamai bot management that blocks a Playwright-driven browser at the edge before login.
+  // Dropping --enable-automation and the AutomationControlled feature, plus hiding
+  // navigator.webdriver, makes your own authorized manual login behave like an ordinary browser.
+  const browser = await chromium.launch({
+    headless: false,
+    channel: "chrome",
+    args: ["--disable-blink-features=AutomationControlled"],
+    ignoreDefaultArgs: ["--enable-automation"],
+  });
   const context = await browser.newContext({ viewport: { width: 1360, height: 900 } });
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, "webdriver", { get: () => undefined });
+  });
   const page = await context.newPage();
   await page.goto(url, { waitUntil: "domcontentloaded" }).catch(() => {});
 

@@ -591,6 +591,22 @@ saved) → `survey-portal` → `fetch-costa.mjs` (Disney pattern) → snapshot �
 `buildFromAcquired`; delete `parseCosta` + `COSTA_*` maps + markdown.
 **Depends on:** TD.3
 **Done when:** Costa snapshot-sourced; guards + validate green.
+**DONE (2026-08-05):** CostaClick exposes a clean WCF JSON API — no HTML scraping. `fetch-costa.mjs`
+replays two endpoints through the authenticated browser (same-origin `page.evaluate` fetch, session
+cookies ride along): `BookingFlowServices.svc/GetExtendedCruiseListData` (all cruises in a date window;
+API caps a call at 250 → paged **monthly**, unioned by cruise code) + `PublicServices.svc/GetItineraryDetails`
+(day-by-day `Segments`, one call per distinct itinerary). Its host redirects `int→b2b` after login and
+the list endpoint differs from what the survey saw, so the fetcher runs in **CDP-attach + discover** mode:
+you launch your own Chrome (`--remote-debugging-port`), log in, run one search — it learns the exact
+endpoint URLs from that call, then replays. (Playwright-launched Chrome was unstable at CostaClick login;
+CDP-attach to your real browser is robust.) `classify.mjs`: `costaDest` (Destination.Name → canonical) +
+`costaDestFromName` fallback (Costa's "Special Cruises" grab-bag inferred from the country-list itinerary
+name → 100% dest coverage). Wired: `ACQUIRED_DATED` + `DAYBYDAY_LINES` (build) + `_DAY_BY_DAY_LINES`
+(engine) gained `costa`; deleted `parseCosta`/`parseCostaDate`/`costaClassify`/`COSTA_*` maps + the
+markdown. **Result: 1,205 itineraries → 2,063 dated records, 100% day-by-day** (was ~1,280 stale rows with
+none), dates to May 2028. Guard test (2) reassigned to `norwegian`; `test_costa_falls_back_to_featured`
+repurposed to assert real routes. Rebuild: costa 2,063; `engine.validate` 27 ok; full suite **143 passed**.
+No prices read (FarePrices ignored). Refresh: re-run `fetch-costa.mjs --cdp http://localhost:9222`.
 
 #### TD.13 — MSC importer + cutover (auth portal, GATED)
 **Goal:** Source MSC from mscbook — only once permitted.

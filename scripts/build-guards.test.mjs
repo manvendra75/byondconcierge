@@ -48,8 +48,14 @@ const goodDisney = () => ({
     { day: 2, date: "2026-08-02", port: "Nassau", is_sea_day: false },
   ],
 });
+const goodCosta = () => ({
+  line: "costa", name: "Western Mediterranean", itineraryDays: [
+    { day: 1, date: "2026-08-06", port: "Savona", is_sea_day: false },   // Costa is dated (CostaClick API, TD.12)
+    { day: 2, date: "2026-08-07", port: "At Sea", is_sea_day: true },
+  ],
+});
 // Valid records covering EVERY day-by-day line — the coverage floor for a negative fixture.
-const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney()];
+const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta()];
 
 // A tiny assertion helper: the guard must throw, and its message must mention the reason.
 function mustThrow(records, needle, label) {
@@ -67,9 +73,10 @@ console.log("  ok  — a well-formed record for every day-by-day line passes");
 mustThrow(baseline().filter((r) => r.line !== "elixir"),
   "elixir emits no itineraryDays", "missing an entire day-by-day line");
 
-// (2) The field leaks onto a line that shouldn't carry it -> caught.
-mustThrow([...baseline(), { line: "costa", name: "Med loop", itineraryDays: [{ day: 1, port: "Rome", is_sea_day: false }] }],
-  "costa record unexpectedly carries itineraryDays", "field leaking onto another line");
+// (2) The field leaks onto a line that shouldn't carry it -> caught. (Norwegian is NOT a day-by-day
+// line — Costa used to be the example here, but it's now acquired with day-by-day, TD.12.)
+mustThrow([...baseline(), { line: "norwegian", name: "Fjords loop", itineraryDays: [{ day: 1, port: "Bergen", is_sea_day: false }] }],
+  "norwegian record unexpectedly carries itineraryDays", "field leaking onto another line");
 
 // (3) A dated line (Crystal) with a day missing its date -> caught (never ship a dateless dated day).
 const crystalNoDate = goodCrystal();

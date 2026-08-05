@@ -100,15 +100,6 @@ function isoDate(year, month, day) {
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
-/** "09 JUL 2026" / "12 SEPT 2026" -> "2026-07-09" (full sail date, TB.1). */
-function parseCostaDate(raw) {
-  const m = raw.trim().match(/^(\d{1,2})\s+([A-Za-z]{3,4})\s+(\d{4})$/);
-  if (!m) throw new Error(`Costa: unparseable date "${raw}"`);
-  const mon = MONTHS[m[2].toUpperCase()];
-  if (!mon) throw new Error(`Costa: unknown month "${m[2]}"`);
-  return isoDate(Number(m[3]), mon, Number(m[1]));
-}
-
 /** "Jul 26, 2026 (Sun)" or "Jul 11, 2026" -> "2026-07-26" (full sail date, TB.1). */
 function parseLooseDate(raw) {
   const m = raw.trim().match(/^([A-Za-z]{3,4})\s+(\d{1,2}),\s*(\d{4})/);
@@ -576,121 +567,6 @@ function recordFromDatedRow(row) {
 function nightsLabel(n) {
   const num = Number(n);
   return `${num} night${num === 1 ? "" : "s"}`;
-}
-
-// =========================================================================================
-// COSTA — monthly `##` sections, pipe table, escaped `\|` port names, no explicit region
-// column (classified from departure port + ship + nights, since the round-the-world
-// Costa Deliziosa/Serena segments and Canaries/South America legs share ports with the
-// regular Mediterranean loops).
-// =========================================================================================
-
-const COSTA_WORLD_PORTS = new Set(["Tokyo", "Hong Kong", "Sydney", "San Francisco", "Cape Town"]);
-
-const COSTA_PORT_REGION = {
-  "Civitavecchia | Rome": ["Mediterranean", "Western Mediterranean"],
-  Barcelona: ["Mediterranean", "Western Mediterranean"],
-  Marseilles: ["Mediterranean", "Western Mediterranean"],
-  Savona: ["Mediterranean", "Western Mediterranean"],
-  "Palma De Mallorca": ["Mediterranean", "Western Mediterranean"],
-  Cagliari: ["Mediterranean", "Western Mediterranean"],
-  "Genoa | Portofino": ["Mediterranean", "Western Mediterranean"],
-  "La Seyne | Saint-Tropez": ["Mediterranean", "Western Mediterranean"],
-  Valencia: ["Mediterranean", "Western Mediterranean"],
-  Malaga: ["Mediterranean", "Western Mediterranean"],
-  Palermo: ["Mediterranean", "Western Mediterranean"],
-  Naples: ["Mediterranean", "Western Mediterranean"],
-  Cadiz: ["Mediterranean", "Western Mediterranean"],
-  Tarragona: ["Mediterranean", "Western Mediterranean"],
-  "Marghera | Venice": ["Mediterranean", "Eastern Mediterranean"],
-  "Piraeus | Athens": ["Mediterranean", "Eastern Mediterranean"],
-  Taranto: ["Mediterranean", "Eastern Mediterranean"],
-  Istanbul: ["Mediterranean", "Eastern Mediterranean"],
-  "La Valletta": ["Mediterranean", "Eastern Mediterranean"],
-  Catania: ["Mediterranean", "Eastern Mediterranean"],
-  Trieste: ["Mediterranean", "Eastern Mediterranean"],
-  Bari: ["Mediterranean", "Eastern Mediterranean"],
-  Kiel: ["Northern Europe & Baltic", "Northern Europe & Fjords"],
-  Hamburg: ["Northern Europe & Baltic", "Northern Europe & Fjords"],
-  Copenhagen: ["Northern Europe & Baltic", "Northern Europe & Fjords"],
-  "Le Havre": ["Northern Europe & Baltic", "Northern Europe & Fjords"],
-  "Leixões | Porto": ["Northern Europe & Baltic", "Northern Europe & Fjords"],
-  Lisbon: ["Middle East & Africa journeys", "Canaries & African Atlantic"],
-  "Santo Domingo": ["Caribbean", "Caribbean & Antilles"],
-  "La Romana": ["Caribbean", "Caribbean & Antilles"],
-  "Pointe-à-Pitre": ["Caribbean", "Caribbean & Antilles"],
-  "Fort-de-France": ["Caribbean", "Caribbean & Antilles"],
-  "Santa Cruz | Tenerife": ["Middle East & Africa journeys", "Canaries & African Atlantic"],
-  "Las Palmas | Gran Canaria": ["Middle East & Africa journeys", "Canaries & African Atlantic"],
-  "Buenos Aires": ["South America", "South America"],
-  "Rio de Janeiro": ["South America", "South America"],
-  "Santos | São Paulo": ["South America", "South America"],
-  Itajai: ["South America", "South America"],
-  Maceio: ["South America", "South America"],
-  "Salvador de Bahia": ["South America", "South America"],
-  "San Antonio | Santiago": ["South America", "South America"],
-  "Keelung | Taipei": ["Asia (Far East)", "Asia"],
-  Naha: ["Asia (Far East)", "Asia"],
-  Pusan: ["Asia (Far East)", "Asia"],
-  Fukuoka: ["Asia (Far East)", "Asia"],
-  Nagasaki: ["Asia (Far East)", "Asia"],
-  Shanghai: ["Asia (Far East)", "Asia"],
-  "Yokohama (Tokyo)": ["Asia (Far East)", "Asia"],
-  "Sasebo (Japan)": ["Asia (Far East)", "Asia"],
-};
-
-const COSTA_PORT_REGION_CI = new Map(
-  Object.entries(COSTA_PORT_REGION).map(([k, v]) => [k.toLowerCase(), v]),
-);
-
-function costaClassify(fromPortRaw, ship, nights) {
-  const displayPort = normPort("costa", fromPortRaw);
-  if (COSTA_WORLD_PORTS.has(displayPort)) {
-    return { dest: "World & Grand Voyages", destLabel: "World Cruise (bookable by segment)", port: displayPort };
-  }
-  if ((ship === "Costa Deliziosa" || ship === "Costa Serena") && nights >= 17) {
-    return { dest: "World & Grand Voyages", destLabel: "World Cruise (bookable by segment)", port: displayPort };
-  }
-  const found = COSTA_PORT_REGION_CI.get(fromPortRaw.toLowerCase());
-  if (!found) throw new Error(`Costa: unmapped departure port "${fromPortRaw}"`);
-  return { dest: checkDest(found[0], `Costa port ${fromPortRaw}`), destLabel: found[1], port: displayPort };
-}
-
-function parseCosta() {
-  const txt = readData("costa-sailings-jul2026-jun2027.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing (Itinerary) | Ship | Nights | Departure Date | From | To | Route | From Price |
-    const combo = cols[2];
-    const ship = cols[3];
-    const nights = Number(cols[4]);
-    const departDate = cols[5];
-    const fromPort = cols[6];
-    const toPort = cols[7];                       // "To" column — the disembark port (TA.2)
-    const date = parseCostaDate(departDate);      // full YYYY-MM-DD sail date (TB.1)
-    const month = date.slice(0, 7);               // month the aggregation still groups on
-    const { dest, destLabel, port } = costaClassify(fromPort, ship, nights);
-    rows.push({
-      line: "costa",
-      ship,
-      name: combo,
-      nameKey: combo.split(",").map((s) => s.trim()).sort().join(", "),
-      dest,
-      destLabel,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port,
-      // Costa publishes an explicit arrival port; carry it as the disembark (TA.2).
-      portTo: toPort ? normPort("costa", toPort) : undefined,
-      month,
-      date,                                       // exact sail date (TB.1)
-    });
-  }
-  return rows;
 }
 
 // =========================================================================================
@@ -1492,7 +1368,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1577,7 +1453,7 @@ function validateRecords(records, allRows) {
 // come from the source markdown (Crystal/Elixir, TC.2); three come from the acquired snapshots
 // merged in TC.6 (Carnival/Silversea via enrichment, Disney via replacement). Keep in step with
 // parseCrystal / parseElixir and the TC.6 merge, and mirror engine `_DAY_BY_DAY_LINES`.
-const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney"]);
+const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa"]);
 
 /**
  * TC.2 validation hook (build-time). Validates the EMITTED `itineraryDays` on each record — the
@@ -1775,8 +1651,8 @@ function buildFromAcquired(line, acq, { dated }) {
 
 function main() {
   const parsers = [
-    ["costa", parseCosta],
     // carnival: sourced from acquisition (buildFromAcquired) — TD.4
+    // costa: sourced from acquisition (buildFromAcquired, CostaClick API) — TD.12
     ["royal-caribbean", parseRC],
     ["aroya", parseAroya],
     ["elixir", () => attachElixirShips(parseElixir())],

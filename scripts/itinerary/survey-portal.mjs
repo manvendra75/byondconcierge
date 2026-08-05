@@ -45,8 +45,17 @@ async function main() {
   if (!fs.existsSync(statePath)) throw new Error(`No session — run auth-portal.mjs --line ${line} … first.`);
 
   const host = new URL(startUrl).host;
-  const browser = await chromium.launch({ headless: false, channel: "chrome" });
+  // Same anti-bot-management launch as auth-portal (MSC/Akamai blocks driven browsers at the edge).
+  const browser = await chromium.launch({
+    headless: false,
+    channel: "chrome",
+    args: ["--disable-blink-features=AutomationControlled"],
+    ignoreDefaultArgs: ["--enable-automation"],
+  });
   const context = await browser.newContext({ storageState: statePath, viewport: { width: 1360, height: 900 } });
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, "webdriver", { get: () => undefined });
+  });
   const page = await context.newPage();
 
   const seen = [];
@@ -59,13 +68,19 @@ async function main() {
       let body = ""; try { body = await res.text(); } catch { return; }
       if (body.length > 6_000_000) return;
       fs.mkdirSync(samplesDir, { recursive: true });
-      const file = path.join(samplesDir, `${seen.length}-${(url.split("?")[0].split("/").filter(Boolean).pop() || "hit").replace(/[^\w.-]/g, "_").slice(0, 30)}.json`);
+      const stem = (url.split("?")[0].split("/").filter(Boolean).pop() || "hit").replace(/[^\w.-]/g, "_").slice(0, 30);
+      const file = path.join(samplesDir, `${seen.length}-${stem}.json`);
       try { fs.writeFileSync(file, body); } catch { /* ignore */ }
+      // Also capture the REQUEST body (the .svc POST payload) so a fetcher can replay the exact call.
+      let reqBody = null;
+      try { reqBody = res.request().postData(); } catch { /* ignore */ }
+      if (reqBody) { try { fs.writeFileSync(path.join(samplesDir, `${seen.length}-${stem}.req.json`), reqBody); } catch { /* ignore */ } }
       seen.push({
         method: res.request().method(), status: res.status(), url,
         bytes: body.length, itineraryLike: looksItinerary(body),
         mentionsSailing: (body.match(/sailing|itinerary|voyage/gi) || []).length,
         savedTo: path.relative(ROOT, file),
+        request: reqBody ? (reqBody.length > 4000 ? reqBody.slice(0, 4000) + "…" : reqBody) : null,
       });
     } catch { /* ignore */ }
   });
@@ -75,6 +90,24 @@ async function main() {
   console.log("  → Open ONE specific cruise's ITINERARY / day-by-day view.");
   console.log("  → Then run the cruise SEARCH (widest; scroll through all results).\n");
   await waitForEnter("Press ENTER when you've viewed a cruise's day-by-day AND the search results… ");
+
+  // Also snapshot each open page's HTML — many agent portals (CostaClick/ASP.NET) are server-rendered,
+  // so the data may live in the page rather than a JSON endpoint. This makes the survey useful either way.
+  fs.mkdirSync(samplesDir, { recursive: true });
+  const openPages = context.pages();
+  for (let i = 0; i < openPages.length; i++) {
+    try {
+      const html = await openPages[i].content();
+      const file = path.join(samplesDir, `page-${i}.html`);
+      fs.writeFileSync(file, html);
+      seen.push({
+        method: "PAGE", status: 200, url: openPages[i].url(), bytes: html.length,
+        itineraryLike: looksItinerary(html),
+        mentionsSailing: (html.match(/sailing|itinerary|voyage/gi) || []).length,
+        savedTo: path.relative(ROOT, file),
+      });
+    } catch { /* ignore */ }
+  }
 
   seen.sort((a, b) => (Number(b.itineraryLike) - Number(a.itineraryLike)) || (b.mentionsSailing - a.mentionsSailing));
   fs.mkdirSync(dir, { recursive: true });

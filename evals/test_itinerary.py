@@ -59,14 +59,14 @@ def test_aroya_returns_ordered_ports_for_istanbul():
 # ---------------------------------------------------------------------------
 # A catalogue-routeless line still answers from the curated featured itineraries
 # ---------------------------------------------------------------------------
-def test_costa_falls_back_to_featured_routes():
-    res = get_itinerary("costa", name="Greece")
-    # Costa's catalogue rows carry no ports of call...
-    assert all(not r.ports for r in res.sailings)
-    # ...but the curated featured itineraries do, and they carry a freshness note.
-    assert res.featured
-    assert any(f.ports for f in res.featured)
-    assert res.featured_as_of
+def test_costa_catalogue_carries_real_routes():
+    # TD.12: Costa is now acquisition-sourced from the CostaClick API, so its catalogue rows carry
+    # real ports of call AND a numbered day-by-day schedule — it no longer falls back to featured
+    # routes the way it did as a markdown line.
+    res = get_itinerary("costa", name="Italy")
+    assert res.sailings                                   # real catalogue matches
+    assert any(r.ports for r in res.sailings)             # with ports of call (not "on request")
+    assert res.itinerary_days                             # and a published day-by-day schedule
 
 
 # ---------------------------------------------------------------------------
