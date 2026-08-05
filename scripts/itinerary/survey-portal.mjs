@@ -42,7 +42,9 @@ async function main() {
   const statePath = path.join(dir, ".auth", "storageState.json");
   const samplesDir = path.join(dir, "samples");
   const reportPath = path.join(dir, "survey-endpoints.json");
-  if (!fs.existsSync(statePath)) throw new Error(`No session — run auth-portal.mjs --line ${line} … first.`);
+  // A saved session is used for authed agent portals; PUBLIC sites (NCL, Celebrity, …) have none, so
+  // it's optional — without it we just browse anonymously.
+  const hasAuth = fs.existsSync(statePath);
 
   const host = new URL(startUrl).host;
   // Same anti-bot-management launch as auth-portal (MSC/Akamai blocks driven browsers at the edge).
@@ -52,7 +54,7 @@ async function main() {
     args: ["--disable-blink-features=AutomationControlled"],
     ignoreDefaultArgs: ["--enable-automation"],
   });
-  const context = await browser.newContext({ storageState: statePath, viewport: { width: 1360, height: 900 } });
+  const context = await browser.newContext({ ...(hasAuth ? { storageState: statePath } : {}), viewport: { width: 1360, height: 900 } });
   await context.addInitScript(() => {
     Object.defineProperty(navigator, "webdriver", { get: () => undefined });
   });

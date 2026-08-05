@@ -568,6 +568,19 @@ Celebrity entry to `classify` → source through `buildFromAcquired` → delete 
 **Spec:** Same pattern as TD.8; handle NCL's gzipped sitemaps. Delete `parseNCL` + `NCL_REGION_DEST` + markdown.
 **Depends on:** TD.2, TD.3
 **Done when:** Norwegian snapshot-sourced; guards + validate green.
+**DONE (2026-08-05):** ncl.com serves a clean public JSON API (no sitemap scraping needed) — robots.txt
+permits the itinerary content; we never touch the disallowed /booking, /search-results, /cruise-quotes.
+`fetch-norwegian.mjs` (launched Playwright on the ncl.com origin, so Akamai serves it like the frontend):
+GET `/api/vacations/v2/itineraries` (master list → enumerate the 483 pure "cruise" codes; land-tour /
+hotel bundles dropped) → GET `/api/vacations/v2/search-result-itinerary/<code>` per cruise (ship + port
++ itinerary NAMES, destination, and all sailing dates). `classify.mjs`: `NCL_DEST` (destinationCode →
+canonical, WEEKEND→Bahamas, EXTRAORDINARY_JOURNEYS→World & Grand) + name fallback → 100% dest coverage.
+NCL's API gives ports of call but **no sea-day schedule**, so Norwegian is **route-only** (not a
+day-by-day line): `buildFromAcquired` now takes an explicit `ports` route when a snapshot has no `days`.
+Wired: `ACQUIRED_DATED` + `DATED_LINES` gained `norwegian`; removed `parseNCL`/`NCL_REGION_DEST`/
+`NCL_SEASON_HINT` + the markdown. **Result: 482 itineraries → 1,612 dated departures with real routes**
+(was ~785 stale markdown rows), 22 ships, 17 regions, dates to Apr 2028. No prices read. Rebuild:
+norwegian 1,612; `engine.validate` 27 ok; full suite **143 passed**. Refresh: re-run `fetch-norwegian.mjs`.
 
 #### TD.10 — Royal Caribbean importer + cutover (public)
 **Goal:** Source RC from its site (check for a partner API first).

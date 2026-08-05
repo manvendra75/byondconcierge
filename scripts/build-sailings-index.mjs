@@ -838,90 +838,6 @@ function parseStardream() {
 }
 
 // =========================================================================================
-// NCL — `## Region (N sailings)` sections, full `→` port runs, undated.
-// =========================================================================================
-
-const NCL_REGION_DEST = {
-  Caribbean: "Caribbean",
-  Mediterranean: "Mediterranean",
-  "Northern Europe": "Northern Europe & Baltic",
-  "Extraordinary Journeys": "World & Grand Voyages",
-  Asia: "Asia (Far East)",
-  Alaska: "Alaska",
-  Bahamas: "Bahamas",
-  Transatlantic: "Transatlantic & repositioning",
-  Hawaii: "Hawaii",
-  "Australia & New Zealand": "Australia & New Zealand",
-  "Canada & New England": "North America & Canada",
-  "Greek Isles": "Greek Isles & Aegean",
-  "Panama Canal": "Caribbean",
-  "South Pacific": "South Pacific",
-  "Weekend short breaks": "Bahamas",
-  Weekend: "Bahamas",
-  Bermuda: "North America & Canada",
-  "Pacific Coastal": "North America & Canada",
-  Mexico: "Mexico & Baja",
-  "South America": "South America",
-  Africa: "Middle East & Africa journeys",
-};
-
-const NCL_SEASON_HINT = {
-  Alaska: "Summer season",
-  "Northern Europe": "Summer season",
-};
-
-function parseNCL() {
-  const txt = readData("ncl-all-sailings.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  let region = null;
-  for (const line of lines) {
-    const h2 = line.match(/^## (.+?)\s*\(\d+ sailings?\)/);
-    if (h2) {
-      region = h2[1].trim();
-      continue;
-    }
-    if (!isTableRow(line) || /^\|\s*Sailing/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (cols.length < 5 || !cols[1]) continue;
-    if (cols[1] === "Sailing Name") continue;
-    const sailingName = cols[1];
-    const nights = Number(cols[2]);
-    if (Number.isNaN(nights)) continue;
-    const fromPort = cols[3];
-    const itinRaw = cols[4];
-    if (!region) throw new Error("NCL: row before any region header");
-    const dest = NCL_REGION_DEST[region];
-    if (!dest) throw new Error(`NCL: unmapped region "${region}"`);
-    const shipMatch = sailingName.match(/on\s+(Norwegian\s+.+)$/);
-    const ship = shipMatch ? shipMatch[1].trim() : "Norwegian";
-    // Drop the "N-Day " prefix so near-duplicate sailings that differ only by a night or two
-    // (the same regional product) share a name and collapse via the nights-bucket aggregation
-    // below, rather than fragmenting into one record per exact night count.
-    const name = sailingName.replace(/\s+on\s+Norwegian\s+.+$/, "").replace(/^\d+-Day\s+/, "").trim();
-    const stops = itinRaw.split("→").map((p) => normPort("norwegian", p.trim()));
-    const ports = capRoute(stops);                // full "A → … → B" run
-    const row = {
-      line: "norwegian",
-      ship,
-      name,
-      dest: checkDest(dest, `NCL region ${region}`),
-      destLabel: name === region ? dest : region,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port: normPort("norwegian", fromPort),
-      months: [],
-      ports,
-      // The run ends at the disembark port (TA.2).
-      portTo: ports.length ? ports[ports.length - 1] : undefined,
-    };
-    if (NCL_SEASON_HINT[region]) row.seasonHint = NCL_SEASON_HINT[region];
-    rows.push(row);
-  }
-  return rows;
-}
-
-// =========================================================================================
 // MSC — single table, escaped pipes, REGION column caps, undated.
 // =========================================================================================
 
@@ -1359,7 +1275,7 @@ function parseCelebrity() {
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -1368,7 +1284,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1620,7 +1536,10 @@ function buildFromAcquired(line, acq, { dated }) {
     const nightsNum = Number(it.nights);
     const port = normPort(line, it.departPort);
     const portDisembark = it.arrivePort ? normPort(line, it.arrivePort) : port;
-    const route = routeFromDays(line, it.days || []);          // sea-day-stripped ports of call
+    // Route: derive from the day-by-day when present (sea days stripped); otherwise take an explicit
+    // `ports` list from the snapshot — for lines whose API gives ports of call but no sea-day schedule
+    // (Norwegian, TD.9). `itineraryDays` stays empty for those, so they aren't day-by-day lines.
+    const route = (it.days && it.days.length) ? routeFromDays(line, it.days) : (it.ports || []);
     if (dated) {
       // A dated route carries every departure in `dates[]` (new shape) or a single `date` (legacy).
       const dates = (it.dates && it.dates.length) ? it.dates : (it.date ? [it.date] : []);
@@ -1657,7 +1576,7 @@ function main() {
     ["aroya", parseAroya],
     ["elixir", () => attachElixirShips(parseElixir())],
     ["dream-star", parseStardream],
-    ["norwegian", parseNCL],
+    // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9
     ["msc", parseMSC],
     // disney: sourced from acquisition (buildFromAcquired, undated) — TD.6
     ["crystal", parseCrystal],

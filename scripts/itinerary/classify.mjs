@@ -214,6 +214,38 @@ export function costaDestFromName(name) {
 }
 
 // ---------------------------------------------------------------------------------------
+// Norwegian (NCL) — the vacations API's destinationCodes (GET /api/vacations/v2/itineraries).
+// ---------------------------------------------------------------------------------------
+export const NCL_DEST = {
+  ALASKA: "Alaska",
+  CARIBBEAN: "Caribbean",
+  BAHAMAS: "Bahamas",
+  WEEKEND: "Bahamas",                         // NCL weekend getaways are Bahamas/FL short breaks
+  BERMUDA: "North America & Canada",
+  CANADA_NEW_ENGL: "North America & Canada",
+  PACIFIC_COASTAL: "North America & Canada",
+  HAWAII: "Hawaii",
+  MEXICAN_RIVIERA: "Mexico & Baja",
+  MEDITERRANEAN: "Mediterranean",
+  GREEK_ISLES: "Greek Isles & Aegean",
+  NORTHERN_EUROPE: "Northern Europe & Baltic",
+  ASIA: "Asia (Far East)",
+  AUSTRALIA: "Australia & New Zealand",
+  SOUTH_PACIFIC: "South Pacific",
+  AFRICA: "Middle East & Africa journeys",
+  SOUTH_AMERICA: "South America",
+  TRANSATLANTIC: "Transatlantic & repositioning",
+  PANAMA_CANAL: "Transatlantic & repositioning",
+  EXTRAORDINARY_JOURNEYS: "World & Grand Voyages",   // NCL's long/exotic grand voyages
+};
+
+// Lenient: an unmapped code returns undefined (fetcher falls back to a name-based guess).
+export function nclDest(code) {
+  if (!code) return undefined;
+  return NCL_DEST[String(code).trim().toUpperCase().replace(/[\s-]+/g, "_")];
+}
+
+// ---------------------------------------------------------------------------------------
 // Dispatcher — classify one acquired itinerary for a line into a canonical destination.
 // ---------------------------------------------------------------------------------------
 // Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
@@ -227,6 +259,7 @@ export function classify(line, itin) {
     case "disney": return disneyDestForItin(itin);
     case "silversea": return silverseaDest(itin.region);
     case "costa": return costaDest(itin.destination);       // fetcher usually bakes dest already
+    case "norwegian": return nclDest(itin.destination);     // fetcher usually bakes dest already
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }
