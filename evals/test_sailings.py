@@ -48,7 +48,7 @@ def test_mediterranean_january_returns_capped_page():
 # Undated catalogue lines stay honest — "on request", never a fabricated date
 # ---------------------------------------------------------------------------
 def test_undated_line_shows_on_request():
-    out = search_sailings(SailingFilters(line="scenic-emerald", dest="Mediterranean"))
+    out = search_sailings(SailingFilters(line="elixir", dest="Greek Isles & Aegean"))
     assert out.status == "ok"
     assert any("on request" in r.coverage for r in out.rows)
 
@@ -77,7 +77,7 @@ def test_past_dates_are_filtered_out():
 
 
 def test_past_date_filter_keeps_undated_rows():
-    out = search_sailings(SailingFilters(line="scenic-emerald"), today="2027-06-01")
+    out = search_sailings(SailingFilters(line="elixir"), today="2027-06-01")
     assert out.status == "ok"
     assert all(r.sail_date is None for r in out.rows)   # undated rows carry no date, never filtered
 
@@ -107,20 +107,20 @@ def test_date_range_excludes_undated_rows():
 def test_date_search_falls_back_to_month_for_undated_line():
     from engine.agent import _tool_search_sailings
 
-    # A named sailing on a season-only line (Scenic's "Idyllic Rhône"): the date-range search finds
+    # A named sailing on a season-only line (Elixir's "Aegean Escape"): the date-range search finds
     # no dated departures, so the tool wrapper retries at month granularity — keeping the name
     # filter — and surfaces the exact sailing with a "confirm via the desk" note, instead of
     # falsely reporting "no sailings".
-    out = _tool_search_sailings(line="Scenic", name="Idyllic Rhône", dates="September 2026")
-    assert "Idyllic Rhône" in out
+    out = _tool_search_sailings(line="Elixir", name="Aegean Escape", dates="September 2026")
+    assert "Aegean Escape" in out
     assert "Byond Borders desk" in out
 
 
 def test_name_filter_finds_a_specific_sailing():
     # The name filter locates a specific itinerary regardless of count-ranking.
-    out = search_sailings(SailingFilters(line="scenic-emerald", name="Idyllic Rhône"))
+    out = search_sailings(SailingFilters(line="elixir", name="Aegean Escape"))
     assert out.status == "ok"
-    assert all("idyllic rhône" in r.name.lower() for r in out.rows)
+    assert all("aegean escape" in r.name.lower() for r in out.rows)
 
 
 # ---------------------------------------------------------------------------
@@ -168,8 +168,8 @@ def test_nights_range_filter():
 # Undated rows keep the departure-count ranking (TB.4 leaves them on count DESC)
 # ---------------------------------------------------------------------------
 def test_undated_rows_ranked_by_count():
-    # Scenic & Emerald is an undated line, so every row is count-ranked (no dates to sort by).
-    out = search_sailings(SailingFilters(line="scenic-emerald"))
+    # Elixir is an undated line, so every row is count-ranked (no dates to sort by).
+    out = search_sailings(SailingFilters(line="elixir"))
     assert all(r.sail_date is None for r in out.rows)
     counts = [r.count for r in out.rows]
     assert counts == sorted(counts, reverse=True)

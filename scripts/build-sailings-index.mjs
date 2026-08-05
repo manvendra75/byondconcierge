@@ -109,17 +109,6 @@ function parseLooseDate(raw) {
   return isoDate(Number(m[3]), mon, Number(m[2]));
 }
 
-/** Scenic "Season" is year-level: "2026" | "2026/2027" -> all months of each year. */
-function expandYearSeason(raw) {
-  const years = raw.trim().split("/").map((y) => Number(y.trim()));
-  const out = [];
-  for (const y of years) {
-    if (!Number.isFinite(y) || y < 2020 || y > 2035) throw new Error(`Scenic: unparseable season "${raw}"`);
-    for (let m = 1; m <= 12; m++) out.push(ym(y, m));
-  }
-  return out;
-}
-
 // ---------------------------------------------------------------------------------------
 // Port normalization
 // ---------------------------------------------------------------------------------------
@@ -887,122 +876,13 @@ function parseCrystal() {
 }
 
 // =========================================================================================
-// SCENIC — table with year-level Season column (no ship column), keyword-classified region.
-// =========================================================================================
-
-function scenicClassify(name, route) {
-  const t = `${name} ${route}`.toLowerCase();
-  const has = (...words) => words.some((w) => t.includes(w));
-
-  if (has("antarctica", "falkland", "south georgia", "ross sea")) return "Expedition (Polar)";
-  if (has("arctic", "greenland", "svalbard", "disko bay", "hudson bay")) return "Expedition (Polar)";
-  if (has("mekong", "vietnam", "cambodia", "ho chi minh", "siem reap", "indochina", "andaman", "laos")) {
-    return "Southeast Asia";
-  }
-  if (has("rajasthan", "ganges", "delhi", "kolkata", "chennai", "kochi", "sri lanka", "colombo")) {
-    return "Southeast Asia";
-  }
-  if (has("komodo", "raja ampat", "spice islands", "denpasar", "bali", "jakarta", "sulawesi")) {
-    return "Southeast Asia";
-  }
-  if (has("japan", "osaka", "tokyo", "korea", " china", "hong kong", "shanghai")) return "Asia (Far East)";
-  if (has("peru", "machu picchu", "amazon", "lima", "patagonia", "chile", "argentina", "brazil",
-    "buenos aires", "santiago", "rio de janeiro", "easter island", "ushuaia", "valparaiso")) {
-    return "South America";
-  }
-  if (has("new zealand", "auckland", "christchurch", "cairns", "darwin", "hobart", "melbourne",
-    "brisbane", "tasmania", "norfolk island", "kimberley", "broome")) {
-    return "Australia & New Zealand";
-  }
-  if (has("fiji", "tahiti", "papeete", "solomon islands", "vanuatu", "papua new guinea", "nadi",
-    "bora bora", "french polynesia")) {
-    return "South Pacific";
-  }
-  if (has("caribbean", "bahamas", "nassau", "panama canal", "panama city", "miami")) return "Caribbean";
-  if (has("barbados", "bridgetown", "funchal", "madeira", "azores", "transatlantic", "tenerife",
-    "antigua", "st john's", "st. john's", "canary")) {
-    return "Transatlantic & repositioning";
-  }
-  if (has("montreal", "toronto", "quebec", "boston", "new york city", "vancouver", "victoria",
-    "rockies", "canada", "east coast")) {
-    return "North America & Canada";
-  }
-  if (has("egypt", "jordan", "amman", "cairo", "nairobi", "kenya", "pyramids", "south africa",
-    "cape town", "johannesburg", "namibia", "morocco", "tanzania", "zanzibar", "mozambique")) {
-    return "Middle East & Africa journeys";
-  }
-  if (has("danube", "rhine", "rhône", "rhone", "douro", "seine", "moselle", "elbe", "balkans",
-    "budapest", "bucharest", "nuremberg", "zagreb", "ljubljana", "christmas markets")) {
-    return "European rivers";
-  }
-  if (has("norway", "fjord", "bergen", "oslo", "norwegian")) return "Norwegian Fjords";
-  if (has("baltic", "stockholm", "nordic", "scandinavia", "copenhagen")) return "Northern Europe & Baltic";
-  if (has("greek", "athens", "piraeus", "mykonos", "santorini")) return "Greek Isles & Aegean";
-  if (has("mediterranean", "italy", "istanbul", "turkey", "malta", "valletta", "nice",
-    "french riviera", "malaga", "barcelona", "rome", "venice", "croatia", "dubrovnik", "amalfi", "milan")) {
-    return "Mediterranean";
-  }
-  // Fallback: generic Western/Central-Europe city pairs are Scenic's river product.
-  if (has("paris", "london", "amsterdam", "basel", "zurich", "munich", "frankfurt", "brussels",
-    "lisbon", "porto", "dublin", "madrid", "lyon", "prague", "vienna", "bordeaux", "cologne",
-    "strasbourg", "avignon", "arles", "antwerp", "ghent", "bruges", "luxembourg", "heidelberg",
-    "koblenz", "bratislava", "linz", "melk", "salzburg", "innsbruck", "lucerne", "geneva",
-    "monaco", "cannes", "seville", "granada", "gibraltar", "la coruña", "la coruna", "vigo",
-    "bilbao", "douro", "rivers", "river cruise", "windmills", "tulips")) {
-    return "European rivers";
-  }
-  throw new Error(`Scenic: unclassified "${name}" (${route})`);
-}
-
-function scenicShip(dest) {
-  return dest === "European rivers" ? "Scenic Space-Ship" : "Scenic Eclipse";
-}
-
-function parseScenic() {
-  const txt = readData("scenic-sailings-jul2026.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing Name | Days | Departure Port | Itinerary (Route) | Season |
-    const name = cols[2];
-    const days = Number(cols[3]);
-    const fromPort = cols[4];
-    const route = cols[5];
-    const season = cols[6];
-    const dest = scenicClassify(name, route);
-    const port = normPort("scenic", fromPort);
-    // Scenic's route reads "X to Y"; take Y as the disembark, else it's a round trip to X (TA.2).
-    const toParts = route.split(/\s+to\s+/i);
-    const portTo = toParts.length > 1
-      ? normPort("scenic", toParts[toParts.length - 1].trim())
-      : port;
-    rows.push({
-      line: "scenic-emerald",
-      ship: scenicShip(dest),
-      name,
-      dest: checkDest(dest, `Scenic "${name}"`),
-      destLabel: dest,
-      nights: nightsLabel(days - 1),
-      nightsNum: days - 1,
-      port,
-      portTo,
-      months: expandYearSeason(season),
-    });
-  }
-  return rows;
-}
-
-// =========================================================================================
 // Build + write
 // =========================================================================================
 
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -1011,7 +891,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1096,7 +976,7 @@ function validateRecords(records, allRows) {
 // come from the source markdown (Crystal/Elixir, TC.2); three come from the acquired snapshots
 // merged in TC.6 (Carnival/Silversea via enrichment, Disney via replacement). Keep in step with
 // parseCrystal / parseElixir and the TC.6 merge, and mirror engine `_DAY_BY_DAY_LINES`.
-const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity"]);
+const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity", "scenic-emerald"]);
 
 /**
  * TC.2 validation hook (build-time). Validates the EMITTED `itineraryDays` on each record — the
@@ -1285,9 +1165,14 @@ function buildFromAcquired(line, acq, { dated }) {
         line, ship: it.ship, name: it.name,
         dest, destLabel: dest,
         nights: nightsLabel(nightsNum), port, portDisembark,
-        months: [], count: 1,
-        itineraryDays: daysForDateless(line, it.days || []),         // dateless template
+        // A curated undated snapshot may carry its aggregated departure count (TD.14); default 1.
+        months: [], count: it.count || 1,
       };
+      // Attach the dateless day-by-day only when the snapshot actually has one — a route-only undated
+      // line (Scenic, TD.11) carries none, and must NOT set the field (the guard forbids it on
+      // non-day-by-day lines).
+      const dd = daysForDateless(line, it.days || []);
+      if (dd.length) rec.itineraryDays = dd;
       if (route.length) rec.ports = route;
       records.push(rec);
     }
@@ -1307,7 +1192,7 @@ function main() {
     ["msc", parseMSC],
     // disney: sourced from acquisition (buildFromAcquired, undated) — TD.6
     ["crystal", parseCrystal],
-    ["scenic-emerald", parseScenic],
+    // scenic-emerald: sourced from acquisition (buildFromAcquired, curated JSON, undated) — TD.11/TD.14
     // silversea: sourced from acquisition (buildFromAcquired) — TD.5
     // celebrity: sourced from acquisition (buildFromAcquired, RCG GraphQL, day-by-day) — TD.8
   ];

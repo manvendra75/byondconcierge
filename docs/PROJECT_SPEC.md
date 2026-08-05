@@ -618,6 +618,25 @@ royal-caribbean 3,412; `engine.validate` 27 ok; full suite **143 passed**. Refre
 **Spec:** Same pattern; largest fetch (~358 river/expedition/world itineraries). Delete `parseScenic` + `scenicClassify` + markdown.
 **Depends on:** TD.2, TD.3
 **Done when:** Scenic snapshot-sourced; guards + validate green.
+**DONE (2026-08-05) — compliant live day-by-day scrape (superseded an initial curated-JSON stopgap):**
+scenic.cruises (Scenic's domain) is Next.js. A first pass concluded the day-by-day wasn't compliantly
+reachable — but that was from inspecting only the `?d=`/`_rsc=` **query variants** (client-loaded, robots-
+disallowed). The **base tour page `/<region>/tours/<code>` server-renders the full numbered day-by-day in
+its HTML and is robots-ALLOWED** (only the query-param variants are disallowed). That unlocked a plain-HTTP
+scrape, no browser: (1) sitemap `…/sitemaps/<region>` → every `/tours/<code>` (617 codes); (2) `GET
+/tours/<code>` → name + Day N/port schedule parsed from HTML; (3) `GET /api/scenic-catalog/v1/departures?
+…&products=<CODE>` → dated departures, nights, product line, destination. Land tours (productLine "Land")
+skipped; **no prices read**. Ship name isn't published per-tour, so a generic per-line label is used
+(Scenic Space-Ship / Scenic Eclipse). `scenicDest()` (classify.mjs) maps productLine+destination+name → 16
+canonical dests. **Emerald** shares the same API (`brand=ec`) but its site (emeraldcruises.com) is client-
+rendered (day-by-day only via the disallowed `_rsc` route), so it's **not compliantly scrapable** — and the
+prior curated data was already Scenic-only (no Emerald ships), so acquiring Scenic alone is a strict upgrade,
+not a regression. Wired as a **dated + day-by-day** line (`ACQUIRED_DATED["scenic-emerald"] = true`; added
+to `DATED_LINES`, `DAYBYDAY_LINES`, engine `_DAY_BY_DAY_LINES`; classify dispatcher returns the baked dest,
+skip+log if unmapped). Result: **372 itineraries → 2232 dated records, all carrying day-by-day** (up from
+396 undated route-only; 2 skipped for unmapped dest, 111 tour pages failed/omitted, 86 no-dates, 48 land).
+Deleted `parseScenic` + `expandYearSeason` + markdown. `engine.validate` 27 ok; full suite **143 passed**.
+Refresh: re-run `node scripts/itinerary/fetch-scenic-emerald.mjs` (dates as of run day; `--limit N` to test).
 
 #### TD.12 — Costa importer + cutover (auth portal)
 **Goal:** Source Costa from CostaExtra.

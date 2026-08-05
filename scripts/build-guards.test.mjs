@@ -66,8 +66,14 @@ const goodCelebrity = () => ({
     { day: 2, date: "2026-08-08", port: "At Sea", is_sea_day: true },
   ],
 });
+const goodScenic = () => ({
+  line: "scenic-emerald", name: "Meandering along the Mekong", itineraryDays: [
+    { day: 1, date: "2026-11-18", port: "Ho Chi Minh City", is_sea_day: false }, // Scenic is dated (scenic-catalog API, TD.11)
+    { day: 2, date: "2026-11-19", port: "My Tho", is_sea_day: false },
+  ],
+});
 // Valid records covering EVERY day-by-day line — the coverage floor for a negative fixture.
-const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta(), goodRoyalCaribbean(), goodCelebrity()];
+const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta(), goodRoyalCaribbean(), goodCelebrity(), goodScenic()];
 
 // A tiny assertion helper: the guard must throw, and its message must mention the reason.
 function mustThrow(records, needle, label) {

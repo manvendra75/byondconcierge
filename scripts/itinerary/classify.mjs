@@ -281,6 +281,26 @@ export function rclDest(name) {
 }
 
 // ---------------------------------------------------------------------------------------
+// Scenic & Emerald — from the scenic-catalog departures API (productLine + productDestination)
+// plus the tour NAME. River in Europe is the big bucket; ocean/expedition classified by keywords.
+// ---------------------------------------------------------------------------------------
+export function scenicDest(productLine, productDestination, name = "") {
+  const line = String(productLine || "").toLowerCase();
+  const dst = String(productDestination || "").toLowerCase();
+  // Expedition/polar first (Scenic Eclipse ocean voyages), by name.
+  if (/antarctic|arctic|greenland|svalbard|northwest passage|north pole|polar/i.test(name)) return "Expedition (Polar)";
+  if (line.includes("river")) {
+    if (dst.includes("europe")) return "European rivers";
+    if (/nile|egypt/i.test(name)) return "Middle East & Africa journeys";
+    if (/mekong|vietnam|cambodia|ganges|india/i.test(name)) return "Southeast Asia";  // closest canonical bucket
+    if (dst.includes("asia")) return "Southeast Asia";
+    return "European rivers";                              // Scenic's rivers are overwhelmingly European
+  }
+  // Ocean / discovery voyages: keyword-classify the name, then the destination word.
+  return rclDest(name) || rclDest(productDestination) || costaDestFromName(name);
+}
+
+// ---------------------------------------------------------------------------------------
 // Dispatcher — classify one acquired itinerary for a line into a canonical destination.
 // ---------------------------------------------------------------------------------------
 // Reads the natural signal per line (Carnival: destinationCode; Disney: name+port; Silversea:
@@ -297,6 +317,7 @@ export function classify(line, itin) {
     case "norwegian": return nclDest(itin.destination);     // fetcher usually bakes dest already
     case "royal-caribbean": return rclDest(itin.destination);
     case "celebrity": return rclDest(itin.destination);     // same RCG GraphQL destination names
+    case "scenic-emerald": return itin.dest || null;        // fetcher bakes dest (scenicDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }
