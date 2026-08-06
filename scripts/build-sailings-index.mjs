@@ -549,53 +549,9 @@ function nightsLabel(n) {
   return `${num} night${num === 1 ? "" : "s"}`;
 }
 
-// =========================================================================================
-// AROYA — small table with real dates, em-dash itinerary list.
-// =========================================================================================
-
-function aroyaClassify(name, fromPort, itinRoute) {
-  const hasSuez = /suez canal/i.test(itinRoute);
-  if (hasSuez) return { dest: "Red Sea", destLabel: "Red Sea ↔ Mediterranean repositioning" };
-  if (fromPort === "Istanbul" || fromPort === "Marmaris") {
-    return { dest: "Mediterranean", destLabel: "Mediterranean (from Istanbul)" };
-  }
-  return { dest: "Red Sea", destLabel: "Red Sea (from Jeddah)" };
-}
-
-function parseAroya() {
-  const txt = readData("aroya-sailings-jul2026.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing Name | Nights | Departure Port | Trip Type | Itinerary | Start Date | From (per person) |
-    const name = cols[2];
-    const nights = Number(cols[3]);
-    const fromPort = cols[4];
-    const itinRoute = cols[6];
-    const startDate = cols[7];
-    const { dest, destLabel } = aroyaClassify(name, fromPort, itinRoute);
-    const ports = capRoute(itinRoute.split("—").map((p) => normPort("aroya", p.trim())));
-    rows.push({
-      line: "aroya",
-      ship: "Aroya",
-      name,
-      dest: checkDest(dest, `Aroya ${name}`),
-      destLabel,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port: normPort("aroya", fromPort),
-      month: parseLooseDate(startDate).slice(0, 7),   // month the aggregation still groups on
-      date: parseLooseDate(startDate),                // exact sail date (TB.1)
-      ports,
-      // The route runs embark → … → disembark, so the last stop is the arrival port (TA.2).
-      portTo: ports[ports.length - 1],
-    });
-  }
-  return rows;
-}
+// (Aroya is now sourced from acquisition — buildFromAcquired reads the aroya-itineraries-<date>.json
+// snapshot produced by scripts/itinerary/fetch-aroya.mjs (authorized SeawareTouch agent session, dated).
+// parseAroya + aroyaClassify were removed at cutover; classify.mjs::aroyaDest maps its regions.) — TD.20
 
 // (Elixir is now sourced from acquisition — buildFromAcquired reads the elixir-itineraries-<date>.json
 // snapshot produced by scripts/itinerary/fetch-elixir.mjs (elixir-cruises.com, dated + day-by-day).
@@ -688,7 +644,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true, elixir: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true, elixir: true, aroya: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -982,7 +938,7 @@ function main() {
     // carnival: sourced from acquisition (buildFromAcquired) — TD.4
     // costa: sourced from acquisition (buildFromAcquired, CostaClick API) — TD.12
     // royal-caribbean: sourced from acquisition (buildFromAcquired, RCL GraphQL, day-by-day) — TD.10
-    ["aroya", parseAroya],
+    // aroya: sourced from acquisition (buildFromAcquired, SeawareTouch agent session, dated route) — TD.20
     // elixir: sourced from acquisition (buildFromAcquired, elixir-cruises.com, dated day-by-day) — TD.19
     // dream-star: sourced from acquisition (buildFromAcquired, SeawareTouch agent session, dated route) — TD.18
     // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9

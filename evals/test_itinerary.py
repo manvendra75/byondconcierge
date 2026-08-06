@@ -50,10 +50,12 @@ def test_aroya_returns_ordered_ports_for_istanbul():
     assert res.sailings
     assert all("istanbul" in r.name.lower() for r in res.sailings)
     assert all(r.ports for r in res.sailings)
-    # The specific 6-night Istanbul -> Marmaris sailing keeps its full port run.
-    six_night = next(r for r in res.sailings if r.name.startswith("6") and "Marmaris" in r.name)
-    assert six_night.ports == ["Istanbul", "Alexandria", "Kas", "Bodrum", "Marmaris"]
-    assert six_night.port_disembark == "Marmaris"
+    # Aroya is portal-sourced now (SeawareTouch, TD.20): each route is the dated embark -> disembark
+    # pair (intermediate ports live only behind the sailing's expanded card), so the disembark is the
+    # last port, and a sailing that departs Istanbul keeps Istanbul first.
+    assert all(r.port_disembark == r.ports[-1] for r in res.sailings)
+    dep = next(r for r in res.sailings if r.ports[0] == "Istanbul")
+    assert dep.ports[0] == "Istanbul" and dep.port_disembark == dep.ports[-1]
 
 
 # ---------------------------------------------------------------------------

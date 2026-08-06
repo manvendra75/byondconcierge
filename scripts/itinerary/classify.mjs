@@ -301,6 +301,19 @@ export function scenicDest(productLine, productDestination, name = "") {
 }
 
 // ---------------------------------------------------------------------------------------
+// AROYA — Saudi line (one ship, "Aroya"). Two theatres: the Red Sea (Jeddah/Yanbu/Aqaba/Sharm/
+// Ain Sokhna homeports) and the Mediterranean (Istanbul/Turkey/Greece/Alexandria). Classify by
+// the ports; unknown → null (caller skips + logs, never guesses).
+// ---------------------------------------------------------------------------------------
+export function aroyaDest(depPort, arrPort, embCode = "") {
+  const s = `${depPort} ${arrPort} ${embCode}`.toLowerCase();
+  if (/jeddah|yanbu|aqaba|sharm|safaga|hurghada|ain sokhna|sokhna|suez|jabal|duba\b|king abdullah|\bjed\b|\bynb\b/.test(s)) return "Red Sea";
+  if (/dubai|abu dhabi|doha|\bdxb\b|\bauh\b/.test(s)) return "Arabian Gulf";
+  if (/istanbul|marmaris|bodrum|\bkas\b|alexandria|souda|mykonos|piraeus|athens|kusadasi|rhodes|santorini|crete|izmir|turkey|greece|cyprus|limassol/.test(s)) return "Mediterranean";
+  return null;
+}
+
+// ---------------------------------------------------------------------------------------
 // Elixir — boutique Greek-yacht cruises. Almost all sail the Aegean/Cyclades/Sporades/Saronic/
 // Ionian/Peloponnese (all → Greek Isles & Aegean); the outlier is the Red Sea programme.
 // ---------------------------------------------------------------------------------------
@@ -369,6 +382,7 @@ export function classify(line, itin) {
     case "crystal": return itin.dest || null;               // fetcher bakes dest (crystalDest); unmapped → skip
     case "dream-star": return itin.dest || null;            // fetcher bakes dest (stardreamDest); unmapped → skip
     case "elixir": return itin.dest || null;                // fetcher bakes dest (elixirDest); unmapped → skip
+    case "aroya": return itin.dest || null;                 // fetcher bakes dest (aroyaDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

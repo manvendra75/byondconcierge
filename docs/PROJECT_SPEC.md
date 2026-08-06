@@ -799,6 +799,32 @@ from `elixir` to **`msc`** (now the only undated line). Rebuild: elixir 106; `en
 full suite **144 passed**. Refresh: re-run `node scripts/itinerary/fetch-elixir.mjs` (merges a new season
 when published; `--year` overrides the default).
 
+#### TD.20 — Aroya importer + cutover (authorized B2B portal) + shared SeawareTouch harvester
+**Goal:** Replace the hand-maintained Aroya markdown (`parseAroya` + `aroyaClassify` +
+`aroya-sailings-jul2026.md`, 14) with dated sailings from the agent portal — and share the harvester
+with StarDream (both are SeawareTouch).
+**Files:** `scripts/itinerary/seaware-harvest.mjs` (new, shared), `fetch-aroya.mjs` (new),
+`fetch-dream-star.mjs` (now a thin wrapper), `classify.mjs`, `build-sailings-index.mjs`.
+**Spec:** Aroya's public search is Cloudflare/robots-guarded; the data lives in the **authorized agent
+portal** `booking.aroya.com/touchb2b` — the same **SeawareTouch (GWT)** engine as StarDream (TD.18).
+Refactor the StarDream harvester into a shared `harvestSeaware({line, ships, classify, source})`
+(CDP-attach to the agent's own session, set results to "All", tab-parse the grid, accumulate across
+runs, no prices); StarDream + Aroya become thin wrappers. `aroyaDest` (classify.mjs): Red Sea (Jeddah/
+Yanbu/Aqaba/Sharm) vs Mediterranean (Istanbul/Turkey/Greece). Source through `buildFromAcquired`
+(`ACQUIRED_DATED.aroya`, already in DATED_LINES); delete `parseAroya`/`aroyaClassify`.
+**Depends on:** TD.2, TD.3, TD.18
+**Done when:** Aroya snapshot-sourced + dated; guards + validate green.
+**DONE (2026-08-06):** Aroya's grid is **name-based** (Ship, itinerary NAME, "Nd" days, dates as
+"Sep 07, 2026") vs StarDream's code-based ("3N SIN-SIN(DES)", "3n", "07 Aug 2026"); the shared
+`extractRows` now handles both (and both date shapes), and tab-detection is format-agnostic (a tab with
+parseable rows). Result: **75 dated sailings** with the portal's real names (was 14), one ship (Aroya),
+Red Sea 66 / Mediterranean 9, **Sep 2026 → Jul 2027** in one search, 0 unmapped, no prices. Route is
+embark/disembark only (intermediate ports behind the expanded card). Two data-coupled tests updated:
+`classify.test` "no classifier" example moved to a fake line (aroya now has a dispatcher case), and
+`test_aroya_returns_ordered_ports_for_istanbul` relaxed to the embark→disembark route. Rebuild: aroya
+75 (was 14); `engine.validate` 27 ok; full suite **144 passed**. Refresh: re-run
+`node scripts/itinerary/fetch-aroya.mjs` against a live authorized session.
+
 ---
 
 ## PHASE 4C — Umbrella-region search

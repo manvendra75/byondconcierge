@@ -40,7 +40,7 @@ assert.strictEqual(classify("carnival", { destinationCode: "CW", name: "Western 
 assert.strictEqual(classify("disney", { name: "7-Night Alaskan Cruise from Vancouver", departPort: "Vancouver" }), "Alaska");
 assert.strictEqual(classify("silversea", { region: "Alaska", name: "x" }), "Alaska");
 assert.strictEqual(classify("aroya", { dest: "Red Sea", name: "curated" }), "Red Sea");   // curated passthrough
-assert.throws(() => classify("aroya", { name: "no dest, no classifier" }), /no classifier for line/);
+assert.throws(() => classify("no-such-line", { name: "no dest, no classifier" }), /no classifier for line/);
 console.log("  ok  — dispatcher per line + curated passthrough");
 
 // Sanity: the taxonomy has the expected size.
