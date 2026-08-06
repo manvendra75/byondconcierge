@@ -102,7 +102,11 @@ def _tool_search_sailings(dest: str | None = None, month: str | None = None,
     """Search Byond Borders' cruise sailings. Pass any filters you can infer:
     dest (a destination, e.g. 'Mediterranean', 'Arabian Gulf'; OR a broad umbrella region like
     'Europe', 'Asia', 'the Americas' — pass the region word AS-IS, do NOT narrow it to one
-    sub-region yourself; the tool expands it to every destination it covers), month ('January' or '2027-01'),
+    sub-region yourself; the tool expands it to every destination it covers. But if the user names a
+    SPECIFIC place that isn't a bucket or a broad region — a country or city like 'India', 'Iceland',
+    'Vietnam', 'Alaska' — pass THAT exact word as `dest`; do NOT broaden it to its continent, and
+    never turn 'India' into 'Asia'. The tool matches an unlisted place against itinerary names/routes,
+    so a specific search still finds the right sailings), month ('January' or '2027-01'),
     dates (a specific timeframe finer or broader than a plain month, e.g. 'first half of August',
     'first week of September', 'early October', 'August 2026'), line (cruise line name/slug),
     port (departure port), ship, nights_min, nights_max, name (an itinerary name to find a specific
