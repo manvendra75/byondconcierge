@@ -748,6 +748,32 @@ DAYBYDAY_LINES + engine `_DAY_BY_DAY_LINES`). One data-coupled test updated: `re
 returns `Rome (Civitavecchia)` (the bare "Rome" only the old markdown emitted is gone). `engine.validate`
 27 ok; full suite **144 passed**. Refresh: re-run `node scripts/itinerary/fetch-crystal.mjs`.
 
+#### TD.18 — StarDream importer + cutover (authorized B2B portal)
+**Goal:** Replace the hand-maintained StarDream markdown (`parseStardream` + `stardream-sailings-jul2026.md`,
+45 undated) with dated sailings from the agent booking portal.
+**Files:** `scripts/itinerary/fetch-dream-star.mjs` (new), `classify.mjs`, `build-sailings-index.mjs`.
+**Spec:** StarDream's public site disallows its search (`robots.txt`: `/*search-results`, `/*?*`), and the
+marketing pages carry no itineraries. The data lives in the **authorized agent portal**
+`booking.stardreamcruises.com/touchb2b` — **SeawareTouch, a GWT app** (obfuscated per-build classes, no
+clean API, DataTables server-side paging). No robots restriction on that host; access is the agent's own
+entitled session. Approach (Costa-style, CDP-attach): the user logs in and runs the widest voyage search in
+their own Chrome (`--remote-debugging-port`); `fetch-dream-star.mjs` attaches over CDP and reads the results
+**grid by text** (tab-separated `Ship / code / nights / departure / port-from / arrival / port-to`),
+selecting the tab with the most rows and preferring "entries = All". `stardreamDest` (classify.mjs) maps the
+embark region → SE Asia / Asia Far East / Arabian Gulf. Source through `buildFromAcquired`
+(`ACQUIRED_DATED["dream-star"]=true`, `DATED_LINES`); delete `parseStardream` + `stardreamClassify`. No
+prices read. Session cookies stay on the user's machine (`.auth/`, outside the repo); nothing typed.
+**Depends on:** TD.2, TD.3
+**Done when:** StarDream snapshot-sourced + dated; guards + validate green.
+**DONE (2026-08-06):** Portal is GWT — no API, programmatic pagination/clicks are ignored (needs a real
+gesture), so the run is: user sets results to "All" in their browser, the harvester reads the whole grid in
+one pass. First capture: **89 dated sailings** (3 ships; SE Asia 52 / Far East 37; Aug–Oct 2026 window; 0
+unmapped). Route is **embark/disembark only** — the grid omits intermediate ports (they live in the per-
+sailing expanded card; full day-by-day is a possible v2), so `dream-star` is DATED but **not** in
+DAYBYDAY_LINES. Wider date ranges add more sailings on re-run (dedup by ship+date+code+nights). Rebuild:
+dream-star 89 (was 45 undated); `engine.validate` 27 ok; full suite **144 passed**. Refresh: re-run
+`node scripts/itinerary/fetch-dream-star.mjs` against a live authorized session.
+
 ---
 
 ## PHASE 4C — Umbrella-region search

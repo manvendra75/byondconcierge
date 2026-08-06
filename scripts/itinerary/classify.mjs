@@ -301,6 +301,22 @@ export function scenicDest(productLine, productDestination, name = "") {
 }
 
 // ---------------------------------------------------------------------------------------
+// StarDream — short Asia/Gulf round-trips. Classify by the EMBARK region (port + code): Arabian
+// Gulf (Abu Dhabi/Dubai), Southeast Asia (Singapore/Melaka/Bangkok/…), or Asia Far East
+// (Keelung/Hong Kong/Japan/Korea). Unknown → null (caller skips + logs, never guesses).
+// ---------------------------------------------------------------------------------------
+export function stardreamDest(depPort, arrPort, embCode = "") {
+  const emb = `${depPort} ${embCode}`.toLowerCase();
+  const all = `${depPort} ${arrPort} ${embCode}`.toLowerCase();
+  if (/abu dhabi|dubai|doha|muscat|\bauh\b|\bdxb\b|\bdoh\b|\bmct\b/.test(all)) return "Arabian Gulf";
+  if (/singapore|\bsin\b|melaka|\bmkz\b|penang|klang|phuket|batam|bintan|bangkok|laem|ho chi minh|da ?nang|nha trang|redang|samui|kota kinabalu|belitung|bali/.test(emb)) return "Southeast Asia";
+  if (/keelung|\bkel\b|kaohsiung|taichung|hong ?kong|\bhkg\b|okinawa|naha|ishigaki|miyako|yonaguni|japan|korea|incheon|jeju|taipei/.test(emb)) return "Asia (Far East)";
+  if (/singapore|melaka|penang|phuket|bangkok|vietnam|bali/.test(all)) return "Southeast Asia";
+  if (/keelung|hong ?kong|japan|korea|okinawa|taiwan/.test(all)) return "Asia (Far East)";
+  return null;
+}
+
+// ---------------------------------------------------------------------------------------
 // Crystal — crystalcruises.com publishes a fixed set of region names in the voyage's
 // destination.title; map each to its canonical bucket. Unknown → null (caller skips + logs).
 // ---------------------------------------------------------------------------------------
@@ -341,6 +357,7 @@ export function classify(line, itin) {
     case "celebrity": return rclDest(itin.destination);     // same RCG GraphQL destination names
     case "scenic-emerald": return itin.dest || null;        // fetcher bakes dest (scenicDest); unmapped → skip
     case "crystal": return itin.dest || null;               // fetcher bakes dest (crystalDest); unmapped → skip
+    case "dream-star": return itin.dest || null;            // fetcher bakes dest (stardreamDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

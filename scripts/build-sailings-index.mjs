@@ -254,7 +254,7 @@ const LINE_PORT_FIX = {
     "port of lavrion (athens)": "Lavrion (Athens)",
     lavrion: "Lavrion (Athens)",
   },
-  stardream: {
+  "dream-star": {
     keelung: "Keelung (Taipei)",
   },
   crystal: {
@@ -677,56 +677,9 @@ function attachElixirShips(rows) {
   return rows;
 }
 
-// =========================================================================================
-// STARDREAM — table, undated, ships in a "Brand — Ship" column.
-// =========================================================================================
-
-function stardreamClassify(itin) {
-  const SEA = /melaka|port klang|penang|phuket|bali|redang|koh samui|bangkok/i;
-  if (SEA.test(itin)) return "Southeast Asia";
-  return "Asia (Far East)";
-}
-
-function parseStardream() {
-  const txt = readData("stardream-sailings-jul2026.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing Name | Nights | Departure Port | Itinerary (Visiting) | Ship |
-    const name = cols[2];
-    const nights = Number(cols[3]);
-    const fromPort = cols[4];
-    const itin = cols[5];
-    const shipRaw = cols[6];
-    const ship = shipRaw.split("—").pop().trim();
-    const dest = stardreamClassify(itin);
-    const ports = capRoute(
-      itin
-        .split(",")
-        .map((p) => p.trim())
-        .filter((p) => p && !/^high seas$/i.test(p) && !/^at sea/i.test(p))
-        .map((p) => normPort("stardream", p)),
-    );
-    rows.push({
-      line: "dream-star",
-      ship,
-      name,
-      dest: checkDest(dest, `StarDream ${name}`),
-      destLabel: dest === "Southeast Asia" ? "Southeast Asia" : "Asia (Far East)",
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port: normPort("stardream", fromPort),
-      months: [],
-      ports,
-      // Last visited port is the disembark (the "A - B" name confirms the endpoint) (TA.2).
-      portTo: ports.length ? ports[ports.length - 1] : undefined,
-    });
-  }
-  return rows;
-}
+// (StarDream is now sourced from acquisition — buildFromAcquired reads the dream-star-itineraries-<date>.json
+// snapshot produced by scripts/itinerary/fetch-dream-star.mjs (authorized SeawareTouch agent session, dated).
+// parseStardream + stardreamClassify were removed at cutover; classify.mjs::stardreamDest maps its regions.) — TD.18
 
 // =========================================================================================
 // MSC — single table, escaped pipes, REGION column caps, undated.
@@ -802,7 +755,7 @@ function parseMSC() {
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald", "dream-star"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -811,7 +764,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1107,7 +1060,7 @@ function main() {
     // royal-caribbean: sourced from acquisition (buildFromAcquired, RCL GraphQL, day-by-day) — TD.10
     ["aroya", parseAroya],
     ["elixir", () => attachElixirShips(parseElixir())],
-    ["dream-star", parseStardream],
+    // dream-star: sourced from acquisition (buildFromAcquired, SeawareTouch agent session, dated route) — TD.18
     // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9
     ["msc", parseMSC],
     // disney: sourced from acquisition (buildFromAcquired, undated) — TD.6
