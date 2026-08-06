@@ -774,6 +774,31 @@ DAYBYDAY_LINES. Wider date ranges add more sailings on re-run (dedup by ship+dat
 dream-star 89 (was 45 undated); `engine.validate` 27 ok; full suite **144 passed**. Refresh: re-run
 `node scripts/itinerary/fetch-dream-star.mjs` against a live authorized session.
 
+#### TD.19 — Elixir importer + cutover (public)
+**Goal:** Replace the hand-maintained Elixir markdown (`parseElixir` + `attachElixirShips` +
+`elixir-sailings-2026.md`, 9 undated) with dated day-by-day from elixir-cruises.com.
+**Files:** `scripts/itinerary/fetch-elixir.mjs` (new), `classify.mjs`, `build-sailings-index.mjs`.
+**Spec:** elixir-cruises.com (Yacht Cruise Company) is a small server-rendered site, robots fully
+permissive. Each cruise page carries the itinerary in HTML: `<h1>` name, "N DAYS", a "DAY n <port>"
+day-by-day, and a "Departure dates:" block of weekly departures grouped by month. Enumerate cruise
+pages from `/sitemap.xml` (keep those with ≥4 "DAY n" rows); per page read name, nights, day-by-day,
+destination, and parsed dates. `elixirDest` (classify.mjs): Aegean/Cyclades/Sporades/Ionian/
+Peloponnese → Greek Isles & Aegean, Red Sea programme → Red Sea. Source through `buildFromAcquired`
+as a **dated + day-by-day** line; delete `parseElixir`/`attachElixirShips`. No prices read.
+**Depends on:** TD.2, TD.3
+**Done when:** Elixir snapshot-sourced, dated + day-by-day; guards + validate green.
+**DONE (2026-08-06):** Per the user's call, DATED (drop no-date cruises): the season-only pages (Aegean
+Horizon, Red Sea's undated variant) publish no departure dates and are **skipped, not guessed**. Result:
+**6 cruises → 106 dated departures, all day-by-day** (both yachts — M/Y Gemaya + M/Y Elysium; Greek Isles
+& Aegean + one Red Sea; ~35 upcoming as of the run, the rest past-2026-season and hidden by the engine).
+`ionian-icons-2027` uses a different bare-"DAY n" layout and is not yet captured (a later tweak). Elixir
+was the **last undated day-by-day line**, so: it joins `ACQUIRED_DATED`/`DATED_LINES`; build-guards test
+(4) (undated-line-with-a-date) was retired as that category is now empty (test (3) still covers a dated
+line missing a day's date); and the five undated-behaviour tests in `test_sailings.py` were repointed
+from `elixir` to **`msc`** (now the only undated line). Rebuild: elixir 106; `engine.validate` 27 ok;
+full suite **144 passed**. Refresh: re-run `node scripts/itinerary/fetch-elixir.mjs` (merges a new season
+when published; `--year` overrides the default).
+
 ---
 
 ## PHASE 4C — Umbrella-region search

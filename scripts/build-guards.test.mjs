@@ -25,9 +25,9 @@ const goodCrystal = () => ({
   ],
 });
 const goodElixir = () => ({
-  line: "elixir", name: "Aegean Escape", itineraryDays: [
-    { day: 1, port: "Lavrion – Kythnos", is_sea_day: false },
-    { day: 2, port: "Sifnos", is_sea_day: false },
+  line: "elixir", name: "Divine Cyclades", itineraryDays: [
+    { day: 1, date: "2026-09-04", port: "Lavrion", is_sea_day: false },   // Elixir is dated (elixir-cruises.com, TD.19)
+    { day: 2, date: "2026-09-05", port: "Delos-Mykonos", is_sea_day: false },
   ],
 });
 const goodCarnival = () => ({
@@ -101,14 +101,17 @@ const crystalNoDate = goodCrystal();
 crystalNoDate.itineraryDays[1] = { day: 2, port: "Hubbard Glacier", is_sea_day: true };  // date dropped
 mustThrow([...baseline().filter((r) => r.line !== "crystal"), crystalNoDate], "lacks a valid date", "dated line with a dateless day");
 
-// (4) An undated line (Elixir) with a fabricated date -> caught (we never invent a date).
-const elixirWithDate = goodElixir();
-elixirWithDate.itineraryDays[0] = { day: 1, date: "2026-05-01", port: "Lavrion", is_sea_day: false };
-mustThrow([...baseline().filter((r) => r.line !== "elixir"), elixirWithDate], "unexpectedly carries a date", "undated line with a fabricated date");
+// (4) removed: there is no longer any UNDATED day-by-day line (every day-by-day line is now dated —
+// Elixir was the last, TD.19), so the "undated line unexpectedly carries a date" branch has no real
+// line to exercise. The inverse (a DATED line with a dateless day) stays covered by test (3) above.
 
-// (5) Day numbers going backwards (scrambled parse) -> caught.
+// (5) Day numbers going backwards (scrambled parse) -> caught. Elixir is dated now, so each day
+// carries a date (the first day must pass the date check before the second day's order check fires).
 const scrambled = goodElixir();
-scrambled.itineraryDays = [{ day: 3, port: "Sifnos", is_sea_day: false }, { day: 1, port: "Lavrion", is_sea_day: false }];
+scrambled.itineraryDays = [
+  { day: 3, date: "2026-09-06", port: "Sifnos", is_sea_day: false },
+  { day: 1, date: "2026-09-04", port: "Lavrion", is_sea_day: false },
+];
 mustThrow([...baseline().filter((r) => r.line !== "elixir"), scrambled], "day numbers go backwards", "day numbers out of order");
 
 // (6) An empty port label -> caught.

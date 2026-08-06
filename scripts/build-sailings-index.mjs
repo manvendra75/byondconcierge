@@ -597,85 +597,9 @@ function parseAroya() {
   return rows;
 }
 
-// =========================================================================================
-// ELIXIR — `##` ship sections, `### N. Title` blocks with a Friday-Friday day list, undated.
-// =========================================================================================
-
-function parseElixir() {
-  const txt = readData("elixir-sailings-2026.md");
-  const blocks = txt.split(/\n(?=### \d+\. )/);
-  const rows = [];
-  for (const block of blocks) {
-    const titleMatch = block.match(/^### \d+\.\s+(.+)$/m);
-    if (!titleMatch) continue;
-    const name = titleMatch[1].trim();
-    const shipMatch = block.match(/^## (.+)$/m);
-    // find nearest preceding "## Ship" header by scanning full text — simpler: search whole doc.
-    const nightsMatch = block.match(/\*\*Nights:\*\*\s*(\d+)/);
-    const portMatch = block.match(/\*\*Departure Port:\*\*\s*(.+)/);
-    if (!nightsMatch || !portMatch) throw new Error(`Elixir: missing fields for "${name}"`);
-    // Capture each "- Day N: …" line with its number and text (used for both the flat route and
-    // the day-by-day schedule below). Elixir publishes no per-day dates, so only number + text.
-    const dayMatches = [...block.matchAll(/-\s*Day (\d+)[^:]*:\s*(.+)$/gm)];
-    // Flat route (unchanged behaviour): every stop, in order, feeds `ports`. A day can list two
-    // stops on one line ("Lavrion – Kythnos"), so we split each day's text as before.
-    const stops = [];
-    for (const [, , text] of dayMatches) {
-      for (const part of text.split(/[–-]/)) {
-        const p = part.trim().replace(/\s*\(Setting Sail\)|\s*\(Arrival\)/gi, "");
-        if (p) stops.push(normPort("elixir", p));
-      }
-    }
-    const ports = capRoute(stops);                // day list runs embark → … → disembark
-    // Day-by-day (TC.2): one entry per day, undated (Elixir has no per-day dates), sea days flagged
-    // (it has none, so every entry is a real stop).
-    const itineraryDays = dayMatches.map(([, num, text]) =>
-      makeItineraryDay("elixir", Number(num), null, text));
-    rows.push({
-      line: "elixir",
-      ship: shipMatch ? shipMatch[1].trim() : "Elixir",
-      name,
-      dest: checkDest("Greek Isles & Aegean", `Elixir ${name}`),
-      destLabel: "Greek Islands & Aegean",
-      nights: nightsLabel(Number(nightsMatch[1])),
-      nightsNum: Number(nightsMatch[1]),
-      port: normPort("elixir", portMatch[1].trim()),
-      months: [],
-      seasonHint: "2026 season (Friday–Friday)",
-      ports,
-      // Friday–Friday round trips end where they start; the last day confirms it (TA.2).
-      portTo: ports.length ? ports[ports.length - 1] : undefined,
-      itineraryDays,
-    });
-  }
-  return rows;
-}
-
-// Elixir ship headers ("## M/Y Gemaya" / "## The Elysium") aren't nested per-block above; patch
-// ship names by re-scanning the raw file in document order.
-function attachElixirShips(rows) {
-  const txt = readData("elixir-sailings-2026.md");
-  const lines = txt.split(/\r?\n/);
-  let currentShip = "Elixir";
-  const shipByTitle = new Map();
-  let currentTitle = null;
-  for (const line of lines) {
-    const shipHeader = line.match(/^## (.+)$/);
-    if (shipHeader) {
-      currentShip = shipHeader[1].trim();
-      continue;
-    }
-    const blockHeader = line.match(/^### \d+\.\s+(.+)$/);
-    if (blockHeader) {
-      currentTitle = blockHeader[1].trim();
-      shipByTitle.set(currentTitle, currentShip);
-    }
-  }
-  for (const row of rows) {
-    if (shipByTitle.has(row.name)) row.ship = shipByTitle.get(row.name);
-  }
-  return rows;
-}
+// (Elixir is now sourced from acquisition — buildFromAcquired reads the elixir-itineraries-<date>.json
+// snapshot produced by scripts/itinerary/fetch-elixir.mjs (elixir-cruises.com, dated + day-by-day).
+// parseElixir + attachElixirShips were removed at cutover; classify.mjs::elixirDest maps its regions.) — TD.19
 
 // (StarDream is now sourced from acquisition — buildFromAcquired reads the dream-star-itineraries-<date>.json
 // snapshot produced by scripts/itinerary/fetch-dream-star.mjs (authorized SeawareTouch agent session, dated).
@@ -755,7 +679,7 @@ function parseMSC() {
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald", "dream-star"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald", "dream-star", "elixir"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -764,7 +688,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true, elixir: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -1059,7 +983,7 @@ function main() {
     // costa: sourced from acquisition (buildFromAcquired, CostaClick API) — TD.12
     // royal-caribbean: sourced from acquisition (buildFromAcquired, RCL GraphQL, day-by-day) — TD.10
     ["aroya", parseAroya],
-    ["elixir", () => attachElixirShips(parseElixir())],
+    // elixir: sourced from acquisition (buildFromAcquired, elixir-cruises.com, dated day-by-day) — TD.19
     // dream-star: sourced from acquisition (buildFromAcquired, SeawareTouch agent session, dated route) — TD.18
     // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9
     ["msc", parseMSC],

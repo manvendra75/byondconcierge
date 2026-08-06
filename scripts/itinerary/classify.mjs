@@ -301,6 +301,16 @@ export function scenicDest(productLine, productDestination, name = "") {
 }
 
 // ---------------------------------------------------------------------------------------
+// Elixir — boutique Greek-yacht cruises. Almost all sail the Aegean/Cyclades/Sporades/Saronic/
+// Ionian/Peloponnese (all → Greek Isles & Aegean); the outlier is the Red Sea programme.
+// ---------------------------------------------------------------------------------------
+export function elixirDest(name = "", ports = []) {
+  const s = `${name} ${(ports || []).join(" ")}`.toLowerCase();
+  if (/red sea|egypt|aqaba|hurghada|sharm|safaga/.test(s)) return "Red Sea";
+  return "Greek Isles & Aegean";
+}
+
+// ---------------------------------------------------------------------------------------
 // StarDream — short Asia/Gulf round-trips. Classify by the EMBARK region (port + code): Arabian
 // Gulf (Abu Dhabi/Dubai), Southeast Asia (Singapore/Melaka/Bangkok/…), or Asia Far East
 // (Keelung/Hong Kong/Japan/Korea). Unknown → null (caller skips + logs, never guesses).
@@ -358,6 +368,7 @@ export function classify(line, itin) {
     case "scenic-emerald": return itin.dest || null;        // fetcher bakes dest (scenicDest); unmapped → skip
     case "crystal": return itin.dest || null;               // fetcher bakes dest (crystalDest); unmapped → skip
     case "dream-star": return itin.dest || null;            // fetcher bakes dest (stardreamDest); unmapped → skip
+    case "elixir": return itin.dest || null;                // fetcher bakes dest (elixirDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }
