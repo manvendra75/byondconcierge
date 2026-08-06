@@ -142,12 +142,26 @@ async function main() {
   });
   if (unmapped.size) console.log(`Unmapped dest (omitted): ${[...unmapped].slice(0, 10).join(" | ")}`);
 
-  const obj = { generated, line: "dream-star", source: "booking.stardreamcruises.com SeawareTouch voyage search (authorized agent session; dated, no prices)", itineraries };
+  // The portal caps a search at ~3 months, so we ACCUMULATE across runs: merge this run's sailings
+  // into the newest existing snapshot (dedup by ship+date+nights+ports; a fresh row wins on conflict).
+  // Run once per date window (Aug–Oct, Nov–Jan, …) and the coverage builds up instead of overwriting.
   fs.mkdirSync(OUT_DIR, { recursive: true });
+  const keyOf = (it) => `${it.ship}|${it.dates[0]}|${it.nights}|${it.departPort}|${it.arrivePort}`;
+  const byKey = new Map();
+  const prior = fs.readdirSync(OUT_DIR).filter((f) => /^dream-star-itineraries-.*\.json$/.test(f)).sort();
+  if (prior.length) {
+    try { for (const it of (JSON.parse(fs.readFileSync(path.join(OUT_DIR, prior[prior.length - 1]), "utf8")).itineraries || [])) byKey.set(keyOf(it), it); } catch { /* start fresh */ }
+  }
+  const priorCount = byKey.size;
+  for (const it of itineraries) byKey.set(keyOf(it), it);
+  const merged = [...byKey.values()];
+  const fresh = merged.length - priorCount;
+
+  const obj = { generated, line: "dream-star", source: "booking.stardreamcruises.com SeawareTouch voyage search (authorized agent session; dated, no prices)", itineraries: merged };
   const outPath = path.join(OUT_DIR, `dream-star-itineraries-${generated}.json`);
   fs.writeFileSync(outPath, JSON.stringify(obj) + "\n");
   console.log(`\nWrote ${path.relative(ROOT, outPath)}`);
-  console.log(`  ${itineraries.length} dated sailings${total ? ` (portal reported ${total})` : ""}`);
+  console.log(`  this run: ${itineraries.length} sailings${total ? ` (portal reported ${total})` : ""} · +${fresh} new · ${merged.length} total in snapshot`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
