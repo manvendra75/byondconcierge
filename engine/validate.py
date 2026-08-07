@@ -724,6 +724,27 @@ def _check_model_pricing() -> Check:
 # ---------------------------------------------------------------------------
 # Run all checks
 # ---------------------------------------------------------------------------
+def _check_banner_config() -> Check:
+    """The sidebar ad banner (T4.3/T4.4) renders its <img> only when
+    ``banner_image_url`` is a real http(s) URL — otherwise it silently falls back
+    to the "advertising space" placeholder. A set-but-malformed URL is almost
+    always an ops mistake (a paid ad that never shows), so flag it; the
+    click-through URL is checked the same way. Blank (the default — placeholder
+    shown) is perfectly valid. Warn-level: a bad value degrades gracefully to the
+    placeholder, it doesn't break the app."""
+    problems = []
+    img = (settings.banner_image_url or "").strip()
+    link = (settings.banner_link_url or "").strip()
+    if img and not img.lower().startswith(("http://", "https://")):
+        problems.append(f"BANNER_IMAGE_URL is set but not an http(s) URL ({img[:40]!r}) — the ad falls back to the placeholder")
+    if link and not link.lower().startswith(("http://", "https://")):
+        problems.append(f"BANNER_LINK_URL is set but not an http(s) URL ({link[:40]!r}) — the banner click won't work")
+    if problems:
+        return Check("banner_config", False, "warn", "; ".join(problems))
+    return Check("banner_config", True, "warn",
+                 f"sidebar banner config valid — {'live ad set' if img else 'placeholder (no ad set)'}")
+
+
 def validate_assumptions() -> list[Check]:
     """Run every assumption check and return the list of results. Reads the
     committed data snapshots; no DB, no network, no LLM."""
@@ -757,6 +778,7 @@ def validate_assumptions() -> list[Check]:
         _check_date_range_resolver(),
         _check_search_filters_applied(),
         _check_itinerary_days_render(),
+        _check_banner_config(),
     ]
 
 

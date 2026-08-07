@@ -62,6 +62,14 @@ class Settings:
     resend_api_key: str         # blank => dev mode (log the email instead of sending)
     sales_email: str
 
+    # --- Sidebar ad banner (advertising space sold to cruise companies, T4.3) ---
+    # The concierge's left panel carries a banner slot we monetise. It is DATA, not code: both fields
+    # are read from env, so an ad can be sold, swapped, or pulled by editing env vars + redeploying —
+    # the app itself never changes. When both are blank the sidebar shows a neutral "advertising space"
+    # placeholder (which also advertises the slot itself), so there is always something to render.
+    banner_image_url: str       # https URL of the ad creative; blank/non-http => the placeholder shows
+    banner_link_url: str        # advertiser landing URL the banner links to; blank => image not clickable
+
     # --- Local storage (absolute paths) ---
     db_path: Path
     chroma_dir: Path
@@ -81,6 +89,9 @@ settings = Settings(
     embeddings_provider=os.getenv("EMBEDDINGS_PROVIDER", "local"),
     resend_api_key=os.getenv("RESEND_API_KEY", ""),
     sales_email=os.getenv("SALES_EMAIL", "sales@byondborders.com"),
+    # Sidebar ad slot — both default to "" (placeholder shown); set to run a live ad (T4.3).
+    banner_image_url=os.getenv("BANNER_IMAGE_URL", ""),
+    banner_link_url=os.getenv("BANNER_LINK_URL", ""),
     db_path=_resolve(os.getenv("DB_PATH", "data/app.db")),
     chroma_dir=_resolve(os.getenv("CHROMA_DIR", "data/chroma")),
 )

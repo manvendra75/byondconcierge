@@ -183,6 +183,45 @@ Implementation companion to `PRD.md` and `ARCHITECTURE.md`. Every component is d
 **Depends on:** T3.4, T4.1
 **Done when:** browser E2E: register → ask Med-in-Jan → streamed table; refresh keeps the session and history.
 
+### T4.3 — Sidebar banner ad slot (config)
+**Goal:** Make the sidebar banner ad a configurable, swappable slot (no code change to sell/change an ad).
+**Files:** `engine/config.py`, `.env.example`.
+**Spec:** Add two optional `Settings` fields read from env (default `""`): `banner_image_url`
+(`BANNER_IMAGE_URL` — an https URL of the ad creative) and `banner_link_url` (`BANNER_LINK_URL` — the
+advertiser's click-through URL). Document both in `.env.example`. No behaviour beyond exposing config.
+**Depends on:** T0.1
+**Done when:** `settings.banner_image_url` / `settings.banner_link_url` read from env, default `""`; `.env.example` lists both.
+**DONE:** Added both fields (with per-field comments) to the `Settings` dataclass + constructor in `engine/config.py`, reading `BANNER_IMAGE_URL` / `BANNER_LINK_URL` (default `""`); documented both in `.env.example`. Added a `_check_banner_config()` validation hook to `engine/validate.py` (warns if either env var is set but not an http(s) URL) — `python -m engine.validate` now reports 28 ok.
+
+### T4.4 — Sidebar ad banner + "Powered by AtlasIQ" component
+**Goal:** A reusable render function for the monetisable banner slot + the AtlasIQ credit.
+**Files:** `engine/ui/sidebar.py` (new).
+**Spec:** `render_ad_and_credit(settings)` writes into the current sidebar via
+`st.markdown(..., unsafe_allow_html=True)`: (a) if `settings.banner_image_url` starts with `http`, a
+full-width rounded **clickable** banner — `<a href="{banner_link_url or '#'}" target="_blank"
+rel="noopener"><img src="{banner_image_url}" style="width:100%;border-radius:8px;display:block"></a>`;
+else a neutral **placeholder** box (dashed border, muted theme-neutral rgba text: "Advertising space —
+reach cruise agencies here"). (b) Beneath it, a subtle `Powered by AtlasIQ` link → `https://www.atlasiq.co`
+(`target="_blank" rel="noopener"`, ~0.8em, dimmed). Interpolated values come only from our env config
+(never user input), so this contained `unsafe_allow_html` is safe.
+**Depends on:** T4.3
+**Done when:** with no env set the function renders the placeholder + AtlasIQ link; with `BANNER_IMAGE_URL`
+set it renders the clickable image; no user input reaches the HTML.
+**DONE:** Created `engine/ui/sidebar.py` with `render_ad_and_credit(settings)` — clickable rounded `<img>` when `banner_image_url` starts with `http` (linked to `banner_link_url` or unlinked), else the dashed "Advertising space" placeholder; subtle dimmed "Powered by AtlasIQ" link to `https://www.atlasiq.co` beneath. Both URLs are `html.escape`-d (defence-in-depth; values are trusted env config, never user input).
+
+### T4.5 — Wire the ad + credit into the sidebar
+**Goal:** Surface the banner + credit in the left panel, below the account/logout block.
+**Files:** `app.py`.
+**Spec:** In the `with st.sidebar:` block, after the Log out button block, add a `st.divider()` and call
+`render_ad_and_credit(settings)` (import from `engine.ui.sidebar`; `settings` from `engine.config`).
+Keep the existing "🚢 Sailing data as of…" caption last. Final order: name/agency/email → Log out →
+banner → Powered by AtlasIQ → sailing-data. Renders only when logged in (already inside the `else:` branch).
+**Depends on:** T4.4, T4.2
+**Done when:** `streamlit run app.py` → sign in → the left panel shows the placeholder banner then the
+AtlasIQ link (opens www.atlasiq.co in a new tab) under Log out; logged-out users still see only the
+registration gate; existing suites stay green.
+**DONE:** Wired into `app.py` — imported `settings` (engine.config) + `render_ad_and_credit` (engine.ui.sidebar); after the Log out block in the `with st.sidebar:` branch, added `st.divider()` + `render_ad_and_credit(settings)`, keeping the "🚢 Sailing data as of…" caption last. Final order: name/agency/email → Log out → banner → Powered by AtlasIQ → sailing-data. `py_compile` clean; `pytest evals/` 140 passed.
+
 ---
 
 ## PHASE 4B — Itinerary detail

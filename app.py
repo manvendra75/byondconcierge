@@ -26,10 +26,12 @@ from engine.db import (
     init_db,
     upsert_user,
 )
+from engine.config import settings
 from engine.ingest.load_sailings import snapshot_date
 from engine.orchestrator import cancel_lead, confirm_lead, handle_turn
 from engine.schemas import UserProfile
 from engine.ui.register import render_registration_gate
+from engine.ui.sidebar import render_ad_and_credit
 
 # ---------------------------------------------------------------------------
 # Page setup + storage bootstrap
@@ -154,6 +156,10 @@ else:
             st.session_state.messages = []
             st.query_params.clear()
             st.rerun()
+        # Ad banner (sold to cruise companies) + "Powered by AtlasIQ" credit (T4.5). Config-driven
+        # slot: shows a placeholder until an ad's set in env — engine/ui/sidebar.py.
+        st.divider()
+        render_ad_and_credit(settings)
         # Data freshness: tell the agent how current the sailing catalogue is (TB.6). Dated
         # departures rot (sell out / sail away), so the "as of" date sets expectations.
         if st.session_state.data_date:
