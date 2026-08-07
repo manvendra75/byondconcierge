@@ -122,6 +122,39 @@ local model, and queries must use the same defaults to match it.
 Push to `main` → Railway auto-deploys. Pull the captured data anytime with the report commands above,
 run against the service (Railway shell or `railway run`).
 
+## Managing the sidebar ad banner
+
+The concierge's left panel carries an **advertising slot** (sold to cruise companies) with a subtle
+"Powered by AtlasIQ" credit beneath it. The banner is **data, not code** — swapping, selling, or pulling
+an ad is a config change, never an edit. Two env vars drive it (`engine/config.py`, rendered by
+`engine/ui/sidebar.py`):
+
+| Variable | Value | Effect |
+|---|---|---|
+| `BANNER_IMAGE_URL` | **https** URL of the ad creative | shown as a full-width, clickable banner |
+| `BANNER_LINK_URL` | the advertiser's landing page | where the banner click goes (new tab) |
+
+**Behaviour:** both blank → a neutral "Advertising space" **placeholder** (so an unsold slot still looks
+intentional and pitches itself). Image set → the ad renders; add the link to make it click through.
+
+**To change the ad in production:** edit the two variables in the **Railway service → Variables** and
+redeploy. No code change, no push. To pull an ad, blank both (placeholder returns).
+
+**To preview locally:** set the same two in `.env`, then `streamlit run app.py` and sign in.
+`.env.example` carries a ready sample (a cruise photo from the live site via Next's image optimizer).
+
+**Rules the creative must follow** (enforced by `python -m engine.validate` → the `banner_config`
+check, which warns rather than blocks so a bad value never takes the app down):
+- Use **`https://`**, not `http://` — the app is served over https, so a browser blocks a mixed-content
+  http image and the ad silently won't paint.
+- Point `BANNER_IMAGE_URL` at an **image** the browser can load directly (an image URL, not a web page).
+- Don't set `BANNER_LINK_URL` without a valid `BANNER_IMAGE_URL` — the click would sit on the placeholder.
+- Keep it **light** (aim for ≲150 KB); if the source is large, serve a resized copy (e.g. a CDN/Next
+  image URL) so the sidebar stays fast.
+
+Run `python -m engine.validate` after any change — a green `banner_config` line confirms the slot is
+either a valid live ad or the intended placeholder.
+
 ## Documentation
 
 - `docs/PRD.md` — product requirements

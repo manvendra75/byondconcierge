@@ -727,18 +727,32 @@ def _check_model_pricing() -> Check:
 def _check_banner_config() -> Check:
     """The sidebar ad banner (T4.3/T4.4) renders its <img> only when
     ``banner_image_url`` is a real http(s) URL — otherwise it silently falls back
-    to the "advertising space" placeholder. A set-but-malformed URL is almost
-    always an ops mistake (a paid ad that never shows), so flag it; the
-    click-through URL is checked the same way. Blank (the default — placeholder
-    shown) is perfectly valid. Warn-level: a bad value degrades gracefully to the
-    placeholder, it doesn't break the app."""
+    to the "advertising space" placeholder. Because a misconfigured banner fails
+    *silently* (placeholder shows, or the image just doesn't paint), this hook
+    catches the four ways ops can set it wrong so a paid ad never quietly goes
+    dark. Blank (the default — placeholder shown) is perfectly valid. All
+    warn-level: every bad value degrades gracefully, none breaks the app.
+
+      1. BANNER_IMAGE_URL set but not http(s)  -> falls back to the placeholder.
+      2. BANNER_IMAGE_URL uses http:// not https:// -> the app is served over
+         https, so the browser blocks the mixed-content image and it won't paint.
+      3. BANNER_LINK_URL set but not http(s)   -> the banner click goes nowhere.
+      4. BANNER_LINK_URL set with no valid image -> a click target with nothing
+         visible to click (the link is attached to the placeholder, not an ad)."""
     problems = []
     img = (settings.banner_image_url or "").strip()
     link = (settings.banner_link_url or "").strip()
-    if img and not img.lower().startswith(("http://", "https://")):
+    img_ok = img.lower().startswith(("http://", "https://"))
+    link_ok = link.lower().startswith(("http://", "https://"))
+
+    if img and not img_ok:
         problems.append(f"BANNER_IMAGE_URL is set but not an http(s) URL ({img[:40]!r}) — the ad falls back to the placeholder")
-    if link and not link.lower().startswith(("http://", "https://")):
+    elif img.lower().startswith("http://"):
+        problems.append("BANNER_IMAGE_URL uses http:// not https:// — the app runs over https, so the browser blocks the mixed-content image and the ad won't paint")
+    if link and not link_ok:
         problems.append(f"BANNER_LINK_URL is set but not an http(s) URL ({link[:40]!r}) — the banner click won't work")
+    if link and not img_ok:
+        problems.append("BANNER_LINK_URL is set but BANNER_IMAGE_URL isn't a valid image URL — the click target sits on the placeholder, not an ad")
     if problems:
         return Check("banner_config", False, "warn", "; ".join(problems))
     return Check("banner_config", True, "warn",

@@ -191,7 +191,7 @@ Implementation companion to `PRD.md` and `ARCHITECTURE.md`. Every component is d
 advertiser's click-through URL). Document both in `.env.example`. No behaviour beyond exposing config.
 **Depends on:** T0.1
 **Done when:** `settings.banner_image_url` / `settings.banner_link_url` read from env, default `""`; `.env.example` lists both.
-**DONE:** Added both fields (with per-field comments) to the `Settings` dataclass + constructor in `engine/config.py`, reading `BANNER_IMAGE_URL` / `BANNER_LINK_URL` (default `""`); documented both in `.env.example`. Added a `_check_banner_config()` validation hook to `engine/validate.py` (warns if either env var is set but not an http(s) URL) — `python -m engine.validate` now reports 28 ok.
+**DONE:** Added both fields (with per-field comments) to the `Settings` dataclass + constructor in `engine/config.py`, reading `BANNER_IMAGE_URL` / `BANNER_LINK_URL` (default `""`); documented both in `.env.example` (with a copy-paste cruise sample). Added a `_check_banner_config()` validation hook to `engine/validate.py` catching all four silent-failure modes (image not http(s) → placeholder; http:// → mixed-content blocked; link not http(s) → dead click; link with no valid image) — `python -m engine.validate` reports 28 ok. Ops runbook for swapping/pulling ads added to `README.md` ("Managing the sidebar ad banner").
 
 ### T4.4 — Sidebar ad banner + "Powered by AtlasIQ" component
 **Goal:** A reusable render function for the monetisable banner slot + the AtlasIQ credit.
