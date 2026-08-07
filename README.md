@@ -98,6 +98,26 @@ These show **real contact details** (for authorized internal use) — unlike `tr
 Note `data/app.db` is local to wherever the app runs; on an ephemeral host it won't persist across
 redeploys (leads are also emailed to the sales desk, but registrations live only in this file).
 
+**Reading production leads.** The live captures are in the app DB on the Railway **volume**
+(`/data/app.db`) — a *different* database from your local `data/app.db`, so running the report on your
+machine shows only local test data. You have to run it **inside the running container**, where that
+volume is mounted:
+
+```bash
+npm i -g @railway/cli    # once
+railway login            # opens a browser to authorize
+railway link             # from this folder; pick the project + service
+railway ssh              # opens a shell INSIDE the running container
+#   then, at the container prompt:
+python -m engine.reports leads         # or: users, or add --csv
+```
+
+Use `railway ssh` (a shell in the container), **not** `railway run` / `railway shell` — those run the
+command on your machine with prod env vars injected, so `DB_PATH` points at `/data/app.db`, a path that
+only exists in the container. The service must be deployed and healthy for `railway ssh` to connect.
+For a spreadsheet, run `python -m engine.reports leads --csv` in the container and copy the CSV from the
+terminal output (there's no file to download — the report just prints).
+
 ## Deploying to production (Railway)
 
 The app is deployed on Railway from this repo via the **`Dockerfile`** (`railway.json` sets the builder,
