@@ -825,6 +825,39 @@ embark/disembark only (intermediate ports behind the expanded card). Two data-co
 75 (was 14); `engine.validate` 27 ok; full suite **144 passed**. Refresh: re-run
 `node scripts/itinerary/fetch-aroya.mjs` against a live authorized session.
 
+#### TD.21 — MSC importer + cutover (third-party Apify feed, quarterly)
+**Goal:** Un-park MSC (Akamai + robots bot-walled) using the commercial `vulnv/msc-cruises-scraper`
+Apify actor; make it dated + day-by-day; pull quarterly and maintain the data in-repo.
+**Files:** `scripts/itinerary/fetch-msc.mjs` (new), `classify.mjs`, `build-sailings-index.mjs`,
+`engine/validate.py`, `data/acquired/msc-itineraries.json` (new, committed).
+**Spec:** `fetch-msc.mjs` runs the actor via the Apify REST API (`APIFY_TOKEN` from env — never
+committed), all destinations, `scrapeDetails:true`, strips ALL prices, and writes a committed
+price-free snapshot. `mscDest` classifies by ports. Source through `buildFromAcquired`
+(`ACQUIRED_DATED.msc`, `DATED_LINES`, `DAYBYDAY_LINES`, engine `_DAY_BY_DAY_LINES`); delete
+`parseMSC`+`MSC_REGION_DEST`. Snapshot committed (unlike free-regenerable lines) because re-pulling
+costs money. Run quarterly.
+**Depends on:** TD.2, TD.3. **Done when:** MSC dated + day-by-day; guards + validate green; no prices anywhere.
+**DONE (2026-08-07):** This is the sanctioned non-Claude channel for MSC — we consume a paid provider's
+output, we don't scrape MSC ourselves. Findings baked into `fetch-msc.mjs`: the actor's default is the
+tiny **Poland** storefront (~5 results); the working **full English catalogue is the UK storefront**
+(`baseUrl msccruises.co.uk`, `marketPath uk`, `locale en_GB`, `GBP`) — now the fetcher default. Runs
+async (poll to SUCCEEDED) + paginate; caches raw (git-ignored `workdir/`, has prices) for **free
+re-transforms** (`--cached`) and can transform a UI-run's dataset (`--dataset <id>`); accumulates across
+runs (dedup, `--replace` to reset). Transform → `{ship, name, nights, departPort, arrivePort, dest,
+days, dates}`, prices dropped. Day-by-day comes from `cruiseDetails.itinerary.days`; when a run is
+**OOM-truncated** (all-worldwide + scrapeDetails is memory-heavy) `parseDays` **falls back to the
+ordered `portOfCalls` + `visitingPorts`** every sailing carries, so all sailings still get a route.
+First pull (partial dataset + fallback): **2,260 dated day-by-day records** (was 318 undated markdown;
+25 ships; Mediterranean 744 / Caribbean 351 / Greek Isles 297 / Bahamas 231 / Northern Europe 226 /
+Grand Voyages 143 / South America 126 / Fjords 56 / Asia 47 / Alaska 12 / Arabian Gulf 9 …; 1 unmapped
+skipped; Aug 2026 → Feb 2028). The build's snapshot loader now also reads the **committed
+`data/acquired/`** dir. Removed the hardcoded undated MSC "Emirates & Qatar winter season" placeholder —
+the real dated Gulf season (MSC World Europa ex-Dubai/Abu Dhabi/Doha) now comes through the feed. MSC was
+the **last undated line**, so the four undated-behaviour tests were **retired** (paths kept defensive; no
+undated line remains) and the name-filter test repointed to Elixir. `engine.validate` 27 ok; full suite
+**140 passed**; no prices in any committed file. Refresh: quarterly re-run (raise the actor's Memory or
+pull in `--from/--to` chunks to avoid OOM; chunks accumulate), rebuild, commit the snapshot + index.
+
 ---
 
 ## PHASE 4C — Umbrella-region search

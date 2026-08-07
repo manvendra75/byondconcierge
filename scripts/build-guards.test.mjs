@@ -72,8 +72,14 @@ const goodScenic = () => ({
     { day: 2, date: "2026-11-19", port: "My Tho", is_sea_day: false },
   ],
 });
+const goodMsc = () => ({
+  line: "msc", name: "Mediterranean", itineraryDays: [
+    { day: 1, date: "2026-08-27", port: "Barcelona", is_sea_day: false }, // MSC is dated (Apify feed, TD.21)
+    { day: 2, date: "2026-08-28", port: "Marseille", is_sea_day: false },
+  ],
+});
 // Valid records covering EVERY day-by-day line — the coverage floor for a negative fixture.
-const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta(), goodRoyalCaribbean(), goodCelebrity(), goodScenic()];
+const baseline = () => [goodCrystal(), goodElixir(), goodCarnival(), goodSilversea(), goodDisney(), goodCosta(), goodRoyalCaribbean(), goodCelebrity(), goodScenic(), goodMsc()];
 
 // A tiny assertion helper: the guard must throw, and its message must mention the reason.
 function mustThrow(records, needle, label) {

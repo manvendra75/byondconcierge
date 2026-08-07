@@ -301,6 +301,31 @@ export function scenicDest(productLine, productDestination, name = "") {
 }
 
 // ---------------------------------------------------------------------------------------
+// MSC — worldwide (Apify feed, TD.21). No region field, so classify by embark + ports-of-call + name.
+// Ordered most-distinctive first; unknown → null (caller skips + logs, never guesses). First cut —
+// widen the keyword sets from the raw sample if legitimate sailings come back unmapped.
+// ---------------------------------------------------------------------------------------
+export function mscDest(embkPort, arrivePort, portsOfCall = [], name = "") {
+  const s = `${embkPort} ${arrivePort} ${(portsOfCall || []).join(" ")} ${name}`.toLowerCase();
+  if (/world cruise|grand voyage|giro del mondo/.test(s)) return "World & Grand Voyages";
+  if (/transatlantic|repositioning|\bcrossing\b/.test(name.toLowerCase())) return "Transatlantic & repositioning";
+  if (/jeddah|aqaba|safaga|sharm|yanbu/.test(s)) return "Red Sea";
+  if (/dubai|abu dhabi|\bdoha\b|sir bani yas|khasab|\bmuscat\b|bahrain|qatar/.test(s)) return "Arabian Gulf";
+  if (/cape town|durban|port louis|mauritius|seychelles|mombasa|zanzibar|walvis bay|maputo|nosy be|reunion|réunion/.test(s)) return "Middle East & Africa journeys";
+  if (/juneau|skagway|ketchikan|glacier|icy strait|\bsitka\b|seward|\bhaines\b|\bketchikan\b/.test(s)) return "Alaska";
+  if (/geiranger|\bflam\b|flåm|hellesylt|alesund|ålesund|\bolden\b|nordfjord|eidfjord|fjord/.test(s)) return "Norwegian Fjords";
+  if (/kiel|copenhagen|warnem|stockholm|tallinn|helsinki|\briga\b|gdynia|hamburg|zeebrugge|le havre|rotterdam|amsterdam|klaipeda|st\.? ?petersburg|southampton/.test(s)) return "Northern Europe & Baltic";
+  if (/piraeus|\bathens\b|santorini|mykonos|\brhodes\b|heraklion|katakolon|kefalonia|kusadasi|\bkos\b|\bcorfu\b/.test(s)) return "Greek Isles & Aegean";
+  if (/santos|buenos aires|rio de janeiro|montevideo|salvador|ilhabela|b[uú]zios|punta del este|copacabana|ilheus|maceio/.test(s)) return "South America";
+  if (/tokyo|yokohama|shanghai|hong ?kong|singapore|\bosaka\b|keelung|kaohsiung|\bnaha\b|busan|\bjeju\b|nagasaki|fukuoka|\bkobe\b/.test(s)) return "Asia (Far East)";
+  if (/miami|port canaveral|ocean cay|nassau|cozumel|costa maya|jamaica|montego|ocho rios|san juan|barbados|fort-de-france|pointe-[aà]-pitre|philipsburg|roatan|george town|st\.? ?maarten|antigua|grenada|tortola|st\.? ?kitts|st\.? ?lucia|\baruba\b|curacao|cura[çc]ao|\bcolon\b|cartagena/.test(s)) {
+    return /bahamas|ocean cay|nassau/.test(s) && !/cozumel|jamaica|san juan|barbados|colon|cartagena|antigua|aruba/.test(s) ? "Bahamas" : "Caribbean";
+  }
+  if (/barcelona|genoa|\bgenova\b|marseille|naples|\bnapoli\b|civitavecchia|\brome\b|venice|trieste|valletta|\bmalta\b|palma|ajaccio|ibiza|messina|\bbari\b|cannes|la spezia|livorno|cagliari|\bkotor\b|dubrovnik|\bsplit\b|olbia|savona|\bnice\b/.test(s)) return "Mediterranean";
+  return null;
+}
+
+// ---------------------------------------------------------------------------------------
 // AROYA — Saudi line (one ship, "Aroya"). Two theatres: the Red Sea (Jeddah/Yanbu/Aqaba/Sharm/
 // Ain Sokhna homeports) and the Mediterranean (Istanbul/Turkey/Greece/Alexandria). Classify by
 // the ports; unknown → null (caller skips + logs, never guesses).
@@ -383,6 +408,7 @@ export function classify(line, itin) {
     case "dream-star": return itin.dest || null;            // fetcher bakes dest (stardreamDest); unmapped → skip
     case "elixir": return itin.dest || null;                // fetcher bakes dest (elixirDest); unmapped → skip
     case "aroya": return itin.dest || null;                 // fetcher bakes dest (aroyaDest); unmapped → skip
+    case "msc": return itin.dest || null;                   // fetcher bakes dest (mscDest); unmapped → skip
     default:
       throw new Error(`classify: no classifier for line "${line}" (itinerary "${itin.name}")`);
   }

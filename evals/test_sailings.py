@@ -45,12 +45,13 @@ def test_mediterranean_january_returns_capped_page():
 
 
 # ---------------------------------------------------------------------------
-# Undated catalogue lines stay honest — "on request", never a fabricated date
+# Undated-catalogue-line behaviour (on-request coverage, undated rows never being
+# date-filtered, count-ranking, the date→month search fallback) was exercised here
+# via MSC — the last undated line. MSC is now dated (Apify feed, TD.21), so NO
+# undated line remains: those paths are unreachable in production and kept only as
+# a defensive fallback, so the four tests that needed a real undated line are
+# retired. Re-add them (or a synthetic-undated fixture) if an undated line returns.
 # ---------------------------------------------------------------------------
-def test_undated_line_shows_on_request():
-    out = search_sailings(SailingFilters(line="msc", dest="Mediterranean"))
-    assert out.status == "ok"
-    assert any("on request" in r.coverage for r in out.rows)
 
 
 # ---------------------------------------------------------------------------
@@ -76,12 +77,6 @@ def test_past_dates_are_filtered_out():
     assert all(r.sail_date >= "2027-01-01" for r in filtered.rows)    # ...and are gone once today is set
 
 
-def test_past_date_filter_keeps_undated_rows():
-    out = search_sailings(SailingFilters(line="msc"), today="2027-06-01")
-    assert out.status == "ok"
-    assert all(r.sail_date is None for r in out.rows)   # undated rows carry no date, never filtered
-
-
 # ---------------------------------------------------------------------------
 # Date-range filter (TB.5): only concrete dated departures inside [from, to]
 # ---------------------------------------------------------------------------
@@ -100,27 +95,11 @@ def test_date_range_excludes_undated_rows():
     assert all(r.sail_date is not None for r in out.rows)
 
 
-# ---------------------------------------------------------------------------
-# Undated-line date-retrieval fallback: a date query on a season-only line falls
-# back to a MONTH search (which includes it) instead of reporting "no sailings".
-# ---------------------------------------------------------------------------
-def test_date_search_falls_back_to_month_for_undated_line():
-    from engine.agent import _tool_search_sailings
-
-    # A named sailing on a season-only line (MSC's "Caribbean And Antilles"): the date-range search
-    # finds no dated departures, so the tool wrapper retries at month granularity — keeping the name
-    # filter — and surfaces the exact sailing with a "confirm via the desk" note, instead of
-    # falsely reporting "no sailings".
-    out = _tool_search_sailings(line="MSC", name="Caribbean and Antilles", dates="September 2026")
-    assert "Caribbean" in out
-    assert "Byond Borders desk" in out
-
-
 def test_name_filter_finds_a_specific_sailing():
     # The name filter locates a specific itinerary regardless of count-ranking.
-    out = search_sailings(SailingFilters(line="msc", name="Caribbean and Antilles"))
+    out = search_sailings(SailingFilters(line="elixir", name="Divine Cyclades"))
     assert out.status == "ok"
-    assert all("caribbean and antilles" in r.name.lower() for r in out.rows)
+    assert all("divine cyclades" in r.name.lower() for r in out.rows)
 
 
 # ---------------------------------------------------------------------------
@@ -183,12 +162,3 @@ def test_nights_range_filter():
         assert 10 <= n <= 14
 
 
-# ---------------------------------------------------------------------------
-# Undated rows keep the departure-count ranking (TB.4 leaves them on count DESC)
-# ---------------------------------------------------------------------------
-def test_undated_rows_ranked_by_count():
-    # MSC is an undated line, so every row is count-ranked (no dates to sort by).
-    out = search_sailings(SailingFilters(line="msc"))
-    assert all(r.sail_date is None for r in out.rows)
-    counts = [r.count for r in out.rows]
-    assert counts == sorted(counts, reverse=True)

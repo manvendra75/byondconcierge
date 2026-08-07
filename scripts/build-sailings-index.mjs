@@ -561,68 +561,10 @@ function nightsLabel(n) {
 // snapshot produced by scripts/itinerary/fetch-dream-star.mjs (authorized SeawareTouch agent session, dated).
 // parseStardream + stardreamClassify were removed at cutover; classify.mjs::stardreamDest maps its regions.) — TD.18
 
-// =========================================================================================
-// MSC — single table, escaped pipes, REGION column caps, undated.
-// =========================================================================================
-
-const MSC_REGION_DEST = {
-  MEDITERRANEAN: "Mediterranean",
-  "NORTHERN EUROPE": "Northern Europe & Baltic",
-  "MSC GRAND VOYAGES": "World & Grand Voyages",
-  "CARIBBEAN AND ANTILLES": "Caribbean",
-  "FAR EAST": "Asia (Far East)",
-  ALASKA: "Alaska",
-};
-
-function mscHasRealRoute(itin, embarkPort) {
-  if (itin.includes(embarkPort)) return true;
-  const parts = itin.split(",").map((s) => s.trim());
-  if (parts.length > 3 && parts.some((p) => /[a-z]/.test(p) && / /.test(p))) return true;
-  return false;
-}
-
-function parseMSC() {
-  const txt = readData("msc-sailings-extract-jul2026.md");
-  const lines = txt.split(/\r?\n/);
-  const rows = [];
-  for (const line of lines) {
-    if (!isTableRow(line) || /^\|\s*#/.test(line) || /^\|---/.test(line)) continue;
-    const cols = splitRow(line);
-    if (!cols[1] || Number.isNaN(Number(cols[1]))) continue;
-    // | # | Sailing (Region) | Ship | Nights | Departure Port | Arrival Port | Itinerary |
-    const region = cols[2];
-    const ship = cols[3];
-    const nights = Number(cols[4]);
-    const fromPortRaw = cols[5];
-    const arrivalPortRaw = cols[6];               // dedicated Arrival Port column (TA.2)
-    const itin = cols[7];
-    const dest = MSC_REGION_DEST[region];
-    if (!dest) throw new Error(`MSC: unmapped region "${region}"`);
-    const fromPort = normPort("msc", fromPortRaw);
-    const row = {
-      line: "msc",
-      ship: ship.replace(/^MSC\s+/, "MSC "),
-      name: region.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()),
-      dest: checkDest(dest, `MSC region ${region}`),
-      destLabel: dest,
-      nights: nightsLabel(nights),
-      nightsNum: nights,
-      port: fromPort,
-      // MSC uniquely publishes an explicit arrival port — read it directly (TA.2).
-      portTo: arrivalPortRaw ? normPort("msc", arrivalPortRaw) : undefined,
-      months: [],
-    };
-    if (mscHasRealRoute(itin, fromPortRaw.split(",")[0].trim())) {
-      const ports = capRoute(itin.split(",").map((p) => normPort("msc", p.trim())));
-      row.ports = ports;
-      row.nameKey = ports.join(">");
-    } else {
-      row.nameKey = `${region}|${itin}`;
-    }
-    rows.push(row);
-  }
-  return rows;
-}
+// (MSC is now sourced from acquisition — buildFromAcquired reads the committed data/acquired/msc-itineraries.json
+// snapshot produced by scripts/itinerary/fetch-msc.mjs (paid Apify feed, UK storefront, dated + day-by-day,
+// no prices; pulled quarterly). parseMSC + MSC_REGION_DEST were removed; classify.mjs::mscDest maps its
+// regions from the ports. The snapshot is committed — unlike free-regenerable lines — so we never re-pay.) — TD.21
 
 // (Crystal is now sourced from acquisition — buildFromAcquired reads the crystal-itineraries-<date>.json
 // snapshot produced by scripts/itinerary/fetch-crystal.mjs; parseCrystal + CRYSTAL_DEST were removed
@@ -635,7 +577,7 @@ function parseMSC() {
 // Lines whose raw source carries an exact per-departure sail date (TB.1). Every other line
 // is catalogue-level (months / season only), so its rows must NOT carry a date. Includes the
 // acquired dated lines (carnival) so the per-record dated invariants + day-date discipline apply.
-const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald", "dream-star", "elixir"]);
+const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "crystal", "silversea", "disney", "norwegian", "celebrity", "scenic-emerald", "dream-star", "elixir", "msc"]);
 
 // Stage D: lines sourced from acquisition snapshots via buildFromAcquired instead of a markdown
 // parser (value = dated?). These do NOT flow through `allRows`, so the markdown-oriented guards
@@ -644,7 +586,7 @@ const DATED_LINES = new Set(["costa", "carnival", "royal-caribbean", "aroya", "c
 // departure, exact date surfaced). Disney's snapshot now carries EVERY departure per route in
 // `dates[]` (TD.16 — fetch-disney fetches all ~680 sailings), so its coverage matches Carnival/
 // Silversea. Disney's dest is still classified at build time from the itinerary name + embark port.
-const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true, elixir: true, aroya: true };
+const ACQUIRED_DATED = { carnival: true, silversea: true, disney: true, costa: true, norwegian: true, "royal-caribbean": true, celebrity: true, "scenic-emerald": true, crystal: true, "dream-star": true, elixir: true, aroya: true, msc: true };
 const ACQUIRED_LINES = new Set(Object.keys(ACQUIRED_DATED));
 
 /**
@@ -729,7 +671,7 @@ function validateRecords(records, allRows) {
 // come from the source markdown (Crystal/Elixir, TC.2); three come from the acquired snapshots
 // merged in TC.6 (Carnival/Silversea via enrichment, Disney via replacement). Keep in step with
 // parseCrystal / parseElixir and the TC.6 merge, and mirror engine `_DAY_BY_DAY_LINES`.
-const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity", "scenic-emerald"]);
+const DAYBYDAY_LINES = new Set(["crystal", "elixir", "carnival", "silversea", "disney", "costa", "royal-caribbean", "celebrity", "scenic-emerald", "msc"]);
 
 /**
  * TC.2 validation hook (build-time). Validates the EMITTED `itineraryDays` on each record — the
@@ -820,19 +762,29 @@ function validateItineraryDays(records) {
 // recomputed from the TARGET departure's own date, so an attached schedule can never show another
 // sailing's calendar.
 
-/** Read the newest canonical acquired snapshot per line from the research dir. */
+// Most acquired snapshots live in DATA_DIR (outside the repo — they regenerate for free from live
+// sources, so a missing one is harmless). Paid feeds (MSC via the Apify actor, TD.21) instead commit a
+// price-free snapshot into data/acquired/ so rebuilds never need to re-pull; both dirs are scanned.
+const ACQUIRED_DIR = path.join(__dirname, "..", "data", "acquired");
+
+/** Read the newest canonical acquired snapshot per line from the research dir + the committed acquired dir. */
 function loadAcquiredItineraries() {
   const byLine = new Map();
-  for (const f of fs.readdirSync(DATA_DIR)) {
-    if (!/-itineraries-.*\.json$/.test(f)) continue;        // <slug>-itineraries-<date>.json only
-    let j;
-    try { j = JSON.parse(fs.readFileSync(path.join(DATA_DIR, f), "utf8")); } catch { continue; }
-    if (!j || !j.line || !Array.isArray(j.itineraries)) continue;
-    const prev = byLine.get(j.line);
-    // Keep only the freshest snapshot per line (compare the `generated` stamp, then filename).
-    const stamp = `${j.generated || ""}|${f}`;
-    if (!prev || stamp > prev.stamp) byLine.set(j.line, { ...j, file: f, stamp });
-  }
+  const scan = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const f of fs.readdirSync(dir)) {
+      if (!/-itineraries(-[\d-]+)?\.json$/.test(f)) continue;   // <slug>-itineraries[-<date>].json
+      let j;
+      try { j = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")); } catch { continue; }
+      if (!j || !j.line || !Array.isArray(j.itineraries)) continue;
+      const prev = byLine.get(j.line);
+      // Keep only the freshest snapshot per line (compare the `generated` stamp, then filename).
+      const stamp = `${j.generated || ""}|${f}`;
+      if (!prev || stamp > prev.stamp) byLine.set(j.line, { ...j, file: f, stamp });
+    }
+  };
+  scan(DATA_DIR);
+  scan(ACQUIRED_DIR);
   return byLine;
 }
 
@@ -942,7 +894,7 @@ function main() {
     // elixir: sourced from acquisition (buildFromAcquired, elixir-cruises.com, dated day-by-day) — TD.19
     // dream-star: sourced from acquisition (buildFromAcquired, SeawareTouch agent session, dated route) — TD.18
     // norwegian: sourced from acquisition (buildFromAcquired, ncl.com vacations API, route-only) — TD.9
-    ["msc", parseMSC],
+    // msc: sourced from acquisition (buildFromAcquired, committed Apify snapshot, dated day-by-day) — TD.21
     // disney: sourced from acquisition (buildFromAcquired, undated) — TD.6
     // crystal: sourced from acquisition (buildFromAcquired, crystalcruises.com __NEXT_DATA__, day-by-day) — TD.17
     // scenic-emerald: sourced from acquisition (buildFromAcquired, scenic/emerald.cruises, day-by-day) — TD.11
@@ -996,30 +948,11 @@ function main() {
       + (skipped.length ? ` (skipped ${skipped.length}: ${skipped.slice(0, 3).join("; ")}…)` : ""));
   }
 
-  // Research-verified additions: programmes confirmed on official sources but absent from the
-  // current dataset extracts (e.g. seasonal programmes outside an extract's search window).
-  // Kept minimal; months stay empty so the UI shows "departure dates on request".
-  // NOTE (July 2026): the two Royal Caribbean Dubai entries that used to sit here were removed.
-  // Royal Caribbean's own booking engine returns no results for Dubai (DXB) departures and its
-  // Arabian Gulf pages carry destination copy only, so surfacing them in the search widget
-  // implied bookable Gulf inventory that agents could not actually quote. Do not reinstate them
-  // without live sailings on royalcaribbean.com.
-  const RESEARCH_ADDITIONS = [
-    {
-      line: "msc",
-      ship: "MSC Euribia",
-      name: "Emirates & Qatar winter season ex-Dubai",
-      dest: "Arabian Gulf",
-      destLabel: "Arabian Gulf (Dubai season)",
-      nights: "7 nights",
-      port: "Dubai",
-      months: [],
-      seasonHint: "Nov–Mar Gulf season ex-Dubai",
-      count: 1,
-      ports: ["Dubai", "Abu Dhabi", "Sir Bani Yas", "Doha"],
-    },
-  ];
-  records.push(...RESEARCH_ADDITIONS);
+  // (Research-verified additions once lived here for programmes absent from the dataset extracts —
+  // the two Royal Caribbean Dubai entries, then a hardcoded undated MSC "Emirates & Qatar winter
+  // season ex-Dubai" placeholder. Both are gone: RC had no bookable Gulf inventory, and MSC's real
+  // dated Gulf season (MSC World Europa ex-Dubai/Abu Dhabi/Doha) now comes through the acquired
+  // Apify snapshot, TD.21. Do not reinstate undated placeholders on a now-dated line.)
   records.sort((a, b) => a.line.localeCompare(b.line) || b.count - a.count);
 
   validateRecords(records, allRows);      // TB.2 de-aggregation invariant (build-time guard)
