@@ -35,7 +35,11 @@ RUN python -m engine.ingest.load_knowledge
 # headless + telemetry-off guarantees a clean, silent boot.
 ENV STREAMLIT_SERVER_HEADLESS=true \
     STREAMLIT_BROWSER_GATHER_USAGE_STATS=false \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    PYDANTIC_DISABLE_PLUGINS=1
+# ^ logfire (a transitive dep of pydantic-ai we don't use) registers a Pydantic plugin that fails to
+#   import against our opentelemetry-sdk version, printing a noisy ImportError warning on first model
+#   use. We use no Pydantic plugins, so disable them outright for a clean boot + clean CLI output.
 RUN mkdir -p /root/.streamlit \
     && printf '[general]\nemail = ""\n' > /root/.streamlit/credentials.toml
 
